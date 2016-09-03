@@ -49,8 +49,9 @@ bool Shader::AddShader(GLenum ShaderType)
   {
     std::ifstream i ("../shaders/fragment.frag");
 	std::string t((std::istreambuf_iterator<char>(i)),std::istreambuf_iterator<char>());
+	std::cout<<t;
 	s=t;
-
+	std::cout<<s;
   }
 
   GLuint ShaderObj = glCreateShader(ShaderType);
