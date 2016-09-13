@@ -95,14 +95,29 @@ void Engine::Keyboard()
     
 	switch(m_event.key.keysym.sym)
 	{
-	  case SDLK_ESCAPE: m_running = false; 
+	  case SDLK_ESCAPE:
+	    m_running = false;
+	    break;
 
 	  case SDLK_a: 
-		m_TRANSLATION_FLIP = !m_TRANSLATION_FLIP;  
+		m_TRANSLATION_FLIP = !m_TRANSLATION_FLIP; 
+	    break; 
 	
-	  case SDLK_SPACE: 
-			if(m_PAUSE == 0){ m_PAUSE=1;}
-			else{m_PAUSE = 0;}
+	  case SDLK_s: 
+		m_PAUSE = 2;
+	    break;
+
+	  case SDLK_d: 
+		m_PAUSE = 3;
+	    break;
+
+	  case SDLK_z: 
+	    m_PAUSE = 1;
+	    break;
+
+	  case SDLK_x: 
+	    m_PAUSE = 0;
+	    break;
 
 	}
   }
@@ -113,10 +128,18 @@ void Engine::Mouse()
 if (m_event.type == SDL_MOUSEBUTTONDOWN)
   {
     // handle mouse events here
-    if (m_event.button.button == SDL_BUTTON_LEFT)
+    if(m_event.button.button == SDL_BUTTON_LEFT)
     {
       m_ROTATION_FLIP = !m_ROTATION_FLIP;
     }
+	if(m_event.button.button == SDL_BUTTON_RIGHT)
+	{
+	  m_PAUSE = 4;
+	}
+	if(m_event.button.button == SDL_BUTTON_MIDDLE)
+	{
+	  m_PAUSE = 5;
+	}
   }
 
 }

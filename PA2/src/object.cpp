@@ -82,7 +82,28 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause)
 {
   angle += dt * M_PI/1000;
 
-  rateT=rateR=M_PI/1000;
+  switch(pause)
+  {
+    case 0:
+	  rateR=rateT=M_PI/1000;
+	  break;
+	case 1:
+	  rateR=rateT=0;
+		std::cout<<"stop both"<<std::endl;
+	  break;
+	case 2:
+        rateT = M_PI/1000;
+	  break;
+	case 3:
+        rateT = 0;
+	  break;
+	case 4:
+		rateR = M_PI/1000;
+	  break;
+	case 5:
+		rateR = 0;
+	  break;
+  }
 
   if(rotation)
   {
@@ -94,7 +115,6 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause)
   }
 
   glm::mat4 rot= glm::rotate(glm::mat4(1.0f), (angleR), glm::vec3(0.0, 1.0, 0.0));
-  std::cout<<angleR<<std::endl;
 
   if(translation)
   {
