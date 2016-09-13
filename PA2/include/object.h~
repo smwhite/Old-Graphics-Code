@@ -23,7 +23,6 @@ class Object
 
     float angle;
     bool TFlip;
-	float angleT;
 };
 
 #endif /* OBJECT_H */
