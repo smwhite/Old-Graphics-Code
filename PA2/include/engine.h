@@ -30,8 +30,8 @@ class Engine
     SDL_Event m_event;
 	
 	// Variables for changing object movement
-	bool m_ROTATION_FLIP;
-	bool m_TRANSLATION_FLIP;
+    bool m_ROTATION_FLIP;
+    bool m_TRANSLATION_FLIP;
 
     Graphics *m_graphics;
     unsigned int m_DT;

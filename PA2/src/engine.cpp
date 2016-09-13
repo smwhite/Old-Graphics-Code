@@ -108,6 +108,14 @@ void Engine::Keyboard()
 
 void Engine::Mouse()
 {
+if (m_event.type == SDL_MOUSEBUTTONDOWN)
+  {
+    // handle mouse events here
+    if (m_event.button.button == SDL_BUTTON_LEFT)
+    {
+      m_ROTATION_FLIP = !m_ROTATION_FLIP;
+    }
+  }
 
 }
 unsigned int Engine::getDT()

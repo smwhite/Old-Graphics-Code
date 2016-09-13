@@ -7,8 +7,8 @@ Engine::Engine(string name, int width, int height)
   m_WINDOW_WIDTH = width;
   m_WINDOW_HEIGHT = height;
   m_FULLSCREEN = false;
-  m_ROTATION_SETTING = true;
-  m_TRANSLATION_SETTING = true;
+  m_ROTATION_FLIP = true;
+  m_TRANSLATION_FLIP = true;
 }
 
 Engine::Engine(string name)
@@ -17,8 +17,8 @@ Engine::Engine(string name)
   m_WINDOW_HEIGHT = 0;
   m_WINDOW_WIDTH = 0;
   m_FULLSCREEN = true;
-  m_ROTATION_SETTING = true;
-  m_TRANSLATION_SETTING = true;
+  m_ROTATION_FLIP = true;
+  m_TRANSLATION_FLIP = true;
 }
 
 Engine::~Engine()
@@ -108,6 +108,14 @@ void Engine::Keyboard()
 
 void Engine::Mouse()
 {
+if (m_event.type == SDL_MOUSEBUTTONDOWN)
+  {
+    // handle mouse events here
+    if (m_event.button.button == SDL_BUTTON_LEFT)
+    {
+      m_running = false;
+    }
+  }
 
 }
 unsigned int Engine::getDT()

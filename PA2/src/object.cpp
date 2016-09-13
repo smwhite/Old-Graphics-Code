@@ -85,6 +85,17 @@ void Object::Update(unsigned int dt,bool rotation,bool translation)
 
 
   glm::mat4 rot= glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
+
+  if(rotation)
+  {
+    rot= glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
+  }
+  else if(!rotation)
+  {
+    rot= glm::rotate(glm::mat4(1.0f), (-angle), glm::vec3(0.0, 1.0, 0.0));
+  }
+
+
   glm::mat4 trans= glm::translate(glm::mat4(1.0f),glm::vec3(5.0f * cos(angle), 1.0f, 5.0f * sin(angle)));
 
   if(translation)
