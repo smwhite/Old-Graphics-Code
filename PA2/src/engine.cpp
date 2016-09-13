@@ -9,6 +9,7 @@ Engine::Engine(string name, int width, int height)
   m_FULLSCREEN = false;
   m_ROTATION_FLIP = true;
   m_TRANSLATION_FLIP = true;
+  m_PAUSE = 0;
 }
 
 Engine::Engine(string name)
@@ -19,6 +20,7 @@ Engine::Engine(string name)
   m_FULLSCREEN = true;
   m_ROTATION_FLIP = true;
   m_TRANSLATION_FLIP = true;
+  m_PAUSE = 0;
 }
 
 Engine::~Engine()
@@ -72,7 +74,7 @@ void Engine::Run()
     }
 
     // Update and render the graphics
-    m_graphics->Update(m_DT,m_ROTATION_FLIP,m_TRANSLATION_FLIP);
+    m_graphics->Update(m_DT,m_ROTATION_FLIP,m_TRANSLATION_FLIP,m_PAUSE);
     m_graphics->Render();
 
     // Swap to the Window
@@ -88,11 +90,6 @@ void Engine::Keyboard()
   }
   else if (m_event.type == SDL_KEYDOWN)
   {
-    /* handle key down events here
-    if (m_event.key.keysym.sym == SDLK_ESCAPE)
-    {
-      m_running = false;
-    }*/
 
     // handle key down events here
     
@@ -100,7 +97,12 @@ void Engine::Keyboard()
 	{
 	  case SDLK_ESCAPE: m_running = false; 
 
-	  case SDLK_a: m_TRANSLATION_FLIP = !m_TRANSLATION_FLIP;  
+	  case SDLK_a: 
+		m_TRANSLATION_FLIP = !m_TRANSLATION_FLIP;  
+	
+	  case SDLK_SPACE: 
+			if(m_PAUSE == 0){ m_PAUSE=1;}
+			else{m_PAUSE = 0;}
 
 	}
   }

@@ -9,7 +9,7 @@ class Object
   public:
     Object();
     ~Object();
-    void Update(unsigned int dt,bool rotation,bool translation);
+    void Update(unsigned int dt,bool rotation,bool translation, int pause);
     void Render();
 
     glm::mat4 GetModel();
@@ -24,6 +24,9 @@ class Object
     float angle;
     bool TFlip;
 	float angleT;
+	float angleR;
+	float rateT;
+	float rateR;
 };
 
 #endif /* OBJECT_H */

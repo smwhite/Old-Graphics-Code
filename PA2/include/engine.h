@@ -32,6 +32,7 @@ class Engine
 	// Variables for changing object movement
     bool m_ROTATION_FLIP;
     bool m_TRANSLATION_FLIP;
+    int m_PAUSE;
 
     Graphics *m_graphics;
     unsigned int m_DT;

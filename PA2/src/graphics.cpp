@@ -107,10 +107,10 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt,bool rotation,bool translation)
+void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause)
 {
   // Update the object
-  m_cube->Update(dt,rotation,translation);
+  m_cube->Update(dt,rotation,translation,pause);
 }
 
 void Graphics::Render()
