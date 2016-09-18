@@ -89,7 +89,6 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause)
 	  break;
 	case 1:
 	  rateR=rateT=0;
-		std::cout<<"stop both"<<std::endl;
 	  break;
 	case 2:
         rateT = M_PI/1000;

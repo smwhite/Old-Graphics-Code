@@ -108,11 +108,15 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_d: 
-		m_PAUSE = 0;
+		m_PAUSE = 3;
 	    break;
 
-	  case SDLK_f: 
+	  case SDLK_z: 
 	    m_PAUSE = 1;
+	    break;
+
+	  case SDLK_x: 
+	    m_PAUSE = 0;
 	    break;
 
 	}
@@ -130,7 +134,11 @@ if (m_event.type == SDL_MOUSEBUTTONDOWN)
     }
 	if(m_event.button.button == SDL_BUTTON_RIGHT)
 	{
-	  m_PAUSE = 3;
+	  m_PAUSE = 4;
+	}
+	if(m_event.button.button == SDL_BUTTON_MIDDLE)
+	{
+	  m_PAUSE = 5;
 	}
   }
 
