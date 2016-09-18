@@ -46,6 +46,7 @@ bool Graphics::Initialize(int width, int height)
 
   // Create the object
   m_cube = new Object();
+  m_moon = new Object();
 
   // Set up the shaders
   m_shader = new Shader();
@@ -107,10 +108,10 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt,bool rotation,bool translation)
+void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause)
 {
   // Update the object
-  m_cube->Update(dt,rotation,translation,1);
+  m_cube->Update(dt,rotation,translation,pause);
 }
 
 void Graphics::Render()

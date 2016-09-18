@@ -69,7 +69,7 @@ Object::Object()
   glGenBuffers(1, &IB);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
-  TFlip = true;
+
 }
 
 Object::~Object()
@@ -110,7 +110,7 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause)
   }
   else if(!rotation)
   {
-    angleR += -(dt * rateR);
+    angleR -= dt * rateR;
   }
 
   glm::mat4 rot= glm::rotate(glm::mat4(1.0f), (angleR), glm::vec3(0.0, 1.0, 0.0));
@@ -121,7 +121,7 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause)
   }
   else if(!translation)
   {
-    angleT += -(dt * rateT);
+    angleT -= dt * rateT;
   }
 
   glm::mat4 trans= glm::translate(glm::mat4(1.0f),glm::vec3(5.0f * cos(angleT), 1.0f, 5.0f * sin(angleT)));
