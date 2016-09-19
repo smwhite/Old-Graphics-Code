@@ -1,6 +1,6 @@
 #include "object.h"
 
-Object::Object()
+Object::Object(glm::mat4 center)
 {  
   /*
     # Blender File for a Cube
@@ -70,6 +70,9 @@ Object::Object()
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 
+  centerOfOrbit = center;
+  location= glm::mat4(1.0f);
+
 }
 
 Object::~Object()
@@ -78,7 +81,7 @@ Object::~Object()
   Indices.clear();
 }
 
-void Object::Update(unsigned int dt,bool rotation,bool translation, int pause)
+void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center)
 {
   angle += dt * M_PI/1000;
 
@@ -124,8 +127,13 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause)
     angleT -= dt * rateT;
   }
 
-  glm::mat4 trans= glm::translate(glm::mat4(1.0f),glm::vec3(5.0f * cos(angleT), 1.0f, 5.0f * sin(angleT)));
+  glm::vec3 circle(5.0f * cos(angleT), 1.0f, 5.0f * sin(angleT));
 
+
+
+  glm::mat4 trans= glm::translate(center,circle);
+
+  location = trans;
   model= trans*rot;
 }
 
@@ -151,3 +159,7 @@ void Object::Render()
   glDisableVertexAttribArray(1);
 }
 
+glm::mat4 Object::GetLocation()
+{
+  return location;
+}

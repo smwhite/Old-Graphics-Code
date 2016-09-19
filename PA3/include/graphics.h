@@ -30,6 +30,7 @@ class Graphics
 
     Object *m_cube;
 	Object *m_moon;
+    glm::mat4 cubeLocation;
 };
 
 #endif /* GRAPHICS_H */

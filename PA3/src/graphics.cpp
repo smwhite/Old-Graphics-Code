@@ -45,8 +45,9 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_cube = new Object();
-  m_moon = new Object();
+  m_cube = new Object(glm::mat4(1.0f));
+  cubeLocation = m_cube->GetLocation();
+  m_moon = new Object(cubeLocation);
 
   // Set up the shaders
   m_shader = new Shader();
@@ -111,8 +112,9 @@ bool Graphics::Initialize(int width, int height)
 void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause)
 {
   // Update the object
-  m_cube->Update(dt,rotation,translation,pause);
-  m_moon->Update(dt,true,true,0);
+  m_cube->Update(dt,rotation,translation,pause,glm::mat4(1.0f));
+  cubeLocation = m_cube->GetLocation();
+  m_moon->Update(dt,true,true,0,cubeLocation);
 }
 
 void Graphics::Render()

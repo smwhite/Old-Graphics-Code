@@ -7,12 +7,13 @@
 class Object
 {
   public:
-    Object();
+    Object(glm::mat4 center);
     ~Object();
-    void Update(unsigned int dt,bool rotation,bool translation, int pause);
+    void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center);
     void Render();
 
     glm::mat4 GetModel();
+    glm::vec3 GetLocation();
 
   private:
     glm::mat4 model;
@@ -20,11 +21,16 @@ class Object
     std::vector<unsigned int> Indices;
     GLuint VB;
     GLuint IB;
+    
 
     float angle;
-    bool TFlip;
 	float angleT;
 	float angleR;
+	float rateT;
+	float rateR;
+    glm::mat4 centerOfOrbit;
+    glm::mat4 location;
+    
 };
 
 #endif /* OBJECT_H */
