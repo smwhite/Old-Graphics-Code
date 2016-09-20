@@ -9,7 +9,7 @@ class Object
   public:
     Object(glm::mat4 center);
     ~Object();
-    void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center);
+    void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale);
     void Render();
 
     glm::mat4 GetModel();

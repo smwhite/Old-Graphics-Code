@@ -81,7 +81,7 @@ Object::~Object()
   Indices.clear();
 }
 
-void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center)
+void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale)
 {
   angle += dt * M_PI/1000;
 
@@ -134,6 +134,8 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
   glm::mat4 trans= glm::translate(center,circle);
 
   location = trans;
+
+  trans = glm::scale(trans,glm::vec3(scale,scale,scale));
   model= trans*rot;
 }
 

@@ -45,7 +45,7 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_cube = new Object(glm::vec3(0.5f,0.5f,0.5f));
+  m_cube = new Object(glm::mat4(1.0f));
   cubeLocation = m_cube->GetLocation();
   m_moon = new Object(cubeLocation);
 
