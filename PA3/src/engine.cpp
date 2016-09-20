@@ -119,6 +119,14 @@ void Engine::Keyboard()
 	    m_PAUSE = 0;
 	    break;
 
+      case SDLK_LEFT: 
+		m_TRANSLATION_FLIP = false; 
+	    break; 
+
+      case SDLK_RIGHT: 
+		m_TRANSLATION_FLIP = true; 
+	    break;
+
 	}
   }
 }

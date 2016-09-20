@@ -9,7 +9,7 @@ make
 
 
 
-controls
+controls for "planet"
 
 
 a: switch the orbit direction
@@ -21,6 +21,10 @@ d: pause the orbit
 z: pause all
 
 x: unpause all
+
+left arrow: move counter clockwise
+
+right arrow: move clockwise
 
 left mouse button: switch the rotation direction
 
