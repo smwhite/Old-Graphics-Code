@@ -109,12 +109,12 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause)
+void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP)
 {
   // Update the object
   m_cube->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
   cubeLocation = m_cube->GetLocation();
-  m_moon->Update(dt,true,true,0,cubeLocation,0.5f);
+  m_moon->Update(dt,moonR,moonT,moonP,cubeLocation,0.5f);
 }
 
 void Graphics::Render()

@@ -33,6 +33,9 @@ class Engine
     bool m_ROTATION_FLIP;
     bool m_TRANSLATION_FLIP;
     int m_PAUSE;
+    bool m_ROTATION_FLIP_MOON;
+    bool m_TRANSLATION_FLIP_MOON;
+    int m_PAUSE_MOON;
 
     Graphics *m_graphics;
     unsigned int m_DT;

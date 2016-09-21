@@ -74,7 +74,7 @@ void Engine::Run()
     }
 
     // Update and render the graphics
-    m_graphics->Update(m_DT,m_ROTATION_FLIP,m_TRANSLATION_FLIP,m_PAUSE);
+    m_graphics->Update(m_DT,m_ROTATION_FLIP,m_TRANSLATION_FLIP,m_PAUSE,m_ROTATION_FLIP_MOON,m_TRANSLATION_FLIP_MOON,m_PAUSE_MOON);
     m_graphics->Render();
 
     // Swap to the Window
@@ -125,6 +125,38 @@ void Engine::Keyboard()
 
       case SDLK_RIGHT: 
 		m_TRANSLATION_FLIP = true; 
+	    break;
+
+      case SDLK_g: 
+		m_ROTATION_FLIP_MOON = false; 
+	    break; 
+
+      case SDLK_h: 
+		m_ROTATION_FLIP_MOON = true; 
+	    break;
+
+      case SDLK_n: 
+		m_TRANSLATION_FLIP_MOON = false; 
+	    break; 
+
+      case SDLK_m: 
+		m_TRANSLATION_FLIP_MOON = true; 
+	    break;
+
+	  case SDLK_b: 
+		m_PAUSE_MOON = 2;
+	    break;
+
+	  case SDLK_v: 
+		m_PAUSE_MOON = 3;
+	    break;
+
+      case SDLK_j: 
+		m_PAUSE_MOON = 4;
+	    break;
+
+	  case SDLK_k: 
+		m_PAUSE_MOON = 5;
 	    break;
 
 	}
