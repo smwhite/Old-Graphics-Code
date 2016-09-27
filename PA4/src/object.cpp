@@ -31,13 +31,11 @@ Object::Object(glm::mat4 center)
 
 FILE * file = fopen("../test.obj","rb");
 
-std::vector< glm::vec3 > temp_vertices;
-std::vector< unsigned int > vertexIndices;
 
 while( 1 ){
 
     char lineHeader[128];
-    // read the first word of the line
+
     int res = fscanf(file, "%s", lineHeader);
     if (res == EOF)
         break;
@@ -46,17 +44,33 @@ while( 1 ){
  
     glm::vec3 vertex;
     fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z );
-    //std::cout<<v.vertex.x<<" "<<v.vertex.z<<std::endl;
     v.vertex=vertex;
+    std::cout<<v.vertex.x<<" "<<v.vertex.y<<" "<<v.vertex.z<<std::endl;
     v.color = glm::vec3 {1,1,1};
     Vertices.push_back(v);
 }
 
     else if ( strcmp( lineHeader, "f" ) == 0 ){
     std::string vertex1, vertex2, vertex3;
-    unsigned int vertexIndex[3];
-    fscanf(file, "%d %d %d \n", &vertexIndex[0], &vertexIndex[1],&vertexIndex[2]);
-    std::cout<<vertexIndex[0]<<" "<<vertexIndex[1]<<std::endl;
+    unsigned int vertexIndex[3]={0,0,0};
+    unsigned int dummy[3]={0,0,0};
+    char test;
+    fscanf(file, "%d%c ", &vertexIndex[0],&test);
+   
+    
+
+    if(test == '/')
+    {
+      std::cout<<"switch"<<" "<<test<<std::endl;
+      fscanf(file, "/%d %d//%d %d//%d \n",&dummy[0], &vertexIndex[1],&dummy[1],&vertexIndex[2],&dummy[2]);
+    }
+
+    else
+    {
+      std::cout<<"s"<<std::endl;
+      fscanf(file, " %d %d \n", &vertexIndex[1],&vertexIndex[2]);
+    }
+    std::cout<<vertexIndex[0]<<" "<<vertexIndex[1]<<" "<<vertexIndex[2]<<std::endl;
     Indices.push_back(vertexIndex[0]);
     Indices.push_back(vertexIndex[1]);
     Indices.push_back(vertexIndex[2]);
