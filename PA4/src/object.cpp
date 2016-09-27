@@ -1,5 +1,6 @@
 #include "object.h"
 #include <iostream>
+#include <fstream>
 
 Object::Object(glm::mat4 center)
 {  
@@ -27,6 +28,45 @@ Object::Object(glm::mat4 center)
 	f 2 3 4
   */
 
+
+FILE * file = fopen("../test.obj","rb");
+
+std::vector< glm::vec3 > temp_vertices;
+std::vector< unsigned int > vertexIndices;
+
+while( 1 ){
+
+    char lineHeader[128];
+    // read the first word of the line
+    int res = fscanf(file, "%s", lineHeader);
+    if (res == EOF)
+        break;
+
+    if ( strcmp( lineHeader, "v" ) == 0 ){
+ 
+    glm::vec3 vertex;
+    fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z );
+    //std::cout<<v.vertex.x<<" "<<v.vertex.z<<std::endl;
+    v.vertex=vertex;
+    v.color = glm::vec3 {1,1,1};
+    Vertices.push_back(v);
+}
+
+    else if ( strcmp( lineHeader, "f" ) == 0 ){
+    std::string vertex1, vertex2, vertex3;
+    unsigned int vertexIndex[3];
+    fscanf(file, "%d %d %d \n", &vertexIndex[0], &vertexIndex[1],&vertexIndex[2]);
+    std::cout<<vertexIndex[0]<<" "<<vertexIndex[1]<<std::endl;
+    Indices.push_back(vertexIndex[0]);
+    Indices.push_back(vertexIndex[1]);
+    Indices.push_back(vertexIndex[2]);
+}
+}
+
+
+
+
+/*
   Vertices = {
     {{1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 0.0f}},
     {{1.0f, -1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}},
@@ -36,8 +76,8 @@ Object::Object(glm::mat4 center)
     {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 1.0f}},
     {{-1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 1.0f}},
     {{-1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 1.0f}}
-  };
-
+  };*/
+/*
   Indices = {
     2, 3, 4,
     8, 7, 6,
@@ -52,6 +92,19 @@ Object::Object(glm::mat4 center)
     3, 7, 4,
     5, 1, 8
   };
+
+  Indices = {
+	5, 2, 1,
+	6, 3, 2,
+	7, 4, 3,
+	1, 8, 5,
+	5, 6, 2,
+	6, 7, 3,
+	7, 8, 4,
+	1, 4, 8,
+	2, 4, 1,
+	2, 3, 4
+  };*/
 
   // The index works at a 0th index
   for(unsigned int i = 0; i < Indices.size(); i++)
@@ -81,7 +134,7 @@ Object::~Object()
 }
 
 void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale)
-{
+{/*
   angle += dt * M_PI/1000;
 
   switch(pause)
@@ -135,7 +188,7 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
   location = trans;
 
   trans = glm::scale(trans,glm::vec3(scale,scale,scale));
-  model= trans*rot;
+  model= trans*rot;*/
 }
 
 glm::mat4 Object::GetModel()
