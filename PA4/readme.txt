@@ -4,7 +4,7 @@ mkdir build
 cd build
 cp ../makefile .
 make
-./Tutorial file.obj     - where file.obj is the object file to be loaded
+./Tutorial file.obj     - where file.obj is the object file to be loaded object file should be located in PA4
 
 
 
