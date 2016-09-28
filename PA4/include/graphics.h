@@ -12,11 +12,12 @@ using namespace std;
 class Graphics
 {
   public:
-    Graphics();
+    Graphics(std::string File);
     ~Graphics();
     bool Initialize(int width, int height);
     void Update(unsigned int dt, bool rotation,bool translation,int pause,bool moonR,bool moonT, int moonP);
     void Render();
+    string ModelFile;
 
   private:
     std::string ErrorString(GLenum error);

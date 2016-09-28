@@ -10,7 +10,7 @@
 class Engine
 {
   public:
-    Engine(string name, int width, int height);
+    Engine(string name, int width, int height, char* File);
     Engine(string name);
     ~Engine();
     bool Initialize();
@@ -19,6 +19,7 @@ class Engine
     void Mouse();
     unsigned int getDT();
     long long GetCurrentTimeMillis();
+    string ModelFile;
   
   private:
     // Window related variables
@@ -33,6 +34,9 @@ class Engine
     bool m_ROTATION_FLIP;
     bool m_TRANSLATION_FLIP;
     int m_PAUSE;
+    bool m_ROTATION_FLIP_MOON;
+    bool m_TRANSLATION_FLIP_MOON;
+    int m_PAUSE_MOON;
 
     Graphics *m_graphics;
     unsigned int m_DT;

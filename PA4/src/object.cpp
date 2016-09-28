@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-Object::Object(glm::mat4 center)
+Object::Object(glm::mat4 center,std::string ModelFile)
 {  
   /*
     # Blender File for my object. Added for trouble shooting
@@ -28,8 +28,9 @@ Object::Object(glm::mat4 center)
 	f 2 3 4
   */
 
+std::string f = "../"+ModelFile;
 
-FILE * file = fopen("../test.obj","rb");
+FILE * file = fopen(f.c_str(),"rb");
 
 
 while( 1 ){
@@ -45,13 +46,13 @@ while( 1 ){
     glm::vec3 vertex;
     fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z );
     v.vertex=vertex;
-    std::cout<<v.vertex.x<<" "<<v.vertex.y<<" "<<v.vertex.z<<std::endl;
+    //std::cout<<v.vertex.x<<" "<<v.vertex.y<<" "<<v.vertex.z<<std::endl;
     v.color = glm::vec3 {1,1,1};
     Vertices.push_back(v);
 }
 
     else if ( strcmp( lineHeader, "f" ) == 0 ){
-    std::string vertex1, vertex2, vertex3;
+    
     unsigned int vertexIndex[3]={0,0,0};
     unsigned int dummy[3]={0,0,0};
     char test;
@@ -61,16 +62,16 @@ while( 1 ){
 
     if(test == '/')
     {
-      std::cout<<"switch"<<" "<<test<<std::endl;
+      //std::cout<<"switch"<<" "<<test<<std::endl;
       fscanf(file, "/%d %d//%d %d//%d \n",&dummy[0], &vertexIndex[1],&dummy[1],&vertexIndex[2],&dummy[2]);
     }
 
     else
     {
-      std::cout<<"s"<<std::endl;
+      //std::cout<<"s"<<std::endl;
       fscanf(file, " %d %d \n", &vertexIndex[1],&vertexIndex[2]);
     }
-    std::cout<<vertexIndex[0]<<" "<<vertexIndex[1]<<" "<<vertexIndex[2]<<std::endl;
+    //std::cout<<vertexIndex[0]<<" "<<vertexIndex[1]<<" "<<vertexIndex[2]<<std::endl;
     Indices.push_back(vertexIndex[0]);
     Indices.push_back(vertexIndex[1]);
     Indices.push_back(vertexIndex[2]);

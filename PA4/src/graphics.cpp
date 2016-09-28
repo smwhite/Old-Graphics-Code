@@ -1,8 +1,8 @@
 #include "graphics.h"
 
-Graphics::Graphics()
+Graphics::Graphics(std::string File)
 {
-
+  ModelFile = File;
 }
 
 Graphics::~Graphics()
@@ -45,7 +45,7 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_cube = new Object(glm::mat4(1.0f));
+  m_cube = new Object(glm::mat4(1.0f),ModelFile);
   //cubeLocation = m_cube->GetLocation();
   //m_moon = new Object(cubeLocation);
 

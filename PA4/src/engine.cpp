@@ -1,7 +1,7 @@
 
 #include "engine.h"
 
-Engine::Engine(string name, int width, int height)
+Engine::Engine(string name, int width, int height,std::string File)
 {
   m_WINDOW_NAME = name;
   m_WINDOW_WIDTH = width;
@@ -10,6 +10,7 @@ Engine::Engine(string name, int width, int height)
   m_ROTATION_FLIP = true;
   m_TRANSLATION_FLIP = true;
   m_PAUSE = 0;
+  ModelFile = File;
 }
 
 Engine::Engine(string name)
@@ -42,7 +43,7 @@ bool Engine::Initialize()
   }
 
   // Start the graphics
-  m_graphics = new Graphics();
+  m_graphics = new Graphics(ModelFile);
   if(!m_graphics->Initialize(m_WINDOW_WIDTH, m_WINDOW_HEIGHT))
   {
     printf("The graphics failed to initialize.\n");

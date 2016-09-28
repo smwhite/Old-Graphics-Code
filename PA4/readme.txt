@@ -4,7 +4,7 @@ mkdir build
 cd build
 cp ../makefile .
 make
-./Tutorial
+./Tutorial file.obj     - where file.obj is the object file to be loaded
 
 
 

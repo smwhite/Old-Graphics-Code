@@ -10,7 +10,7 @@
 class Engine
 {
   public:
-    Engine(string name, int width, int height);
+    Engine(string name, int width, int height, std::string File);
     Engine(string name);
     ~Engine();
     bool Initialize();
@@ -19,6 +19,7 @@ class Engine
     void Mouse();
     unsigned int getDT();
     long long GetCurrentTimeMillis();
+    string ModelFile;
   
   private:
     // Window related variables

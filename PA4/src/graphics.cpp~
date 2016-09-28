@@ -1,8 +1,8 @@
 #include "graphics.h"
 
-Graphics::Graphics()
+Graphics::Graphics(char** File)
 {
-
+  ModelFile = File;
 }
 
 Graphics::~Graphics()
@@ -45,9 +45,9 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_cube = new Object(glm::mat4(1.0f));
-  cubeLocation = m_cube->GetLocation();
-  m_moon = new Object(cubeLocation);
+  m_cube = new Object(glm::mat4(1.0f),ModelFile);
+  //cubeLocation = m_cube->GetLocation();
+  //m_moon = new Object(cubeLocation);
 
   // Set up the shaders
   m_shader = new Shader();
@@ -113,8 +113,8 @@ void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,
 {
   // Update the object
   m_cube->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  cubeLocation = m_cube->GetLocation();
-  m_moon->Update(dt,moonR,moonT,moonP,cubeLocation,0.5f);
+  //cubeLocation = m_cube->GetLocation();
+ // m_moon->Update(dt,moonR,moonT,moonP,cubeLocation,0.5f);
 }
 
 void Graphics::Render()
@@ -134,8 +134,8 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render();
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_moon->GetModel()));
-  m_moon->Render();
+  //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_moon->GetModel()));
+  //m_moon->Render();
 
 
   // Get any errors from OpenGL
