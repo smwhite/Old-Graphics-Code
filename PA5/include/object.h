@@ -30,6 +30,8 @@ class Object
 	float rateR;
     glm::mat4 centerOfOrbit;
     glm::mat4 location;
+
+    struct Vertex v{{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}};
     
 };
 

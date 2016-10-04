@@ -9,7 +9,7 @@ class Object
   public:
     Object(glm::mat4 center);
     ~Object();
-    void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center);
+    void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale);
     void Render();
 
     glm::mat4 GetModel();
@@ -30,6 +30,8 @@ class Object
 	float rateR;
     glm::mat4 centerOfOrbit;
     glm::mat4 location;
+
+    struct Vertex v{{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 1.0f}};
     
 };
 

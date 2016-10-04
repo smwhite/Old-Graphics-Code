@@ -1,64 +1,38 @@
 #include "object.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include <assimp/color4.h>
 
 Object::Object(glm::mat4 center)
 {  
-  /*
-    # Blender File for a Cube
-    o Cube
-    v 1.000000 -1.000000 -1.000000
-    v 1.000000 -1.000000 1.000000
-    v -1.000000 -1.000000 1.000000
-    v -1.000000 -1.000000 -1.000000
-    v 1.000000 1.000000 -0.999999
-    v 0.999999 1.000000 1.000001
-    v -1.000000 1.000000 1.000000
-    v -1.000000 1.000000 -1.000000
-    s off
-    f 2 3 4
-    f 8 7 6
-    f 1 5 6
-    f 2 6 7
-    f 7 8 4
-    f 1 4 8
-    f 1 2 4
-    f 5 8 6
-    f 2 1 6
-    f 3 2 7
-    f 3 7 4
-    f 5 1 8
-  */
+  Assimp::Importer importer;
+  const aiScene* scene = importer.ReadFile("../dragon.obj", aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs 
+                                       | aiProcess_JoinIdenticalVertices);
 
-  Vertices = {
-    {{1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 0.0f}},
-    {{1.0f, -1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}},
-    {{-1.0f, -1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}},
-    {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 1.0f}},
-    {{1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 0.0f}},
-    {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 1.0f}},
-    {{-1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 1.0f}},
-    {{-1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 1.0f}}
-  };
+  aiMesh* mesh = scene->mMeshes[0];
 
-  Indices = {
-    2, 3, 4,
-    8, 7, 6,
-    1, 5, 6,
-    2, 6, 7,
-    7, 8, 4,
-    1, 4, 8,
-    1, 2, 4,
-    5, 8, 6,
-    2, 1, 6,
-    3, 2, 7,
-    3, 7, 4,
-    5, 1, 8
-  };
-
-  // The index works at a 0th index
-  for(unsigned int i = 0; i < Indices.size(); i++)
+  for(unsigned int i=0;i< mesh->mNumVertices;i++)
   {
-    Indices[i] = Indices[i] - 1;
+    const aiVector3D* pos = &(mesh->mVertices[i]);
+
+    v.vertex = glm::vec3 {pos->x,pos->y,pos->z};
+    Vertices.push_back(v);
   }
+
+
+  for(unsigned int i=0;i<mesh->mNumFaces;i++)
+  {
+    const aiFace& face = mesh->mFaces[i];
+    assert(face.mNumIndices ==3);
+
+    Indices.push_back(face.mIndices[0]);
+    Indices.push_back(face.mIndices[1]);
+    Indices.push_back(face.mIndices[2]);
+  
+  
+  }
+
 
   angle = 0.0f;
 
@@ -82,7 +56,7 @@ Object::~Object()
 }
 
 void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale)
-{
+{/*
   angle += dt * M_PI/1000;
 
   switch(pause)
@@ -136,7 +110,7 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
   location = trans;
 
   trans = glm::scale(trans,glm::vec3(scale,scale,scale));
-  model= trans*rot;
+  model= trans*rot;*/
 }
 
 glm::mat4 Object::GetModel()
