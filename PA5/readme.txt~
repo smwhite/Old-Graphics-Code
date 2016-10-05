@@ -44,6 +44,13 @@ g: move clockwise
 
 h: move counter clockwise
 
+b: unpause the orbit
+
+v: pause the orbit
+
+n: move counter clockwise
+
+m: move clockwise
 
 
 
