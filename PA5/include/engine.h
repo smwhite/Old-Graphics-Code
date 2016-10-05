@@ -11,7 +11,7 @@ class Engine
 {
   public:
     Engine(string name, int width, int height, string vFile, string fFile, string mFile);
-    Engine(string name);
+    Engine(string name, string vFile, string fFile, string mFile);
     ~Engine();
     bool Initialize();
     void Run();
@@ -41,6 +41,10 @@ class Engine
     unsigned int m_DT;
     long long m_currentTimeMillis;
     bool m_running;
+    
+    string vertexFile;
+    string fragmentFile;
+    string modelFile;
 };
 
 #endif // ENGINE_H

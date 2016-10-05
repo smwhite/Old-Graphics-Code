@@ -10,9 +10,13 @@ Engine::Engine(string name, int width, int height, string vFile, string fFile, s
   m_ROTATION_FLIP = true;
   m_TRANSLATION_FLIP = true;
   m_PAUSE = 0;
+
+  vertexFile = vFile;
+  fragmentFile = fFile;
+  modelFile = mFile;
 }
 
-Engine::Engine(string name)
+Engine::Engine(string name, string vFile, string fFile, string mFile)
 {
   m_WINDOW_NAME = name;
   m_WINDOW_HEIGHT = 0;
@@ -21,6 +25,10 @@ Engine::Engine(string name)
   m_ROTATION_FLIP = true;
   m_TRANSLATION_FLIP = true;
   m_PAUSE = 0;
+
+  vertexFile = vFile;
+  fragmentFile = fFile;
+  modelFile = mFile;
 }
 
 Engine::~Engine()
@@ -42,7 +50,7 @@ bool Engine::Initialize()
   }
 
   // Start the graphics
-  m_graphics = new Graphics();
+  m_graphics = new Graphics(vertexFile, fragmentFile, modelFile);
   if(!m_graphics->Initialize(m_WINDOW_WIDTH, m_WINDOW_HEIGHT))
   {
     printf("The graphics failed to initialize.\n");

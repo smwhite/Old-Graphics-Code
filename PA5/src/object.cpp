@@ -4,10 +4,14 @@
 #include <assimp/postprocess.h>
 #include <assimp/color4.h>
 
-Object::Object(glm::mat4 center)
+Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::string mFile)
 {  
+  vertexFile = vFile;
+  fragmentFile = fFile;
+  modelFile = mFile;
+
   Assimp::Importer importer;
-  const aiScene* scene = importer.ReadFile("../dragon.obj", aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs 
+  const aiScene* scene = importer.ReadFile(modelFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs 
                                        | aiProcess_JoinIdenticalVertices);
 
   aiMesh* mesh = scene->mMeshes[0];

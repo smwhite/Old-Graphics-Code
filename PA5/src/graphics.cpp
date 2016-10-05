@@ -1,8 +1,10 @@
 #include "graphics.h"
 
-Graphics::Graphics()
+Graphics::Graphics(string vFile, string fFile, string mFile)
 {
-
+  vertexFile = vFile;
+  fragmentFile = fFile;
+  modelFile = mFile;
 }
 
 Graphics::~Graphics()
@@ -45,12 +47,12 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_cube = new Object(glm::mat4(1.0f));
+  m_cube = new Object(glm::mat4(1.0f), vertexFile, fragmentFile, modelFile);
   cubeLocation = m_cube->GetLocation();
-  m_moon = new Object(cubeLocation);
+  m_moon = new Object(cubeLocation, vertexFile, fragmentFile, modelFile);
 
   // Set up the shaders
-  m_shader = new Shader();
+  m_shader = new Shader(vertexFile, fragmentFile);
   if(!m_shader->Initialize())
   {
     printf("Shader Failed to Initialize\n");

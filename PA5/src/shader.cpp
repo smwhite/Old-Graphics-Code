@@ -2,9 +2,11 @@
 #include <fstream>
 #include <iostream>
 
-Shader::Shader()
+Shader::Shader(std::string vFile, std::string fFile)
 {
   m_shaderProg = 0;
+  vertexFile = vFile;
+  fragmentFile = fFile;
 }
 
 Shader::~Shader()
@@ -41,13 +43,13 @@ bool Shader::AddShader(GLenum ShaderType)
 
   if(ShaderType == GL_VERTEX_SHADER)
   {
-    std::ifstream i ("../shaders/vertex.vert");
+    std::ifstream i (vertexFile);
 	std::string t((std::istreambuf_iterator<char>(i)),std::istreambuf_iterator<char>());
 	s=t;
   }
   else if(ShaderType == GL_FRAGMENT_SHADER)
   {
-    std::ifstream i ("../shaders/fragment.frag");
+    std::ifstream i (fragmentFile);
 	std::string t((std::istreambuf_iterator<char>(i)),std::istreambuf_iterator<char>());
 	s=t;
 

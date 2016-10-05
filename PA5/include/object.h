@@ -7,7 +7,7 @@
 class Object
 {
   public:
-    Object(glm::mat4 center);
+    Object(glm::mat4 center, std::string vFile, std::string fFile, std::string mFile);
     ~Object();
     void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale);
     void Render();
@@ -16,6 +16,9 @@ class Object
     glm::mat4 GetLocation();
 
   private:
+    std::string vertexFile;
+    std::string fragmentFile;
+    std::string modelFile;
     glm::mat4 model;
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;

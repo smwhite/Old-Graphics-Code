@@ -8,7 +8,7 @@
 class Shader
 {
   public:
-    Shader(std::string vFile, std::string fFile);
+    Shader(string vFile, string fFile);
     ~Shader();
     bool Initialize();
     void Enable();
@@ -19,8 +19,8 @@ class Shader
   private:
     GLuint m_shaderProg;    
     std::vector<GLuint> m_shaderObjList;
-    std::string vertexFile;
-    std::string fragmentFile;
+    string vertexFile;
+    string fragmentFile;
 };
 
 #endif  /* SHADER_H */
