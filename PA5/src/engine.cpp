@@ -1,7 +1,7 @@
 
 #include "engine.h"
 
-Engine::Engine(string name, int width, int height)
+Engine::Engine(string name, int width, int height, string vFile, string fFile, string mFile)
 {
   m_WINDOW_NAME = name;
   m_WINDOW_WIDTH = width;

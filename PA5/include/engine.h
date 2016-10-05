@@ -10,7 +10,7 @@
 class Engine
 {
   public:
-    Engine(string name, int width, int height);
+    Engine(string name, int width, int height, string vFile, string fFile, string mFile);
     Engine(string name);
     ~Engine();
     bool Initialize();

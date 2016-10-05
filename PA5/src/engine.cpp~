@@ -127,6 +127,14 @@ void Engine::Keyboard()
 		m_TRANSLATION_FLIP = true; 
 	    break;
 
+      case SDLK_g: 
+		m_ROTATION_FLIP_MOON = false; 
+	    break; 
+
+      case SDLK_h: 
+		m_ROTATION_FLIP_MOON = true; 
+	    break;
+
       case SDLK_n: 
 		m_TRANSLATION_FLIP_MOON = false; 
 	    break; 
