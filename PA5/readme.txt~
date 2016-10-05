@@ -7,7 +7,7 @@ make
 ./Tutorial
 
 
-
+*CONTROLS ARE CURRENTLY COMMENTED OUT*
 
 controls for "planet"
 

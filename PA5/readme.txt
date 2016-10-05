@@ -6,6 +6,10 @@ cp ../makefile .
 make
 ./Tutorial
 
+Added command line arguments
+
+Changed to Assimp model loader
+
 
 *CONTROLS ARE CURRENTLY COMMENTED OUT*
 
