@@ -13,7 +13,7 @@ Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::stri
   fragmentFile = fFile;
   modelFile = mFile;
   
-  std::string m_fileName = "../granite.jpg";
+  std::string m_fileName = "granite.jpg";
   m_image.read(m_fileName);
   m_image.write(&m_blob, "RGBA");
 
@@ -39,9 +39,7 @@ Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::stri
 
     Indices.push_back(face.mIndices[0]);
     Indices.push_back(face.mIndices[1]);
-    Indices.push_back(face.mIndices[2]);
-  
-  
+    Indices.push_back(face.mIndices[2]);    
   }
 
 
@@ -60,7 +58,7 @@ Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::stri
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_image.columns(), m_image.rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);    
-  glBindTexture(GL_TEXTURE_2D, 0);
+  glBindTexture(GL_TEXTURE_2D, m_texObj);
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, m_texObj);
 

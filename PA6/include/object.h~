@@ -26,7 +26,7 @@ class Object
     GLuint VB;
     GLuint IB;
     GLuint m_texObj;
-    GLenum m_texTarget;
+    //GLenum m_texTarget;
     
     Magick::Image m_image;
     Magick::Blob m_blob;
