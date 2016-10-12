@@ -104,13 +104,13 @@ bool Graphics::Initialize(int width, int height)
     return false;
   }
 
-  /* Locate the model texture in the shader
-  m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
+  // Locate the model texture in the shader
+  m_gSampler = m_shader->GetUniformLocation("gSampler");
   if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_modelMatrix not found\n");
+    printf("m_gSampler not found\n");
     return false;
-  } */
+  } 
 
   //enable depth testing
   glEnable(GL_DEPTH_TEST);
@@ -123,8 +123,6 @@ void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,
 {
   // Update the object
   m_cube->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  cubeLocation = m_cube->GetLocation();
-  m_moon->Update(dt,moonR,moonT,moonP,cubeLocation,0.5f);
 }
 
 void Graphics::Render()
@@ -139,13 +137,12 @@ void Graphics::Render()
   // Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
+  glUniform1i(m_gSampler,1);
 
   // Render the object
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render();
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_moon->GetModel()));
-  m_moon->Render();
 
 
   // Get any errors from OpenGL

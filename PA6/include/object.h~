@@ -25,6 +25,7 @@ class Object
     std::vector<unsigned int> Indices;
     GLuint VB;
     GLuint IB;
+
     GLuint m_texObj;
     //GLenum m_texTarget;
     

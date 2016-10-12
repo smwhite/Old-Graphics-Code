@@ -27,6 +27,7 @@ class Graphics
     GLint m_projectionMatrix;
     GLint m_viewMatrix;
     GLint m_modelMatrix;
+	GLint m_gSampler;
 
     Object *m_cube;
 	Object *m_moon;

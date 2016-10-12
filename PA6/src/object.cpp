@@ -30,10 +30,13 @@ Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::stri
   for(unsigned int i=0;i< mesh->mNumVertices;i++)
   {
     const aiVector3D* pos = &(mesh->mVertices[i]);
+    const aiVector3D* uv = &(mesh->mTextureCoords[0][i]);
 
     v.vertex = glm::vec3 {pos->x,pos->y,pos->z};
+	v.uv = glm::vec2{uv->x,uv->y};
     Vertices.push_back(v);
   }
+
 
 
   for(unsigned int i=0;i<mesh->mNumFaces;i++)
@@ -61,11 +64,11 @@ Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::stri
   //glActiveTexture(GL_TEXTURE0);
   //glBindTexture(GL_TEXTURE_2D, m_texObj);
   glGenTextures(1, &m_texObj);
-  glBindTexture(GL_TEXTURE_2D, m_texObj);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_image.columns(), m_image.rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  
-  glBindTexture(GL_TEXTURE_2D, 0);  
+  glBindTexture(GL_TEXTURE_2D, m_texObj);
+  //glBindTexture(GL_TEXTURE_2D, 0);  
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   centerOfOrbit = center;
@@ -149,7 +152,7 @@ void Object::Render()
 
   glBindBuffer(GL_ARRAY_BUFFER, VB);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,color));
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,uv));
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
 
