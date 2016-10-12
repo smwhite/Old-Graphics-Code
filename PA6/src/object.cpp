@@ -13,9 +13,13 @@ Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::stri
   fragmentFile = fFile;
   modelFile = mFile;
   
-  std::string m_fileName = "granite.jpg";
+
+  // scene->mMaterials[1]->GetTexture();
+  // aiString
+  std::string m_fileName = "../granite.jpg";
   m_image.read(m_fileName);
   m_image.write(&m_blob, "RGBA");
+
 
   Assimp::Importer importer;
   const aiScene* scene = importer.ReadFile(modelFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs 

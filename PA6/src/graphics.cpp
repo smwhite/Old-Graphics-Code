@@ -104,6 +104,14 @@ bool Graphics::Initialize(int width, int height)
     return false;
   }
 
+  /* Locate the model texture in the shader
+  m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_modelMatrix not found\n");
+    return false;
+  } */
+
   //enable depth testing
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
