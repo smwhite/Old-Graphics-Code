@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include <vector>
+#include <Magick++.h>
 #include "graphics_headers.h"
 
 class Object
@@ -24,7 +25,11 @@ class Object
     std::vector<unsigned int> Indices;
     GLuint VB;
     GLuint IB;
+    GLuint m_texObj;
+    //GLenum m_texTarget;
     
+    Magick::Image m_image;
+    Magick::Blob m_blob;
 
     float angle;
 	float angleT;
