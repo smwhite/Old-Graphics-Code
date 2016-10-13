@@ -1,4 +1,4 @@
-to make run the following commands from inside PA2
+to make run the following commands from inside PA6.    all models and textures must be in the PA6 folder
 
 mkdir build
 cd build
