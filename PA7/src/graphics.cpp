@@ -117,10 +117,11 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP)
+void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP, float LR, float UD)
 {
   // Update the object
   m_cube->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
+  m_camera->Update(LR,UD);
 }
 
 void Graphics::Render()
