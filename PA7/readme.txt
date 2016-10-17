@@ -11,50 +11,13 @@ Added command line arguments
 Changed to Assimp model loader
 
 
-*CONTROLS ARE CURRENTLY COMMENTED OUT*
 
-controls for "planet"
+controls
 
+A: moves camera left
 
-a: switch the orbit direction
+D: moves camera right
 
-s: unpause the orbit
+W: moves camera up
 
-d: pause the orbit
-
-z: pause all
-
-x: unpause all
-
-left arrow: move counter clockwise
-
-right arrow: move clockwise
-
-left mouse button: switch the rotation direction
-
-right mouse button: unpause rotation
-
-middle mouse button: pause rotation
-
-
-
-controls for "moon"
-
-j: unpause rotation
-
-k: pause rotation
-
-g: move clockwise
-
-h: move counter clockwise
-
-b: unpause the orbit
-
-v: pause the orbit
-
-n: move counter clockwise
-
-m: move clockwise
-
-
-
+S: moves camera down

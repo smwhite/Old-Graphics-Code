@@ -45,6 +45,9 @@ class Engine
     string vertexFile;
     string fragmentFile;
     string modelFile;
+
+	float LR = 0;
+	float UD = 0;
 };
 
 #endif // ENGINE_H
