@@ -116,11 +116,11 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_w: 
-		m_PAUSE = 3;
+		UD += 0.1;
 	    break;
 
 	  case SDLK_s: 
-	    m_PAUSE = 1;
+	    UD -= 0.1;
 	    break;
 
 	  case SDLK_x: 

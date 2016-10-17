@@ -29,8 +29,20 @@ class Graphics
     GLint m_modelMatrix;
 	GLint m_gSampler;
 
+    Object *m_sun;
+	Object *m_mercury;
+    Object *m_venus;
+    Object *m_earth;
+	Object *m_mars;
+    Object *m_jupiter;
+	Object *m_saturn;
+    Object *m_uranus;
+	Object *m_neptune;
+    Object *m_pluto;
+
     Object *m_cube;
 	Object *m_moon;
+
     glm::mat4 cubeLocation;
 
     string vertexFile;
