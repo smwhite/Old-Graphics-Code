@@ -27,11 +27,13 @@ bool Camera::Initialize(int w, int h)
   return true;
 }
 
-bool Camera::Update(float LR,float UD)
+bool Camera::Update(float LR,float UD,float ELR, float EUD)
 {
-  view = glm::lookAt( glm::vec3(0.0, 0.0, -16.0), //Eye Position
-                      glm::vec3(0.0, 0.0, 0.0), //Focus point
+
+  view = glm::lookAt( glm::vec3(ELR, EUD, -16.0), //Eye Position
+                      glm::vec3(LR, UD, 0.0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
+
 
   return true;
 }
