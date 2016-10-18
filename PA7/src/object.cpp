@@ -7,7 +7,7 @@
 
 using namespace Magick;
 
-Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::string mFile)
+Object::Object(glm::mat4 center, float orbitSize, std::string vFile, std::string fFile, std::string mFile)
 {  
   vertexFile = vFile;
   fragmentFile = fFile;
@@ -72,6 +72,7 @@ Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::stri
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   centerOfOrbit = center;
+  orbSize = orbitSize;
   location= glm::mat4(1.0f);
 
 }
@@ -83,9 +84,9 @@ Object::~Object()
 }
 
 void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale)
-{/*
+{
   angle += dt * M_PI/1000;
-
+/*
   switch(pause)
   {
     case 0:
@@ -127,15 +128,18 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
   {
     angleT -= dt * rateT;
   }
+*/
+  angleT += dt * rateT;
+  glm::vec3 circle(orbSize * cos(angle), 1.0f, orbSize * sin(angle));
 
-  glm::vec3 circle(5.0f * cos(angleT), 1.0f, 5.0f * sin(angleT));
 
 
+  glm::mat4 trans= glm::translate(center, circle);
+  model = trans;
 
-  glm::mat4 trans= glm::translate(center,circle);
 
   location = trans;
-
+/*
   trans = glm::scale(trans,glm::vec3(scale,scale,scale));
   model= trans*rot;*/
 }

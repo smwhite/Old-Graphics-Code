@@ -8,7 +8,7 @@
 class Object
 {
   public:
-    Object(glm::mat4 center, std::string vFile, std::string fFile, std::string mFile);
+    Object(glm::mat4 center, float orbitSize, std::string vFile, std::string fFile, std::string mFile);
     ~Object();
     void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale);
     void Render();
@@ -25,6 +25,8 @@ class Object
     std::vector<unsigned int> Indices;
     GLuint VB;
     GLuint IB;
+
+    float orbSize;    
 
     GLuint m_texObj;
     //GLenum m_texTarget;
