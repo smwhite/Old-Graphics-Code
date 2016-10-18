@@ -129,14 +129,16 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
     angleT -= dt * rateT;
   }
 */
+  rateR=rateT=M_PI/1000;
   angleT += dt * rateT;
-  glm::vec3 circle(orbSize * cos(angle), 1.0f, orbSize * sin(angle));
+  angleR += dt * rateR;
+  glm::vec3 circle(orbSize * cos(angleT), 1.0f, orbSize * sin(angleT));
 
 
-
+  glm::mat4 rot= glm::rotate(glm::mat4(1.0f), (angleR), glm::vec3(0.0, 1.0, 0.0));
   glm::mat4 trans= glm::translate(center, circle);
-  model = trans;
-
+  //model = trans;
+  model= rot*trans;
 
   location = trans;
 /*
