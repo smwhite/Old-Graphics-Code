@@ -15,7 +15,8 @@ class Graphics
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     bool Initialize(int width, int height);
-    void Update(unsigned int dt, bool rotation,bool translation,int pause,bool moonR,bool moonT, int moonP, float LR,float UD);
+    void Update(unsigned int dt, bool rotation,bool translation,int pause,bool moonR,bool moonT, int moonP, float LR,float UD
+						, float ELR,float EUD, float ZOOM float ZOOMUD);
     void Render();
 
   private:
@@ -29,6 +30,7 @@ class Graphics
     GLint m_modelMatrix;
 	GLint m_gSampler;
 
+    Object *m_sun;
 	Object *m_mercury;
     Object *m_venus;
     Object *m_earth;
@@ -38,7 +40,6 @@ class Graphics
     Object *m_uranus;
 	Object *m_neptune;
     Object *m_pluto;
-    Object *m_sun;
 
     Object *m_cube;
 	Object *m_moon;
