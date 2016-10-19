@@ -50,7 +50,7 @@ class Engine
 	float UD = 0;
 	float ELR = 0;
 	float EUD = 20;
-	float ZOOM = -16.0;
+	float ZOOM = -100.0;
 };
 
 #endif // ENGINE_H
