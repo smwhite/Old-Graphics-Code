@@ -10,7 +10,7 @@ class Object
   public:
     Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpeed, std::string vFile, std::string fFile, std::string mFile);
     ~Object();
-    void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale);
+    void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale,  float multiplier);
     void Render();
 
     glm::mat4 GetModel();

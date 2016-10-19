@@ -84,7 +84,7 @@ Object::~Object()
   Indices.clear();
 }
 
-void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale)
+void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale, float multiplier)
 {
   angle += dt * M_PI/1000;
 
