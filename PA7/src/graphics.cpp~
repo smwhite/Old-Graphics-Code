@@ -50,13 +50,13 @@ bool Graphics::Initialize(int width, int height)
   m_sun = new Object(glm::mat4(1.0f),0.0f, vertexFile, fragmentFile, modelFile);
   m_mercury = new Object(glm::mat4(1.0f),3.0f, vertexFile, fragmentFile, modelFile);
   m_venus = new Object(glm::mat4(1.0f),5.0f, vertexFile, fragmentFile, modelFile);
-  //m_earth = new Object(glm::mat4(1.0f),7.0f, vertexFile, fragmentFile, modelFile);
-  //m_mars = new Object(glm::mat4(1.0f),9.0f, vertexFile, fragmentFile, modelFile);
-  //m_jupiter = new Object(glm::mat4(1.0f),11.0f, vertexFile, fragmentFile, modelFile);
-  //m_saturn = new Object(glm::mat4(1.0f),13.0f, vertexFile, fragmentFile, modelFile);
-  //m_neptune = new Object(glm::mat4(1.0f),15.0f, vertexFile, fragmentFile, modelFile);
-  //m_uranus = new Object(glm::mat4(1.0f),17.0f, vertexFile, fragmentFile, modelFile);
-  //m_pluto = new Object(glm::mat4(1.0f),19.0f, vertexFile, fragmentFile, modelFile);
+  m_earth = new Object(glm::mat4(1.0f),7.0f, vertexFile, fragmentFile, modelFile);
+  m_mars = new Object(glm::mat4(1.0f),9.0f, vertexFile, fragmentFile, modelFile);
+  m_jupiter = new Object(glm::mat4(1.0f),11.0f, vertexFile, fragmentFile, modelFile);
+  m_saturn = new Object(glm::mat4(1.0f),13.0f, vertexFile, fragmentFile, modelFile);
+  m_neptune = new Object(glm::mat4(1.0f),15.0f, vertexFile, fragmentFile, modelFile);
+  m_uranus = new Object(glm::mat4(1.0f),17.0f, vertexFile, fragmentFile, modelFile);
+  m_pluto = new Object(glm::mat4(1.0f),19.0f, vertexFile, fragmentFile, modelFile);
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -131,17 +131,18 @@ void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,
   // Update the object
 
 
-  m_sun->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_mercury->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_venus->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  /*m_earth->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_mars->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_jupiter->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_saturn->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_neptune->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_uranus->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_pluto->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_camera->Update(LR,UD,ELR,EUD,ZOOM);*/
+  m_sun->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.75f);
+  m_mercury->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  m_venus->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  m_earth->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  m_mars->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  m_jupiter->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  m_saturn->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  m_neptune->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  m_uranus->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  m_pluto->Update(dt,rotation,translation,pause,glm::mat4(1.0f),0.5f);
+  
+  m_camera->Update(LR,UD,ELR,EUD,ZOOM);
 }
 
 void Graphics::Render()
@@ -164,7 +165,7 @@ void Graphics::Render()
   m_mercury->Render();
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_venus->GetModel()));
   m_venus->Render();
-  /*glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_earth->GetModel()));
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_earth->GetModel()));
   m_earth->Render();
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_mars->GetModel()));
   m_mars->Render();
@@ -179,7 +180,7 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_pluto->GetModel()));
   m_pluto->Render();
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sun->GetModel()));
-  m_sun->Render();*/
+  m_sun->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();
