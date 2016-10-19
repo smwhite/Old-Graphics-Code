@@ -68,7 +68,6 @@ Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpe
 
   //glBindTexture(GL_TEXTURE_2D, 0);  
 
-  glDeleteTextures(1, &m_texObj);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   centerOfOrbit = center;
@@ -132,6 +131,11 @@ void Object::Render()
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  
   glBindTexture(GL_TEXTURE_2D, m_texObj);
+
+
+  glDeleteTextures(1, &m_texObj);
+
+
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
 
