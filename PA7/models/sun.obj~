@@ -1,6 +1,6 @@
 # Blender v2.77 (sub 0) OBJ File: 'earth.blend'
 # www.blender.org
-mtllib sun.mtl
+mtllib neptune.mtl
 o Sphere
 v 1.562713 5.066497 -2.145202
 v 0.931268 4.874950 -2.145202
