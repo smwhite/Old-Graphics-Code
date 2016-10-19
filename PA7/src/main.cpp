@@ -43,6 +43,7 @@ int main(int argc, char **argv)
      vertFile = "../shaders/vertex.vert";
      fragFile = "../shaders/fragment.frag";
      modelFile = "../buddha.obj";
+	 //modelFile = "../models/obj/buddha.obj";
     }
 
   //cout << vertFile << endl;
