@@ -107,41 +107,34 @@ void Engine::Keyboard()
 	    m_running = false;
 	    break;
 
-	  /*case SDLK_a: 
-
+	  case SDLK_a: 
+		LR += 1;
+		ELR += 1; 
 	    break; 
 	
 	  case SDLK_d: 
-
-	    break;*/
+		LR -= 1;
+		ELR -= 1;
+	    break;
 
 	  case SDLK_w: 
-        ZOOM += 0.5;
+        ZOOM += 1;
 	    break;
 
 	  case SDLK_s: 
-        ZOOM -= 0.5;
+        ZOOM -= 1;
 	    break;
 
 	  case SDLK_UP: 
-		UD += 0.5;
-	    EUD += 0.5;	    
+		UD -= 1;
+	    EUD -= 1;	    
 	    break;
 
 	  case SDLK_DOWN: 
-	    UD -= 0.5;
-	    EUD -= 0.5;	    
+	    UD += 1;
+	    EUD += 1;	    
 	    break;
 
-      case SDLK_LEFT: 
-		LR += 0.5;
-		ELR += 0.5; 
-	    break;
-
-	  case SDLK_RIGHT: 
-		LR -= 0.5;
-		ELR -= 0.5;
-	    break;
 
 	  /*case SDLK_q: 
 		LR += 0.1;
