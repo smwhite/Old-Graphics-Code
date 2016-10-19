@@ -141,7 +141,8 @@ void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,
   m_neptune->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
   m_uranus->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
   m_pluto->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_camera->Update(LR,UD,ELR,EUD,ZOOM);*/
+  */
+  m_camera->Update(LR,UD,ELR,EUD,ZOOM);
 }
 
 void Graphics::Render()

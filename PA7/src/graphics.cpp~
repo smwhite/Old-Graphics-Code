@@ -141,7 +141,8 @@ void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,
   m_neptune->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
   m_uranus->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
   m_pluto->Update(dt,rotation,translation,pause,glm::mat4(1.0f),1.0f);
-  m_camera->Update(LR,UD,ELR,EUD,ZOOM);*/
+  */
+  m_camera->Update(LR,UD,ELR,EUD,ZOOM);
 }
 
 void Graphics::Render()
@@ -177,9 +178,9 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranus->GetModel()));
   m_uranus->Render();
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_pluto->GetModel()));
-  m_pluto->Render();
+  m_pluto->Render();*/
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sun->GetModel()));
-  m_sun->Render();*/
+  m_sun->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();

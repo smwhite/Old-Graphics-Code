@@ -87,7 +87,7 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
 {
   angle += dt * M_PI/1000;
 
-
+  rateR=rateT=M_PI/1000;
 
   angleR += dt * rateR;
 
