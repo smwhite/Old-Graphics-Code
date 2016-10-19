@@ -46,11 +46,13 @@ Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpe
   aiString mat;
   scene->mMaterials[1]->GetTexture(aiTextureType_DIFFUSE,0,&mat);
   std::string matFile = mat.C_Str();
-  std::string m_fileName = "../"+matFile;
+  std::string m_fileName = "../models/"+matFile;
   m_image.read(m_fileName);
   m_image.write(&m_blob, "RGBA");
 
   angle = 0.0f;
+
+
 
   glGenBuffers(1, &VB);
   glBindBuffer(GL_ARRAY_BUFFER, VB);
@@ -63,16 +65,16 @@ Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpe
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //glActiveTexture(GL_TEXTURE0);
   //glBindTexture(GL_TEXTURE_2D, m_texObj);
-  glGenTextures(1, &m_texObj);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_image.columns(), m_image.rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  
-  glBindTexture(GL_TEXTURE_2D, m_texObj);
+
   //glBindTexture(GL_TEXTURE_2D, 0);  
+
+  glDeleteTextures(1, &m_texObj);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   centerOfOrbit = center;
   orbSize = orbitSize;
+  orbSpeed = orbitSpeed;
+  rotSpeed = rotationSpeed;
   location= glm::mat4(1.0f);
 
 }
@@ -87,7 +89,8 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
 {
   angle += dt * M_PI/1000;
 
-  rateR=rateT=M_PI/1000;
+  rateR=M_PI/rotSpeed;
+  rateT=M_PI/orbSpeed;
 
   angleR += dt * rateR;
 
@@ -124,6 +127,11 @@ glm::mat4 Object::GetModel()
 
 void Object::Render()
 {
+  glGenTextures(1, &m_texObj);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_image.columns(), m_image.rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_blob.data());
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  
+  glBindTexture(GL_TEXTURE_2D, m_texObj);
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
 
