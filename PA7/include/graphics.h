@@ -41,6 +41,13 @@ class Graphics
 	Object *m_neptune;
     Object *m_pluto;
 
+    Object *m_eMoon;
+    Object *m_mMoon;
+    Object *m_jMoon;
+    Object *m_nMoon;
+    Object *m_sRing;
+    Object *m_uRing;
+
     Object *m_cube;
 	Object *m_moon;
 
