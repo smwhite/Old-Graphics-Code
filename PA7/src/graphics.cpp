@@ -47,16 +47,16 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_sun = new Object(glm::mat4(1.0f),0.0f, vertexFile, fragmentFile, modelFile);
-  m_mercury = new Object(glm::mat4(1.0f),3.0f, vertexFile, fragmentFile, modelFile);
-  m_venus = new Object(glm::mat4(1.0f),5.0f, vertexFile, fragmentFile, modelFile);
-  m_earth = new Object(glm::mat4(1.0f),7.0f, vertexFile, fragmentFile, modelFile);
-  m_mars = new Object(glm::mat4(1.0f),9.0f, vertexFile, fragmentFile, modelFile);
-  m_jupiter = new Object(glm::mat4(1.0f),11.0f, vertexFile, fragmentFile, modelFile);
-  m_saturn = new Object(glm::mat4(1.0f),13.0f, vertexFile, fragmentFile, modelFile);
-  m_neptune = new Object(glm::mat4(1.0f),15.0f, vertexFile, fragmentFile, modelFile);
-  m_uranus = new Object(glm::mat4(1.0f),17.0f, vertexFile, fragmentFile, modelFile);
-  m_pluto = new Object(glm::mat4(1.0f),19.0f, vertexFile, fragmentFile, modelFile);
+  m_sun = new Object(glm::mat4(1.0f),0.0f, 4000, 2500, vertexFile, fragmentFile, modelFile);
+  m_mercury = new Object(glm::mat4(1.0f),3.0f, 2000, 5000, vertexFile, fragmentFile, modelFile);
+  m_venus = new Object(glm::mat4(1.0f),5.0f, 1000, 1500, vertexFile, fragmentFile, modelFile);
+  m_earth = new Object(glm::mat4(1.0f),7.0f, 5000, 6000, vertexFile, fragmentFile, modelFile);
+  m_mars = new Object(glm::mat4(1.0f),9.0f, 1600, 2000, vertexFile, fragmentFile, modelFile);
+  m_jupiter = new Object(glm::mat4(1.0f),11.0f, 3200, 5000, vertexFile, fragmentFile, modelFile);
+  m_saturn = new Object(glm::mat4(1.0f),13.0f, 5500, 2000, vertexFile, fragmentFile, modelFile);
+  m_neptune = new Object(glm::mat4(1.0f),15.0f, 3000, 2500, vertexFile, fragmentFile, modelFile);
+  m_uranus = new Object(glm::mat4(1.0f),17.0f, 1000, 5000, vertexFile, fragmentFile, modelFile);
+  m_pluto = new Object(glm::mat4(1.0f),19.0f, 1500, 1000, vertexFile, fragmentFile, modelFile);
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);

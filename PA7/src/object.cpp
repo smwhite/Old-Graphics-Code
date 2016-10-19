@@ -7,7 +7,7 @@
 
 using namespace Magick;
 
-Object::Object(glm::mat4 center,float orbitSize, std::string vFile, std::string fFile, std::string mFile)
+Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpeed, std::string vFile, std::string fFile, std::string mFile)
 {  
   vertexFile = vFile;
   fragmentFile = fFile;
@@ -73,6 +73,8 @@ Object::Object(glm::mat4 center,float orbitSize, std::string vFile, std::string 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   centerOfOrbit = center;
   orbSize = orbitSize;
+  orbSpeed = orbitSpeed;
+  rotSpeed = rotationSpeed;
   location= glm::mat4(1.0f);
 
 }
@@ -87,7 +89,8 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
 {
   angle += dt * M_PI/1000;
 
-  rateR=rateT=M_PI/1000;
+  rateR=M_PI/rotSpeed;
+  rateT=M_PI/orbSpeed;
 
   angleR += dt * rateR;
 
