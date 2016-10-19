@@ -44,7 +44,7 @@ class Graphics
     Object *m_eMoon;
     Object *m_mMoon;
     Object *m_jMoon;
-    Object *m_sMoon;
+    Object *m_nMoon;
     Object *m_sRing;
     Object *m_uRing;
 

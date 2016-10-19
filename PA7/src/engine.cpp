@@ -82,7 +82,7 @@ void Engine::Run()
     }
 
     // Update and render the graphics
-    m_graphics->Update(m_DT,m_ROTATION_FLIP,m_TRANSLATION_FLIP,m_PAUSE,m_ROTATION_FLIP_MOON,m_TRANSLATION_FLIP_MOON,m_PAUSE_MOON,LR,UD,ELR,EUD,ZOOM);
+    m_graphics->Update(m_DT,m_ROTATION_FLIP,m_TRANSLATION_FLIP,m_PAUSE,m_ROTATION_FLIP_MOON,m_TRANSLATION_FLIP_MOON,m_PAUSE_MOON,LR,UD,ELR,EUD,ZOOM,multiplier);
     m_graphics->Render();
 
     // Swap to the Window
@@ -133,6 +133,14 @@ void Engine::Keyboard()
 	  case SDLK_DOWN: 
 	    UD += 1;
 	    EUD += 1;	    
+	    break;
+
+      case SDLK_p: 
+		multiplier += 0.05;    
+	    break;
+
+	  case SDLK_m: 
+		multiplier -= 0.05;    
 	    break;
 
 

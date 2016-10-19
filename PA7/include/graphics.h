@@ -16,7 +16,7 @@ class Graphics
     ~Graphics();
     bool Initialize(int width, int height);
     void Update(unsigned int dt, bool rotation,bool translation,int pause,bool moonR,bool moonT, int moonP, float LR,float UD
-						, float ELR,float EUD, float ZOOM );
+						, float ELR,float EUD, float ZOOM, float mult );
     void Render();
 
   private:

@@ -62,12 +62,8 @@ bool Graphics::Initialize(int width, int height)
   m_mMoon = new Object(m_mars->GetLocation(),2.0f, 2000, 1500, vertexFile, fragmentFile, "../models/moon.obj");
   m_jMoon = new Object(m_jupiter->GetLocation(),5.0f, 1000, 1500, vertexFile, fragmentFile, "../models/moon.obj");
   m_nMoon = new Object(m_neptune->GetLocation(),3.0f, 1250, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  //m_mMoon = new Object(glm::mat4(1.0f),0.0f, 5000, 2500, vertexFile, fragmentFile, "../models/sun.obj");
-  //m_jMoon = new Object(glm::mat4(1.0f),0.0f, 5000, 2500, vertexFile, fragmentFile, "../models/sun.obj");
-  //m_sMoon = new Object(glm::mat4(1.0f),0.0f, 5000, 2500, vertexFile, fragmentFile, "../models/sun.obj");
   m_sRing = new Object(m_sun->GetLocation(),45.0f, 6500, 7500, vertexFile, fragmentFile, "../models/saturnring.obj");
   m_uRing = new Object(m_sun->GetLocation(),65.0f, 7500, 7000, vertexFile, fragmentFile, "../models/uranusring.obj");
-  //m_nRing = new Object(glm::mat4(1.0f),0.0f, 5000, 2500, vertexFile, fragmentFile, "../models/sun.obj");
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -137,28 +133,28 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP, float LR, float UD,float ELR, float EUD, float ZOOM)
+void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP, float LR, float UD,float ELR, float EUD, float ZOOM, float mult)
 {
   // Update the object
 
 
   //m_sun->Update(dt,rotation,translation,pause,glm::mat4(1.0f),2.0f);
-  m_mercury->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f);
-  m_venus->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f);
-  m_earth->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f);
-  m_mars->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f);
-  m_jupiter->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.3f);
-  m_saturn->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.3f);
-  m_neptune->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f);
-  m_uranus->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f);
-  m_pluto->Update(dt,rotation,translation,pause,m_sun->GetLocation(),2.0f);
+  m_mercury->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
+  m_venus->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
+  m_earth->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
+  m_mars->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
+  m_jupiter->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.3f, mult);
+  m_saturn->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.3f, mult);
+  m_neptune->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
+  m_uranus->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
+  m_pluto->Update(dt,rotation,translation,pause,m_sun->GetLocation(),2.0f, mult);
 
-  m_eMoon->Update(dt,rotation,translation,pause,m_earth->GetLocation(),1.0f);
-  m_mMoon->Update(dt,rotation,translation,pause,m_mars->GetLocation(),1.0f);
-  m_jMoon->Update(dt,rotation,translation,pause,m_jupiter->GetLocation(),1.0f);
-  m_nMoon->Update(dt,rotation,translation,pause,m_neptune->GetLocation(),1.0f);
-  m_sRing->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.5f);
-  m_uRing->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.5f);
+  m_eMoon->Update(dt,rotation,translation,pause,m_earth->GetLocation(),1.0f, mult);
+  m_mMoon->Update(dt,rotation,translation,pause,m_mars->GetLocation(),1.0f, mult);
+  m_jMoon->Update(dt,rotation,translation,pause,m_jupiter->GetLocation(),1.0f, mult);
+  m_nMoon->Update(dt,rotation,translation,pause,m_neptune->GetLocation(),1.0f, mult);
+  m_sRing->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.375f, mult);
+  m_uRing->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
   
   m_camera->Update(LR,UD,ELR,EUD,ZOOM);
 }

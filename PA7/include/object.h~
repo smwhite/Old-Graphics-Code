@@ -41,6 +41,8 @@ class Object
     glm::mat4 location;
 
     float orbSize;
+    int rotSpeed;
+    int orbSpeed;
     struct Vertex v{{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f}};
     
 };
