@@ -8,7 +8,7 @@
 class Object
 {
   public:
-    Object(glm::mat4 center, std::string vFile, std::string fFile, std::string mFile);
+    Object(glm::mat4 center,float orbitSize, std::string vFile, std::string fFile, std::string mFile);
     ~Object();
     void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale);
     void Render();
@@ -40,6 +40,7 @@ class Object
     glm::mat4 centerOfOrbit;
     glm::mat4 location;
 
+    float orbSize;
     struct Vertex v{{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f}};
     
 };

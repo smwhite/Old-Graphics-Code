@@ -7,7 +7,7 @@
 
 using namespace Magick;
 
-Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::string mFile)
+Object::Object(glm::mat4 center,float orbitSize, std::string vFile, std::string fFile, std::string mFile)
 {  
   vertexFile = vFile;
   fragmentFile = fFile;
@@ -72,6 +72,7 @@ Object::Object(glm::mat4 center, std::string vFile, std::string fFile, std::stri
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   centerOfOrbit = center;
+  orbSize = orbitSize;
   location= glm::mat4(1.0f);
 
 }
@@ -83,52 +84,21 @@ Object::~Object()
 }
 
 void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale)
-{/*
+{
   angle += dt * M_PI/1000;
 
-  switch(pause)
-  {
-    case 0:
-	  rateR=rateT=M_PI/1000;
-	  break;
-	case 1:
-	  rateR=rateT=0;
-	  break;
-	case 2:
-        rateT = M_PI/1000;
-	  break;
-	case 3:
-        rateT = 0;
-	  break;
-	case 4:
-		rateR = M_PI/1000;
-	  break;
-	case 5:
-		rateR = 0;
-	  break;
-  }
 
-  if(rotation)
-  {
-    angleR += dt * rateR;
-  }
-  else if(!rotation)
-  {
-    angleR -= dt * rateR;
-  }
+
+  angleR += dt * rateR;
+
 
   glm::mat4 rot= glm::rotate(glm::mat4(1.0f), (angleR), glm::vec3(0.0, 1.0, 0.0));
 
-  if(translation)
-  {
-    angleT += dt * rateT;
-  }
-  else if(!translation)
-  {
-    angleT -= dt * rateT;
-  }
 
-  glm::vec3 circle(5.0f * cos(angleT), 1.0f, 5.0f * sin(angleT));
+  angleT += dt * rateT;
+
+
+  glm::vec3 circle(orbSize * cos(angleT), 1.0f, orbSize * sin(angleT));
 
 
 
@@ -137,7 +107,7 @@ void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,gl
   location = trans;
 
   trans = glm::scale(trans,glm::vec3(scale,scale,scale));
-  model= trans*rot;*/
+  model= trans*rot;
 }
 
 glm::mat4 Object::GetModel()
