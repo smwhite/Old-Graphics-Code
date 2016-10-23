@@ -133,7 +133,7 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP, float LR, float UD,float ELR, float EUD, float ZOOM, float mult)
+void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP, float LR, float UD,float ELR, float EUD, float ZOOM, float mult, int camPos)
 {
   // Update the object
 
@@ -156,7 +156,51 @@ void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,
   m_sRing->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.375f, mult);
   m_uRing->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
   
-  m_camera->Update(LR,UD,ELR,EUD,ZOOM);
+
+  switch(camPos)
+  {
+    case 0:
+	m_camera->Update(LR,UD,ELR,EUD,ZOOM);
+	break;
+
+    case 1:
+	c = m_mercury->GetLocation();
+	m_camera->Update(LR,UD,ELR+c[2][0],EUD+c[2][1],ZOOM);
+	break;
+
+    case 2:
+	
+	break;
+    case 3:
+	
+	break;
+    case 4:
+	
+	break;
+    case 5:
+	
+	break;
+    case 6:
+	
+	break;
+    case 7:
+	
+	break;
+    case 8:
+	
+	break;
+
+    case 9:
+	
+	break;
+  }
+
+	//m_camera->Update(LR,UD,ELR,EUD,ZOOM);
+
+
+
+
+
 }
 
 void Graphics::Render()

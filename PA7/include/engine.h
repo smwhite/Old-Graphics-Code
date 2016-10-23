@@ -52,6 +52,7 @@ class Engine
 	float EUD = 20;
 	float ZOOM = -100.0;
     float multiplier = 1;
+	int cameraPosition =0;
 };
 
 #endif // ENGINE_H

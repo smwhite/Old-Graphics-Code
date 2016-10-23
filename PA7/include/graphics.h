@@ -16,7 +16,7 @@ class Graphics
     ~Graphics();
     bool Initialize(int width, int height);
     void Update(unsigned int dt, bool rotation,bool translation,int pause,bool moonR,bool moonT, int moonP, float LR,float UD
-						, float ELR,float EUD, float ZOOM, float mult );
+						, float ELR,float EUD, float ZOOM, float mult, int camPos );
     void Render();
 
   private:
@@ -51,7 +51,7 @@ class Graphics
     Object *m_cube;
 	Object *m_moon;
 
-    glm::mat4 cubeLocation;
+    glm::mat4 c;
 
     string vertexFile;
     string fragmentFile;
