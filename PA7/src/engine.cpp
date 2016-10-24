@@ -109,31 +109,31 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_a: 
-		LR += 1;
-		ELR += 1; 
+		LR += 1.5;
+		ELR += 1.5; 
 	    break; 
 	
 	  case SDLK_d: 
-		LR -= 1;
-		ELR -= 1;
+		LR -= 1.5;
+		ELR -= 1.5;
 	    break;
 
 	  case SDLK_w: 
-		UD += 1;
-	    EUD += 1;	
+		UD += 1.5;
+	    EUD += 1.5;	
 	    break;
 
 	  case SDLK_s: 
-	    UD -= 1;
-	    EUD -= 1;
+	    UD -= 1.5;
+	    EUD -= 1.5;
 	    break;
 
 	  case SDLK_UP: 
-        ZOOM += 1;    
+        ZOOM += 1.5;    
 	    break;
 
 	  case SDLK_DOWN: 
-        ZOOM -= 1;	    
+        ZOOM -= 1.5;	    
 	    break;
 
       case SDLK_p: 
