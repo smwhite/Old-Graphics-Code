@@ -8,9 +8,51 @@
 
 using namespace Magick;
 
-Object::Object()
+Object::Object(std::string vFile, std::string fFile, std::string mFile)
 {  
   InitializeMagick(NULL);
+
+  vertexFile = vFile;
+  fragmentFile = fFile;
+  modelFile = mFile;
+  
+
+
+  Assimp::Importer importer;
+  const aiScene* scene = importer.ReadFile(modelFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs 
+                                       | aiProcess_JoinIdenticalVertices);
+
+  aiMesh* mesh = scene->mMeshes[0];
+
+  for(unsigned int i=0;i< mesh->mNumVertices;i++)
+  {
+    const aiVector3D* pos = &(mesh->mVertices[i]);
+    const aiVector3D* uv = &(mesh->mTextureCoords[0][i]);
+
+    v.vertex = glm::vec3 {pos->x,pos->y,pos->z};
+	v.uv = glm::vec2{uv->x,uv->y};
+    Vertices.push_back(v);
+  }
+
+
+
+  for(unsigned int i=0;i<mesh->mNumFaces;i++)
+  {
+    const aiFace& face = mesh->mFaces[i];
+    assert(face.mNumIndices ==3);
+
+    Indices.push_back(face.mIndices[0]);
+    Indices.push_back(face.mIndices[1]);
+    Indices.push_back(face.mIndices[2]);    
+  }
+
+  aiString mat;
+  scene->mMaterials[1]->GetTexture(aiTextureType_DIFFUSE,0,&mat);
+  std::string matFile = mat.C_Str();
+  std::string m_fileName = "../models/"+matFile;
+  m_image.read(m_fileName);
+  m_image.write(&m_blob, "RGBA");
+
 }
 
 Object::~Object()

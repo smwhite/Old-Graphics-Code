@@ -50,7 +50,7 @@ int main(int argc, char **argv)
   //cout << modelFile << endl;
 
   // Start an engine and run it then cleanup after
-  Engine *engine = new Engine("Super Sexy Action News", 800, 600, vertFile, fragFile, modelFile);
+  Engine *engine = new Engine("Tutorial", 800, 600, vertFile, fragFile, modelFile);
   if(!engine->Initialize())
   {
     printf("The engine failed to start.\n");

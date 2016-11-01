@@ -4,11 +4,14 @@
 #include <assimp/postprocess.h>
 #include <assimp/color4.h>
 #include <Magick++.h>
+#include <btBulletDynamicsCommon.h>
 
 using namespace Magick;
 
-Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpeed, std::string vFile, std::string fFile, std::string mFile)
+Object::Object()
 {  
+  InitializeMagick(NULL);
+
   vertexFile = vFile;
   fragmentFile = fFile;
   modelFile = mFile;
@@ -50,73 +53,16 @@ Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpe
   m_image.read(m_fileName);
   m_image.write(&m_blob, "RGBA");
 
-  angle = 0.0f;
-
-
-
-  glGenBuffers(1, &VB);
-  glBindBuffer(GL_ARRAY_BUFFER, VB);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
-
-  glGenBuffers(1, &IB);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //glActiveTexture(GL_TEXTURE0);
-  //glBindTexture(GL_TEXTURE_2D, m_texObj);
-
-  //glBindTexture(GL_TEXTURE_2D, 0);  
-
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  centerOfOrbit = center;
-  orbSize = orbitSize;
-  orbSpeed = orbitSpeed;
-  rotSpeed = rotationSpeed;
-  location= glm::mat4(1.0f);
-
 }
 
 Object::~Object()
 {
-  Vertices.clear();
-  Indices.clear();
+
 }
 
-void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale, float multiplier)
+void Object::Update(unsigned int dt)
 {
-  angle += dt * M_PI/1000;
 
-  rateR=M_PI/rotSpeed;
-  rateT=M_PI/orbSpeed;
-
-  angleR += dt * rateR;
-
-
-  glm::mat4 rot= glm::rotate(glm::mat4(1.0f), (angleR), glm::vec3(0.0, 1.0, 0.0));
-
-
-  angleT += dt * rateT;
-
-
-  glm::vec3 circle(orbSize * cos(angleT), 0.0f, orbSize * sin(angleT));
-  glm::mat4 trans= glm::translate(center,circle);
-
-  if(orbSize != 0.0)
-  {
-    location = trans;
-
-    trans = glm::scale(trans,glm::vec3(scale,scale,scale));
-    model= trans*rot;
-  }
-
-  else
-  {
-   location = trans;
-   rot = glm::scale(rot,glm::vec3(scale,scale,scale));
-   model= rot;
-  }
 }
 
 glm::mat4 Object::GetModel()
