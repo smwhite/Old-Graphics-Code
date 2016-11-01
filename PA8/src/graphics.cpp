@@ -47,41 +47,7 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  /*m_sun = new Object(glm::mat4(1.0f),0.0f, 5000, 2500, vertexFile, fragmentFile, "../models/sun.obj");
-  m_mercury = new Object(glm::mat4(1.0f),10.0f, 5200, 4200, vertexFile, fragmentFile, "../models/mercury.obj");
-  m_venus = new Object(glm::mat4(1.0f),15.0f, 5400, 4400, vertexFile, fragmentFile, "../models/venus.obj");
-  m_earth = new Object(glm::mat4(1.0f),20.0f, 5600, 4600, vertexFile, fragmentFile, "../models/earth.obj");
-  m_mars = new Object(glm::mat4(1.0f),25.0f, 5800, 2000, vertexFile, fragmentFile, "../models/mars.obj");
-  m_jupiter = new Object(glm::mat4(1.0f),35.0f, 6000, 8000, vertexFile, fragmentFile, "../models/jupiter.obj");
-  m_saturn = new Object(glm::mat4(1.0f),45.0f, 6500, 7500, vertexFile, fragmentFile, "../models/saturn.obj");
-  m_neptune = new Object(glm::mat4(1.0f),55.0f, 7000, 7000, vertexFile, fragmentFile, "../models/neptune.obj");
-  m_uranus = new Object(glm::mat4(1.0f),65.0f, 7500, 7000, vertexFile, fragmentFile, "../models/uranus.obj");
-  m_pluto = new Object(glm::mat4(1.0f),75.0f, 8000, 4000, vertexFile, fragmentFile, "../models/pluto.obj");
 
-  m_eMoon = new Object(m_earth->GetLocation(),2.0f, 1500, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  m_mMoon = new Object(m_mars->GetLocation(),2.0f, 2000, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  m_jMoon = new Object(m_jupiter->GetLocation(),5.0f, 1000, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  m_nMoon = new Object(m_neptune->GetLocation(),3.0f, 1250, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  m_sRing = new Object(m_sun->GetLocation(),45.0f, 6500, 7500, vertexFile, fragmentFile, "../models/saturnring.obj");
-  m_uRing = new Object(m_sun->GetLocation(),65.0f, 7500, 7000, vertexFile, fragmentFile, "../models/uranusring.obj");*/
-
-  m_sun = new Object(glm::mat4(1.0f),0.0f, 5000, 2500, vertexFile, fragmentFile, "../models/sun.obj");
-  m_mercury = new Object(glm::mat4(1.0f),20.0f, 5200, 4200, vertexFile, fragmentFile, "../models/mercury.obj");
-  m_venus = new Object(glm::mat4(1.0f),30.0f, 5400, 4400, vertexFile, fragmentFile, "../models/venus.obj");
-  m_earth = new Object(glm::mat4(1.0f),40.0f, 5600, 4600, vertexFile, fragmentFile, "../models/earth.obj");
-  m_mars = new Object(glm::mat4(1.0f),50.0f, 5800, 2000, vertexFile, fragmentFile, "../models/mars.obj");
-  m_jupiter = new Object(glm::mat4(1.0f),70.0f, 6000, 8000, vertexFile, fragmentFile, "../models/jupiter.obj");
-  m_saturn = new Object(glm::mat4(1.0f),90.0f, 6500, 7500, vertexFile, fragmentFile, "../models/saturn.obj");
-  m_neptune = new Object(glm::mat4(1.0f),110.0f, 7000, 7000, vertexFile, fragmentFile, "../models/neptune.obj");
-  m_uranus = new Object(glm::mat4(1.0f),130.0f, 7500, 7000, vertexFile, fragmentFile, "../models/uranus.obj");
-  m_pluto = new Object(glm::mat4(1.0f),150.0f, 8000, 4000, vertexFile, fragmentFile, "../models/pluto.obj");
-
-  m_eMoon = new Object(m_earth->GetLocation(),2.0f, 1500, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  m_mMoon = new Object(m_mars->GetLocation(),2.0f, 2000, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  m_jMoon = new Object(m_jupiter->GetLocation(),5.0f, 1000, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  m_nMoon = new Object(m_neptune->GetLocation(),3.0f, 1250, 1500, vertexFile, fragmentFile, "../models/moon.obj");
-  m_sRing = new Object(m_sun->GetLocation(),90.0f, 6500, 7500, vertexFile, fragmentFile, "../models/saturnring.obj");
-  m_uRing = new Object(m_sun->GetLocation(),130.0f, 7500, 7000, vertexFile, fragmentFile, "../models/uranusring.obj");
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -151,73 +117,9 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP, float LR, float UD,float ELR, float EUD, float ZOOM, float mult, int camPos)
+void Graphics::Update(unsigned int dt)
 {
   // Update the object
-
-
-  m_sun->Update(dt,rotation,translation,pause,glm::mat4(1.0f),3.0f, mult);
-  m_mercury->Update(dt,rotation,translation,pause,m_sun->GetLocation(),2.0f, mult);
-  m_venus->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
-  m_earth->Update(dt,rotation,translation,pause,m_sun->GetLocation(),2.0f, mult);
-  m_mars->Update(dt,rotation,translation,pause,m_sun->GetLocation(),2.0f, mult);
-  m_jupiter->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.3f, mult);
-  m_saturn->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.3f, mult);
-  m_neptune->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.8f, mult);
-  m_uranus->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.8f, mult);
-  m_pluto->Update(dt,rotation,translation,pause,m_sun->GetLocation(),4.0f, mult);
-
-  m_eMoon->Update(dt,rotation,translation,pause,m_earth->GetLocation(),1.0f, mult);
-  m_mMoon->Update(dt,rotation,translation,pause,m_mars->GetLocation(),1.0f, mult);
-  m_jMoon->Update(dt,rotation,translation,pause,m_jupiter->GetLocation(),1.0f, mult);
-  m_nMoon->Update(dt,rotation,translation,pause,m_neptune->GetLocation(),1.0f, mult);
-  m_sRing->Update(dt,rotation,translation,pause,m_sun->GetLocation(),0.375f, mult);
-  m_uRing->Update(dt,rotation,translation,pause,m_sun->GetLocation(),1.0f, mult);
-  
-
-  /*switch(camPos)
-  {
-    case 0:
-
-	break;
-
-    case 1:
-
-	break;
-
-    case 2:
-	
-	break;
-    case 3:
-	
-	break;
-    case 4:
-	
-	break;
-    case 5:
-	
-	break;
-    case 6:
-	
-	break;
-    case 7:
-	
-	break;
-    case 8:
-	
-	break;
-
-    case 9:
-	
-	break;
-  }*/
-
-	m_camera->Update(LR,UD,ELR,EUD,ZOOM);
-
-
-
-
-
 }
 
 void Graphics::Render()
@@ -236,39 +138,9 @@ void Graphics::Render()
 
   // Render the object
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sun->GetModel()));
-  m_sun->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_mercury->GetModel()));
-  m_mercury->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_venus->GetModel()));
-  m_venus->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_earth->GetModel()));
-  m_earth->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_mars->GetModel()));
-  m_mars->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_jupiter->GetModel()));
-  m_jupiter->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_saturn->GetModel()));
-  m_saturn->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_neptune->GetModel()));
-  m_neptune->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranus->GetModel()));
-  m_uranus->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_pluto->GetModel()));
-  m_pluto->Render();
+//  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sun->GetModel()));
+//  m_sun->Render();
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_eMoon->GetModel()));
-  m_eMoon->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_mMoon->GetModel()));
-  m_mMoon->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_jMoon->GetModel()));
-  m_jMoon->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_nMoon->GetModel()));
-  m_nMoon->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sRing->GetModel()));
-  m_sRing->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uRing->GetModel()));
-  m_uRing->Render();
 
 
   // Get any errors from OpenGL

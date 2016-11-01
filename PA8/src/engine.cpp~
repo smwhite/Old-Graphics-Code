@@ -119,13 +119,13 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_w: 
-		UD += 1;
-	    EUD += 1;	
+		UD -= 1;
+	    EUD -= 1;	
 	    break;
 
 	  case SDLK_s: 
-	    UD -= 1;
-	    EUD -= 1;
+	    UD += 1;
+	    EUD += 1;
 	    break;
 
 	  case SDLK_UP: 
