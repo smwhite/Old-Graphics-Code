@@ -68,7 +68,27 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
+  m_ball = new Object("../shaders/fragment.frag", "../shaders/vertex.vert", "../models/ball.obj", false, NULL);
+  ball = new btSphereShape (1);
+  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(1, 3, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
 
+  m_cube = new Object(vertexFile, fragmentFile, "../models/box.obj", false, NULL);
+  cube = new btBoxShape (btVector3(1, 1, 1));
+  cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(-1, 0, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(2, cubeMotionState, cube, btVector3(0, 0, 0));
+
+  btTriangleMesh *objTriMesh1 = new btTriangleMesh();
+  m_cylinder = new Object(vertexFile, fragmentFile, "../models/cylindar.obj", true, objTriMesh1);
+  cylinder = new btBvhTriangleMeshShape(objTriMesh1, true);
+  cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(2, 0, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo cylinderRigidBodyCI(1, cylinderMotionState, cylinder, btVector3(0, 0, 0));
+
+  btTriangleMesh *objTriMesh2 = new btTriangleMesh();
+  m_walls = new Object(vertexFile, fragmentFile, "../models/board.obj", true, objTriMesh2);
+  walls = new btBvhTriangleMeshShape(objTriMesh2, true);
+  wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo wallRigidBodyCI(5, wallMotionState, walls, btVector3(0, 0, 0));
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -141,6 +161,10 @@ bool Graphics::Initialize(int width, int height)
 void Graphics::Update(unsigned int dt)
 {
   // Update the object
+  m_ball->Update(dt);
+  m_cube->Update(dt);
+  m_cylinder->Update(dt);
+  m_walls->Update(dt);
 }
 
 void Graphics::Render()
@@ -159,10 +183,14 @@ void Graphics::Render()
 
   // Render the object
 
-//  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_sun->GetModel()));
-//  m_sun->Render();
-
-
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
+  m_ball->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  m_cube->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+  m_cylinder->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_walls->GetModel()));
+  m_walls->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();
