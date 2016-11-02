@@ -11,7 +11,7 @@ class Object
   public:
     Object(std::string vFile, std::string fFile, std::string mFile, bool usingTriMesh, btTriangleMesh *objTriMesh);
     ~Object();
-    void Update(unsigned int dt);
+    void Update(unsigned int dt, glm::mat4 location);
     void Render();
 
     glm::mat4 GetModel();

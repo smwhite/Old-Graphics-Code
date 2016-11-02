@@ -4,6 +4,7 @@
 #include <vector>
 #include <Magick++.h>
 #include "graphics_headers.h"
+#include <btBulletDynamicsCommon.h>
 
 class Object
 {

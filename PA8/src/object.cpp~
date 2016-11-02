@@ -73,7 +73,7 @@ Object::Object(std::string vFile, std::string fFile, std::string mFile, bool usi
 
   //std::cout << "4?" << std::endl;
 
-  aiString mat;
+  //aiString mat;
   //scene->mMaterials[1]->GetTexture(aiTextureType_DIFFUSE,0,&mat);
   //std::cout << "sgh" << std::endl;
   //std::string matFile = mat.C_Str();
@@ -100,7 +100,7 @@ Object::~Object()
 
 }
 
-void Object::Update(unsigned int dt)
+void Object::Update(unsigned int dt, glm::mat4 location)
 {
 
 }

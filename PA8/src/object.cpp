@@ -100,10 +100,10 @@ Object::~Object()
 
 }
 
-void Object::Update(unsigned int dt)
-{
-
-}
+void Object::Update(unsigned int dt, glm::mat4 location)
+    {
+     model = location;
+    }
 
 glm::mat4 Object::GetModel()
 {
