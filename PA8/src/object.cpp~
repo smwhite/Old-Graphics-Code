@@ -8,7 +8,7 @@
 
 using namespace Magick;
 
-Object::Object()
+Object::Object(std::string vFile, std::string fFile, std::string mFile)
 {  
   InitializeMagick(NULL);
 
