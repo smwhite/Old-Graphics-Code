@@ -1,15 +1,36 @@
 #include "graphics.h"
+#include <btBulletDynamicsCommon.h>
 
 Graphics::Graphics(string vFile, string fFile, string mFile)
 {
   vertexFile = vFile;
   fragmentFile = fFile;
   modelFile = mFile;
+
+  broadphase = new btDbvtBroadphase();
+  collisionConfiguration = new btDefaultCollisionConfiguration();
+  dispatcher = new btCollisionDispatcher(collisionConfiguration);
+  solver = new btSequentialImpulseConstraintSolver;
+  dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+  dynamicsWorld->setGravity(btVector3(0, -9.81, 0));
 }
 
 Graphics::~Graphics()
 {
+  delete broadphase;
+  broadphase = NULL;
 
+  delete collisionConfiguration;
+  collisionConfiguration = NULL;
+
+  delete dispatcher;
+  dispatcher = NULL;
+
+  delete solver;
+  solver = NULL;
+
+  delete dynamicsWorld;
+  dynamicsWorld = NULL;
 }
 
 bool Graphics::Initialize(int width, int height)
