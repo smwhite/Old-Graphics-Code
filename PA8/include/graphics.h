@@ -76,9 +76,9 @@ class Graphics
     btDefaultMotionState *wallMotionState = NULL;
 
     btRigidBody *ballRigidBody;
-    btRigidBody *cubeRigidBody
-    btRigidBody *cylinderRigidBody
-    btRigidBody *wallRigidBody
+    btRigidBody *cubeRigidBody;
+    btRigidBody *cylinderRigidBody;
+    btRigidBody *wallRigidBody;
 };
 
 #endif /* GRAPHICS_H */
