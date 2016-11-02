@@ -63,7 +63,15 @@ class Graphics
     btSequentialImpulseConstraintSolver *solver;
     btDiscreteDynamicsWorld *dynamicsWorld;
 
-    btCollisionShape *shape;
+    btCollisionShape *ball;
+    btCollisionShape *cube;
+    btCollisionShape *cylinder;
+    btCollisionShape *walls;
+    
+    btDefaultMotionState *ballMotionState = NULL;
+    btDefaultMotionState *cubeMotionState = NULL;
+    btDefaultMotionState *cylinderMotionState = NULL;
+    btDefaultMotionState *wallMotionState = NULL;
 };
 
 #endif /* GRAPHICS_H */

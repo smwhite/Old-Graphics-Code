@@ -30,26 +30,28 @@ class Graphics
     GLint m_modelMatrix;
 	GLint m_gSampler;
 
-    Object *m_sun;
-	Object *m_mercury;
-    Object *m_venus;
-    Object *m_earth;
-	Object *m_mars;
-    Object *m_jupiter;
-	Object *m_saturn;
-    Object *m_uranus;
-	Object *m_neptune;
-    Object *m_pluto;
+    //Object *m_sun;
+	//Object *m_mercury;
+    //Object *m_venus;
+    //Object *m_earth;
+	//Object *m_mars;
+    //Object *m_jupiter;
+	//Object *m_saturn;
+    //Object *m_uranus;
+	//Object *m_neptune;
+    //Object *m_pluto;
 
-    Object *m_eMoon;
-    Object *m_mMoon;
-    Object *m_jMoon;
-    Object *m_nMoon;
-    Object *m_sRing;
-    Object *m_uRing;
+    //Object *m_eMoon;
+    //Object *m_mMoon;
+    //Object *m_jMoon;
+    //Object *m_nMoon;
+    //Object *m_sRing;
+    //Object *m_uRing;
 
-    Object *m_cube;
-	Object *m_moon;
+    Object *m_ball;
+	Object *m_cube;
+    Object *m_cylinder;
+	Object *m_walls;
 
     glm::mat4 c;
 
@@ -63,7 +65,20 @@ class Graphics
     btSequentialImpulseConstraintSolver *solver;
     btDiscreteDynamicsWorld *dynamicsWorld;
 
-    //btCollisionShape *shape;
+    btCollisionShape *ball;
+    btCollisionShape *cube;
+    btCollisionShape *cylinder;
+    btCollisionShape *walls;
+    
+    btDefaultMotionState *ballMotionState = NULL;
+    btDefaultMotionState *cubeMotionState = NULL;
+    btDefaultMotionState *cylinderMotionState = NULL;
+    btDefaultMotionState *wallMotionState = NULL;
+
+    btRigidBody *ballRigidBody;
+    btRigidBody *cubeRigidBody
+    btRigidBody *cylinderRigidBody
+    btRigidBody *wallRigidBody
 };
 
 #endif /* GRAPHICS_H */
