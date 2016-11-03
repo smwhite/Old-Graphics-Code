@@ -25,6 +25,10 @@ W: moves camera up
 
 S: moves camera down
 
+P: Increases the rotation and orbit speed of everything
+
+M: Decreases the rotation and orbit speed of everything(If decreased low enough it will pause everything and if decreased lower it will reverse the orbit of everything)
+
 Up Arrow: Zoom In
 
 Down Arrow: Zoom Out

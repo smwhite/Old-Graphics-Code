@@ -79,7 +79,7 @@ bool Graphics::Initialize(int width, int height)
   m_cube = new Object(vertexFile, fragmentFile, "../models/box.obj", false, NULL);
   cube = new btBoxShape (btVector3(1, 1, 1));
   cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(3, -1, 0)));
-  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(2, cubeMotionState, cube, btVector3(0, 0, 0));
+  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(5, cubeMotionState, cube, btVector3(0, 0, 0));
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   dynamicsWorld->addRigidBody(cubeRigidBody);
   cubeRigidBody->setActivationState(true);
@@ -236,24 +236,22 @@ void Graphics::moveBox(int direction)
         {
          case 1:
             cubeRigidBody->activate(true);
-            cubeRigidBody->applyCentralImpulse(btVector3(0, 0, 3));   
-            //cubeRigidBody->setLinearVelocity(btVector3(0, 0.2, 1));        
-            //cubeRigidBody->applyCentralForce(btVector3(0, 1, 3));
+            cubeRigidBody->applyCentralForce(btVector3(0, 0, 300));   
             break;
 
          case 2:
 			cubeRigidBody->activate(true);
-            cubeRigidBody->applyCentralImpulse(btVector3(0, 0, -3));
+            cubeRigidBody->applyCentralForce(btVector3(0, 0, -300));
             break;
 
          case 3:
 			cubeRigidBody->activate(true);	
-            cubeRigidBody->applyCentralImpulse(btVector3(3, 0, 0));
+            cubeRigidBody->applyCentralForce(btVector3(300, 0, 0));
             break;
 
          case 4:
 			cubeRigidBody->activate(true);
-            cubeRigidBody->applyCentralImpulse(btVector3(-3, 0, 0));
+            cubeRigidBody->applyCentralForce(btVector3(-300, 0, 0));
             break;   
         }
     }
