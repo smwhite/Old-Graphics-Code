@@ -75,7 +75,7 @@ Object::Object(std::string vFile, std::string fFile, std::string mFile, bool usi
 
   aiString mat;
   scene->mMaterials[1]->GetTexture(aiTextureType_DIFFUSE,0,&mat);
-  std::cout << "sgh" << std::endl;
+  //std::cout << "sgh" << std::endl;
   std::string matFile = mat.C_Str();
   std::string m_fileName = "../models/"+matFile;
   m_image.read(m_fileName);
