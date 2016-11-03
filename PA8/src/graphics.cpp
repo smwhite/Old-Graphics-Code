@@ -82,6 +82,7 @@ bool Graphics::Initialize(int width, int height)
   btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(2, cubeMotionState, cube, btVector3(0, 0, 0));
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   dynamicsWorld->addRigidBody(cubeRigidBody);
+  cubeRigidBody->setActivationState(true);
 
   m_cylinder = new Object(vertexFile, fragmentFile, "../models/cylindar.obj", false, NULL);
   cylinder = new btCylinderShape(btVector3(1, 1, 1));
@@ -233,7 +234,8 @@ void Graphics::moveBox(int direction)
      switch(direction)
         {
          case 1:
-            cubeRigidBody->applyCentralImpulse(btVector3(0, 1, 3));           
+            cubeRigidBody->applyCentralImpulse(btVector3(0, 1, 3));   
+            //cubeRigidBody->setLinearVelocity(btVector3(0, 0.2, 1));        
             //cubeRigidBody->applyCentralForce(btVector3(0, 1, 3));
             break;
 
