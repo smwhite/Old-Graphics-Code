@@ -91,7 +91,7 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(cylinderRigidBody);
 
   btTriangleMesh *objTriMesh1 = new btTriangleMesh();
-  m_walls = new Object(vertexFile, fragmentFile, "../models/board.obj", true, objTriMesh1);
+  m_walls = new Object(vertexFile, fragmentFile, "../models/board2.obj", true, objTriMesh1);
   walls = new btBvhTriangleMeshShape(objTriMesh1, true);
   wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
   btRigidBody::btRigidBodyConstructionInfo wallRigidBodyCI(0, wallMotionState, walls, btVector3(0, 0, 0));
@@ -170,7 +170,7 @@ void Graphics::Update(unsigned int dt)
 {
   btTransform trans;
   btScalar m[16];
-  dynamicsWorld->stepSimulation(1/60.f, 10);
+  dynamicsWorld->stepSimulation(1, 10);
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
