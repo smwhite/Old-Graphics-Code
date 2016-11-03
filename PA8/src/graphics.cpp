@@ -71,27 +71,27 @@ bool Graphics::Initialize(int width, int height)
   // Create the object
   m_ball = new Object("../shaders/fragment.frag", "../shaders/vertex.vert", "../models/ball.obj", false, NULL);
   ball = new btSphereShape (1);
-  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
+  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
   btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
 
   m_cube = new Object(vertexFile, fragmentFile, "../models/box.obj", false, NULL);
   cube = new btBoxShape (btVector3(1, 1, 1));
-  cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(3, 25, 0)));
+  cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(3, -1, 0)));
   btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(2, cubeMotionState, cube, btVector3(0, 0, 0));
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   dynamicsWorld->addRigidBody(cubeRigidBody);
 
   m_cylinder = new Object(vertexFile, fragmentFile, "../models/cylindar.obj", false, NULL);
   cylinder = new btCylinderShape(btVector3(1, 1, 1));
-  cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-3, 10, 0)));
-  btRigidBody::btRigidBodyConstructionInfo cylinderRigidBodyCI(0.1, cylinderMotionState, cylinder, btVector3(0, 1, 0));
+  cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-3, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo cylinderRigidBodyCI(0, cylinderMotionState, cylinder, btVector3(0, 1, 0));
   cylinderRigidBody = new btRigidBody(cylinderRigidBodyCI);
   dynamicsWorld->addRigidBody(cylinderRigidBody);
 
   btTriangleMesh *objTriMesh1 = new btTriangleMesh();
-  m_walls = new Object(vertexFile, fragmentFile, "../models/board.obj", true, objTriMesh1);
+  m_walls = new Object(vertexFile, fragmentFile, "../models/board2.obj", true, objTriMesh1);
   walls = new btBvhTriangleMeshShape(objTriMesh1, true);
   wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
   btRigidBody::btRigidBodyConstructionInfo wallRigidBodyCI(0, wallMotionState, walls, btVector3(0, 0, 0));
@@ -174,22 +174,23 @@ void Graphics::Update(unsigned int dt)
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  std::cout << "ball height: " << trans.getOrigin().getY() << std::endl;
+  //std::cout << "ball height: " << trans.getOrigin().getY() << std::endl;
   m_ball->Update(dt, glm::make_mat4(m));
 
+  //cubeRigidBody->applyCentralImpulse(btVector3(0, 0.1, 0));
   cubeRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  std::cout << "cube height: " << trans.getOrigin().getY() << std::endl;
+  //std::cout << "cube height: " << trans.getOrigin().getY() << std::endl;
   m_cube->Update(dt, glm::make_mat4(m));
 
   cylinderRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  std::cout << "cylinder height: " << trans.getOrigin().getY() << std::endl;
+  //std::cout << "cylinder height: " << trans.getOrigin().getY() << std::endl;
   m_cylinder->Update(dt, glm::make_mat4(m));
 
   wallRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  std::cout << "wall height: " << trans.getOrigin().getY() << std::endl;
+  //std::cout << "wall height: " << trans.getOrigin().getY() << std::endl;
   m_walls->Update(dt, glm::make_mat4(m));
 }
 
@@ -226,6 +227,29 @@ void Graphics::Render()
     std::cout<< "Error initializing OpenGL! " << error << ", " << val << std::endl;
   }
 }
+
+void Graphics::moveBox(int direction)
+    {
+     switch(direction)
+        {
+         case 1:
+            cubeRigidBody->applyCentralImpulse(btVector3(0, 1, 3));           
+            //cubeRigidBody->applyCentralForce(btVector3(0, 1, 3));
+            break;
+
+         case 2:
+            cubeRigidBody->applyCentralImpulse(btVector3(0, 1, -3));
+            break;
+
+         case 3:
+            cubeRigidBody->applyCentralImpulse(btVector3(3, 1, 0));
+            break;
+
+         case 4:
+            cubeRigidBody->applyCentralImpulse(btVector3(-3, 1, 0));
+            break;   
+        }
+    }
 
 std::string Graphics::ErrorString(GLenum error)
 {
