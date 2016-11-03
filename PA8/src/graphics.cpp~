@@ -83,6 +83,7 @@ bool Graphics::Initialize(int width, int height)
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   dynamicsWorld->addRigidBody(cubeRigidBody);
   cubeRigidBody->setActivationState(true);
+  cubeRigidBody->activate(true);
 
   m_cylinder = new Object(vertexFile, fragmentFile, "../models/cylindar.obj", false, NULL);
   cylinder = new btCylinderShape(btVector3(1, 1, 1));
@@ -171,7 +172,7 @@ void Graphics::Update(unsigned int dt)
 {
   btTransform trans;
   btScalar m[16];
-  dynamicsWorld->stepSimulation(1, 10);
+  dynamicsWorld->stepSimulation(1/60.f, 10);
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -234,21 +235,22 @@ void Graphics::moveBox(int direction)
      switch(direction)
         {
          case 1:
-            cubeRigidBody->applyCentralImpulse(btVector3(0, 1, 3));   
+            cubeRigidBody->activate(true);
+            cubeRigidBody->applyCentralImpulse(btVector3(0, 0, 3));   
             //cubeRigidBody->setLinearVelocity(btVector3(0, 0.2, 1));        
             //cubeRigidBody->applyCentralForce(btVector3(0, 1, 3));
             break;
 
          case 2:
-            cubeRigidBody->applyCentralImpulse(btVector3(0, 1, -3));
+            cubeRigidBody->applyCentralImpulse(btVector3(0, 0, -3));
             break;
 
          case 3:
-            cubeRigidBody->applyCentralImpulse(btVector3(3, 1, 0));
+            cubeRigidBody->applyCentralImpulse(btVector3(3, 0, 0));
             break;
 
          case 4:
-            cubeRigidBody->applyCentralImpulse(btVector3(-3, 1, 0));
+            cubeRigidBody->applyCentralImpulse(btVector3(-3, 0, 0));
             break;   
         }
     }
