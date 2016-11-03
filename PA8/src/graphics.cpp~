@@ -242,14 +242,17 @@ void Graphics::moveBox(int direction)
             break;
 
          case 2:
+			cubeRigidBody->activate(true);
             cubeRigidBody->applyCentralImpulse(btVector3(0, 0, -3));
             break;
 
          case 3:
+			cubeRigidBody->activate(true);	
             cubeRigidBody->applyCentralImpulse(btVector3(3, 0, 0));
             break;
 
          case 4:
+			cubeRigidBody->activate(true);
             cubeRigidBody->applyCentralImpulse(btVector3(-3, 0, 0));
             break;   
         }

@@ -26,7 +26,7 @@ INDLUDES=-I../include  -I/usr/include/ImageMagick -I/usr/include/bullet/
 
 
 all: $(O_FILES)
-	$(CC) $(CXXFLAGS) -o Bullet $(O_FILES) $(LIBS) #$(PATHI) $(PATHL)
+	$(CC) $(CXXFLAGS) -o Tutorial $(O_FILES) $(LIBS) #$(PATHI) $(PATHL)
 
 main.o: ../src/main.cpp
 	$(CC) $(CXXFLAGS) -c ../src/main.cpp -o main.o $(INDLUDES)
@@ -50,4 +50,4 @@ window.o: ../src/window.cpp
 	$(CC) $(CXXFLAGS) -c ../src/window.cpp -o window.o $(INDLUDES)
 
 clean:
-	-@if rm *.o Bullet 2>/dev/null || true; then echo "Main Removed"; else echo "No Main"; fi
+	-@if rm *.o Tutorial 2>/dev/null || true; then echo "Main Removed"; else echo "No Main"; fi
