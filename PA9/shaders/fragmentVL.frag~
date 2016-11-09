@@ -11,4 +11,3 @@ void main()
     frag_color = texture2D(gSampler, tex_coord.xy);
 }
           
-  

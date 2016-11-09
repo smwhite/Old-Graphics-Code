@@ -4,17 +4,22 @@
 in vec3 fN;
 in vec3 fL;
 in vec3 fE;
+in vec2 tex_coord;
+
+out vec4 frag_color;
 
 uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 uniform mat4 ModelView;
 uniform vec4 LightPosition;
 uniform float Shininess;
+uniform sampler2D gSampler;
+
 
 void main() 
 { 
     // Normalize the input lighting vectors
     
-   vec3 N = normalize(fN);
+    vec3 N = normalize(fN);
     vec3 E = normalize(fE);
     vec3 L = normalize(fL);
 
@@ -30,6 +35,6 @@ void main()
     if( dot(L, N) < 0.0 ) 
 	specular = vec4(0.0, 0.0, 0.0, 1.0);
     
-    gl_FragColor = ambient + diffuse + specular;
-    gl_FragColor.a = 1.0;
+    frag_color = (ambient + diffuse + specular)* texture2D(gSampler, tex_coord.xy);
+    //gl_FragColor.a = 1.0;
 } 

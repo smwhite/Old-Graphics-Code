@@ -69,7 +69,7 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_ball = new Object("../shaders/fragment.frag", "../shaders/vertex.vert", "../models/ball.obj", false, NULL);
+  m_ball = new Object("../shaders/fragmentvl.frag", "../shaders/vertexvl.vert", "../models/ball.obj", false, NULL);
   ball = new btSphereShape (1);
   ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
   btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
@@ -160,6 +160,23 @@ bool Graphics::Initialize(int width, int height)
     printf("m_gSampler not found\n");
     return false;
   } 
+
+   GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat mat_shininess[] = { 50.0 };
+   GLfloat light_position[] = { 100.0, 100.0, 0.0, 0.0 };
+   glClearColor (0.0, 0.0, 0.0, 0.0);
+   glShadeModel (GL_SMOOTH);
+
+   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+   glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+
+   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+   glEnable(GL_LIGHTING);
+   glColorMaterial( GL_FRONT_AND_BACK, GL_EMISSION);
+   glEnable(GL_COLOR_MATERIAL);
+   glEnable(GL_LIGHT0);
+
 
   //enable depth testing
   glEnable(GL_DEPTH_TEST);

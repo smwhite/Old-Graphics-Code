@@ -17,8 +17,8 @@ int main(int argc, char **argv)
   if( argc == 2)
     {
      modelFile = argv[1];
-     fragFile = "../shaders/fragment.frag";
-     vertFile = "../shaders/vertex.vert";
+     fragFile = "../shaders/fragmentvl.frag";
+     vertFile = "../shaders/vertexvl.vert";
     }
 
   // If argc is 3, the program will assume that the first one is the model file, and the second one is the vertex shader

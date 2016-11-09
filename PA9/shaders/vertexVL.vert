@@ -3,6 +3,8 @@
 in vec4 vPosition;
 in vec3 vNormal;
 out vec4 color;  //vertex shade
+out vec2 tex_coord;
+
 
 uniform vec4 AmbientProduct, DiffuseProduct, SpecularProduct;
 uniform mat4 ModelView;
@@ -31,6 +33,7 @@ void main()
     if( dot(L, N) < 0.0 )  specular = vec4(0.0, 0.0, 0.0, 1.0); 
     gl_Position = Projection * ModelView * vPosition;
 
-    color = ambient + diffuse + specular;
-    color.a = 1.0;
+    color = (ambient + diffuse + specular)*texture2D(gSampler, tex_coord.xy);
+    tex_coord = v_tex_coord;
+    //color.a = 1.0;
 }

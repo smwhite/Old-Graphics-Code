@@ -1,7 +1,9 @@
 #version 330
-
 in vec4 vPosition;
 in vec3 vNormal;
+
+
+out vec2 tex_coord;
 
 // output values that will be interpolatated per-fragment
 out vec3 fN;
@@ -23,5 +25,6 @@ void main()
     }
 
     gl_Position = Projection*ModelView*vPosition;
+    tex_coord = v_tex_coord;
 }
           
