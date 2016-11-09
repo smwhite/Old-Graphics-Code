@@ -31,6 +31,13 @@ class Graphics
     GLint m_modelMatrix;
 	GLint m_gSampler;
 
+    GLint m_ModelView;
+    GLint m_LightPosition;
+    GLint m_Projection;
+	GLint m_Shininess;
+	GLint m_AmbientProduct;
+    GLint m_DiffuseProduct;
+    GLint m_SpecularProduct;
     //Object *m_sun;
 	//Object *m_mercury;
     //Object *m_venus;

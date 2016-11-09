@@ -161,6 +161,63 @@ bool Graphics::Initialize(int width, int height)
     return false;
   } 
 
+  // Locate the ModelView
+  m_ModelView = m_shader->GetUniformLocation("ModelView");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_ModelView not found\n");
+    return false;
+  } 
+  // Locate the LightPosition
+  m_LightPosition = m_shader->GetUniformLocation("LightPosition");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_LightPosition not found\n");
+    return false;
+  } 
+  // Locate the Projection
+  m_Projection = m_shader->GetUniformLocation("Projection");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_Projection not found\n");
+    return false;
+  } 
+
+  // Locate the Shininess
+  m_Shininess = m_shader->GetUniformLocation("Shininess");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_Shininess not found\n");
+    return false;
+  } 
+
+  // Locate the AmbientProduct
+  m_AmbientProduct = m_shader->GetUniformLocation("AmbientProduct");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_AmbientProduct not found\n");
+    return false;
+  } 
+
+  // Locate the DiffuseProduct
+  m_DiffuseProduct = m_shader->GetUniformLocation("DiffuseProduct");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_DiffuseProduct not found\n");
+    return false;
+  } 
+
+  // Locate the SpecularProduct
+  m_SpecularProduct = m_shader->GetUniformLocation("SpecularProduct");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_SpecularProduct not found\n");
+    return false;
+  } 
+
+
+
+
    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat mat_shininess[] = { 50.0 };
    GLfloat light_position[] = { 100.0, 100.0, 0.0, 0.0 };
