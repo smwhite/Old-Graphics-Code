@@ -101,7 +101,7 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(wallRigidBody);
   
   // Set up the shaders
-  m_shader = new Shader(vertexFile, fragmentFile);
+  m_shader = new Shader("../shaders/vertexFL.vert", "../shaders/fragmentFL.frag");
   if(!m_shader->Initialize())
   {
     printf("Shader Failed to Initialize\n");

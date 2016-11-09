@@ -1,7 +1,7 @@
 #version 330
 in vec4 vPosition;
 in vec3 vNormal;
-
+in vec2 v_tex_coord;
 
 out vec2 tex_coord;
 
