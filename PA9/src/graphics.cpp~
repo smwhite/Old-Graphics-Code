@@ -101,7 +101,7 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(wallRigidBody);
   
   // Set up the shaders
-  m_shader = new Shader(vertexFile, fragmentFile);
+  m_shader = new Shader("../shaders/vertexFL.vert", "../shaders/fragmentFL.frag");
   if(!m_shader->Initialize())
   {
     printf("Shader Failed to Initialize\n");
@@ -218,14 +218,14 @@ bool Graphics::Initialize(int width, int height)
 
 
 
-   //GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   //GLfloat mat_shininess[] = { 50.0 };
-   GLfloat light_position[] = { 100.0, 100.0, 0.0, 0.0 };
+   GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat mat_shininess[] = { 50.0 };
+   GLfloat light_position[] = { 10.0, 10.0, 0.0, 0.0 };
    glClearColor (0.0, 0.0, 0.0, 0.0);
    glShadeModel (GL_SMOOTH);
 
-   glMaterialfv(GL_FRONT, GL_SPECULAR, &m_SpecularProduct);
-   glMaterialfv(GL_FRONT, GL_SHININESS, &m_Shininess);
+   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+   glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
