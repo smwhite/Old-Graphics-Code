@@ -36,5 +36,5 @@ void main()
 	specular = vec4(0.0, 0.0, 0.0, 1.0);
     
     frag_color = (ambient + diffuse + specular)* texture2D(gSampler, tex_coord.xy);
-    //gl_FragColor.a = 1.0;
+    frag_color.a = 1.0;
 } 

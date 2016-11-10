@@ -38,6 +38,15 @@ class Graphics
 	GLint m_AmbientProduct;
     GLint m_DiffuseProduct;
     GLint m_SpecularProduct;
+
+
+
+   GLfloat *mat_specular;
+   GLfloat *mat_shininess;
+   GLfloat *mat_ambient;
+   GLfloat *mat_diffuse;
+   GLfloat *light_position;
+   GLfloat *lightmode;
     //Object *m_sun;
 	//Object *m_mercury;
     //Object *m_venus;
