@@ -286,7 +286,7 @@ void Graphics::Render()
   glUniformMatrix4fv(m_Projection, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection()));
   glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
   glUniform4fv(m_LightPosition,1,glm::value_ptr(glm::vec4(100.0, 100.0, 0.0, 0.0)));
-  glUniform4fv(m_AmbientProduct,1,glm::value_ptr(glm::vec4(0.2, 0.2, 0.2, 1.0)));
+  glUniform4fv(m_AmbientProduct,1,glm::value_ptr(glm::vec4(0.5, 0.5, 0.5, 1.0)));
   glUniform4fv(m_DiffuseProduct,1,glm::value_ptr(glm::vec4(1.0, 1.0, 1.0, 1.0)));
   glUniform4fv(m_SpecularProduct,1,glm::value_ptr(glm::vec4(1.0, 1.0, 1.0, 1.0)));
   glUniform1i(m_gSampler,1);
