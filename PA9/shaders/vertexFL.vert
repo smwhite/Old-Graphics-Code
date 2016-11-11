@@ -1,7 +1,7 @@
 #version 330
-in vec4 vPosition;
-in vec3 vNormal;
-in vec2 v_tex_coord;
+layout (location = 0) in vec4 vPosition;
+layout (location = 2) in vec3 vNormal;
+layout (location = 1) in vec2 v_tex_coord;
 
 out vec2 tex_coord;
 

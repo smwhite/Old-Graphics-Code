@@ -24,8 +24,10 @@ class Object
     glm::mat4 model;
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;
+    std::vector<Vertex> Normals;
     GLuint VB;
     GLuint IB;
+    GLuint NB;
 
     GLuint m_texObj;
     //GLenum m_texTarget;
