@@ -25,24 +25,23 @@ Object::Object(std::string vFile, std::string fFile, std::string mFile, bool usi
 
   aiMesh* mesh = scene->mMeshes[0];
 
-  //std::cout << "2?" << std::endl;
 
   for(unsigned int i=0;i< mesh->mNumVertices;i++)
   {
     const aiVector3D* pos = &(mesh->mVertices[i]);
-    //const aiVector3D* uv = &(mesh->mTextureCoords[0][i]);
-
-    //std::cout << "!!!" << std::endl;
+    const aiVector3D* norm = &(mesh->mNormals[i]);
 
     v.vertex = glm::vec3 {pos->x,pos->y,pos->z};
-    //std::cout << "!!!!!!" << std::endl;
-    //std::cout << uv->x << std::endl;
-    //std::cout << uv->y << std::endl;
-	//v.uv = glm::vec2{uv->x,uv->y};
-    //std::cout << "!!!!!!!!!" << std::endl;
+
     Vertices.push_back(v);
-    //std::cout << "!!!!!!!!!!!!" << std::endl;
+
+    v.vertex = glm::vec3 {norm->x,norm->y,norm->z};
+    Normals.push_back(v);
+
+
   }
+
+
 
   //std::cout << "3?" << std::endl;
   btVector3 triArray[3];
@@ -92,6 +91,11 @@ Object::Object(std::string vFile, std::string fFile, std::string mFile, bool usi
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 
+
+  glGenBuffers(1, &NB);
+  glBindBuffer(GL_ARRAY_BUFFER, NB);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Normals.size(), &Normals[0], GL_STATIC_DRAW);
+
   //std::cout << "7?" << std::endl;
 }
 
@@ -124,6 +128,7 @@ void Object::Render()
 
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
+  glEnableVertexAttribArray(2);
 
   glBindBuffer(GL_ARRAY_BUFFER, VB);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
@@ -133,8 +138,12 @@ void Object::Render()
 
   glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
 
+  //glBindBuffer(GL_NORMAL_ARRAY_BUFFER_BINDING, NB);
+
+
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
+  glDisableVertexAttribArray(2);
 }
 
 glm::mat4 Object::GetLocation()
