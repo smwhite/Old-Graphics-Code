@@ -70,7 +70,7 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_ball = new Object("../shaders/fragmentvl.frag", "../shaders/vertexvl.vert", "../models/ball.obj", false, NULL);
+  m_ball = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
   ball = new btSphereShape (1);
   ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
   btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
@@ -156,7 +156,7 @@ bool Graphics::Initialize(int width, int height)
 
   // Locate the model texture in the shader
   m_gSampler = m_shader->GetUniformLocation("gSampler");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_gSampler == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_gSampler not found\n");
     return false;
@@ -164,21 +164,21 @@ bool Graphics::Initialize(int width, int height)
 
   // Locate the ModelView
   m_ModelView = m_shader->GetUniformLocation("ModelView");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_ModelView == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_ModelView not found\n");
     return false;
   } 
   // Locate the LightPosition
   m_LightPosition = m_shader->GetUniformLocation("LightPosition");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_LightPosition == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_LightPosition not found\n");
     return false;
   } 
   // Locate the Projection
   m_Projection = m_shader->GetUniformLocation("Projection");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_Projection == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_Projection not found\n");
     return false;
@@ -186,7 +186,7 @@ bool Graphics::Initialize(int width, int height)
 
   // Locate the Shininess
   m_Shininess = m_shader->GetUniformLocation("Shininess");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_Shininess == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_Shininess not found\n");
     return false;
@@ -194,7 +194,7 @@ bool Graphics::Initialize(int width, int height)
 
   // Locate the AmbientProduct
   m_AmbientProduct = m_shader->GetUniformLocation("AmbientProduct");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_AmbientProduct == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_AmbientProduct not found\n");
     return false;
@@ -202,7 +202,7 @@ bool Graphics::Initialize(int width, int height)
 
   // Locate the DiffuseProduct
   m_DiffuseProduct = m_shader->GetUniformLocation("DiffuseProduct");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_DiffuseProduct == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_DiffuseProduct not found\n");
     return false;
@@ -210,7 +210,7 @@ bool Graphics::Initialize(int width, int height)
 
   // Locate the SpecularProduct
   m_SpecularProduct = m_shader->GetUniformLocation("SpecularProduct");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_SpecularProduct == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_SpecularProduct not found\n");
     return false;
@@ -284,8 +284,8 @@ void Graphics::Render()
   //glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
   glUniformMatrix4fv(m_Projection, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection()));
-  glUniformMatrix4fv(m_ModelView, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
-  glUniform4fv(m_LightPosition,1,glm::value_ptr(glm::vec4(100.0, 100.0, 0.0, 0.0)));
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
+  glUniform4fv(m_LightPosition,1,glm::value_ptr(glm::vec4(10.0, 10.0, 0.0, 0.0)));
   glUniform4fv(m_AmbientProduct,1,glm::value_ptr(glm::vec4(0.5, 0.5, 0.5, 1.0)));
   glUniform4fv(m_DiffuseProduct,1,glm::value_ptr(glm::vec4(1.0, 1.0, 1.0, 1.0)));
   glUniform4fv(m_SpecularProduct,1,glm::value_ptr(glm::vec4(1.0, 1.0, 1.0, 1.0)));
