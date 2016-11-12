@@ -17,8 +17,8 @@ int main(int argc, char **argv)
   if( argc == 2)
     {
      modelFile = argv[1];
-     fragFile = "../shaders/fragmentvl.frag";
-     vertFile = "../shaders/vertexvl.vert";
+     fragFile = "../shaders/fragmentfl.frag";
+     vertFile = "../shaders/vertexfl.vert";
     }
 
   // If argc is 3, the program will assume that the first one is the model file, and the second one is the vertex shader
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     {
      modelFile = argv[1];
      vertFile = argv[2];
-     fragFile = "../shaders/fragment.frag";
+     fragFile = "../shaders/fragmentfl.frag";
     }
 
   // If argc is 4 or greater, the program will assume that the first one is the model file, the second one is the vertex shader, and the third one is the fragment shader.
@@ -40,8 +40,8 @@ int main(int argc, char **argv)
   // If Argc is 1 then that means there were no arguments given by the user and the program will default to the provided shaders and model
   else
     {
-     vertFile = "../shaders/vertex.vert";
-     fragFile = "../shaders/fragment.frag";
+     vertFile = "../shaders/vertexfl.vert";
+     fragFile = "../shaders/fragmentfl.frag";
 	 modelFile = "../models/ball.obj";
     }
 

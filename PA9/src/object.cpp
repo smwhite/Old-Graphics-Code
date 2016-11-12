@@ -141,6 +141,8 @@ void Object::Render()
   //glBindBuffer(GL_NORMAL_ARRAY_BUFFER_BINDING, NB);
 
 
+
+
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
   glDisableVertexAttribArray(2);
