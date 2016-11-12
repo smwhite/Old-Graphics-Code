@@ -14,6 +14,10 @@ uniform mat4 ModelView;
 uniform vec4 LightPosition;
 uniform mat4 Projection;
 
+uniform mat4 projectionMatrix; 
+uniform mat4 viewMatrix; 
+uniform mat4 modelMatrix; 
+
 void main()
 {
     fN = vNormal;
@@ -24,7 +28,8 @@ void main()
 	fL = LightPosition.xyz - vPosition.xyz;
     }
 
-    gl_Position = Projection*ModelView*vPosition;
+    gl_Position = Projection*modelMatrix*viewMatrix*vPosition;
+    //gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vPosition; 
     tex_coord = v_tex_coord;
 }
           
