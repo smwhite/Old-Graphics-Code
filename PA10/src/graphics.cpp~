@@ -241,13 +241,14 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt, glm::vec4 a)
+void Graphics::Update(unsigned int dt, glm::vec4 a,float LR,float UD)
 {
   btTransform trans;
   btScalar m[16];
   dynamicsWorld->stepSimulation(1/60.f, 10);
 
   amb = a;
+  m_camera->Update(LR,UD,0.0,0.0,0.0);
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -300,7 +301,7 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_Projection, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection()));
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
-  glUniform4fv(m_LightPosition,1,glm::value_ptr(glm::vec4(10.0, 10.0, 0.0, 1.0)));
+  glUniform4fv(m_LightPosition,1,glm::value_ptr(glm::vec4(10.0, 10.0, 0.0, 0.0)));
   glUniform4fv(m_AmbientProduct,1,glm::value_ptr(amb));
   glUniform4fv(m_DiffuseProduct,1,glm::value_ptr(glm::vec4(1.0, 1.0, 1.0, 1.0)));
   glUniform4fv(m_SpecularProduct,1,glm::value_ptr(glm::vec4(1.0, 1.0, 1.0, 1.0)));

@@ -82,7 +82,7 @@ void Engine::Run()
     }
 
     // Update and render the graphics
-    m_graphics->Update(m_DT,a);
+    m_graphics->Update(m_DT,a,LR,UD);
     m_graphics->Render();
 
     // Swap to the Window
@@ -160,11 +160,11 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_1: 
-		a += glm::vec4 {0.1,0.1,0.1,0};    
+		a += glm::vec4 {0.01,0.01,0.01,0};    
 	    break;
 
 	  case SDLK_2: 
-		a -= glm::vec4 {0.1,0.1,0.1,0};   
+		a -= glm::vec4 {0.01,0.01,0.01,0};   
 	    break;
 
 

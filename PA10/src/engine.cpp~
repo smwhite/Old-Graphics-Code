@@ -159,12 +159,12 @@ void Engine::Keyboard()
 		cameraPosition = 0;    
 	    break;
 
-	  case SDLK_o: 
-		a += glm::vec4 {0.1,0.1,0.1,0};    
+	  case SDLK_1: 
+		a += glm::vec4 {0.01,0.01,0.01,0};    
 	    break;
 
-	  case SDLK_p: 
-		a -= glm::vec4 {0.1,0.1,0.1,0};   
+	  case SDLK_2: 
+		a -= glm::vec4 {0.01,0.01,0.01,0};   
 	    break;
 
 
