@@ -39,6 +39,8 @@ class Graphics
     GLint m_DiffuseProduct;
     GLint m_SpecularProduct;
 
+    glm::vec4 amb = {0.6,0.6,0.6,0.0};
+
 
 
    GLfloat *mat_specular;
@@ -71,7 +73,8 @@ class Graphics
     Object *m_cylinder1;
     Object *m_cylinder2;
 	Object *m_walls;
-
+    Object *m_lPaddle;
+    Object *m_rPaddle;
     glm::mat4 c;
 
     string vertexFile;
@@ -90,6 +93,8 @@ class Graphics
     btCollisionShape *cylinder1;
     btCollisionShape *cylinder2;
     btCollisionShape *walls;
+    btCollisionShape *lPaddle;
+    btCollisionShape *rPaddle;
     
     btDefaultMotionState *ballMotionState = NULL;
     btDefaultMotionState *cubeMotionState = NULL;
@@ -97,6 +102,8 @@ class Graphics
     btDefaultMotionState *cylinder1MotionState = NULL;
     btDefaultMotionState *cylinder2MotionState = NULL;
     btDefaultMotionState *wallMotionState = NULL;
+    btDefaultMotionState *lPaddleMotionState = NULL;
+    btDefaultMotionState *rPaddleMotionState = NULL;
 
     btRigidBody *ballRigidBody;
     btRigidBody *cubeRigidBody;
@@ -104,6 +111,8 @@ class Graphics
     btRigidBody *cylinder1RigidBody;
     btRigidBody *cylinder2RigidBody;
     btRigidBody *wallRigidBody;
+    btRigidBody *lPaddleRigidBody;
+    btRigidBody *rPaddleRigidBody;
 };
 
 #endif /* GRAPHICS_H */
