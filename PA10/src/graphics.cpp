@@ -13,7 +13,7 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
   dispatcher = new btCollisionDispatcher(collisionConfiguration);
   solver = new btSequentialImpulseConstraintSolver;
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-  dynamicsWorld->setGravity(btVector3(0, -1, 0));
+  dynamicsWorld->setGravity(btVector3(0, -9.8, -3.8));
 
 }
 
@@ -241,13 +241,14 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt, glm::vec4 a)
+void Graphics::Update(unsigned int dt, glm::vec4 a,float LR,float UD)
 {
   btTransform trans;
   btScalar m[16];
   dynamicsWorld->stepSimulation(1/60.f, 10);
 
   amb = a;
+  m_camera->Update(LR,UD,0.0,0.0,0.0);
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);

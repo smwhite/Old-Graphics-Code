@@ -17,21 +17,21 @@ bool Camera::Initialize(int w, int h)
   //  ...Like you should update it before you render more dynamic 
   //  for this project having them static will be fine
   view = glm::lookAt( glm::vec3(0.0, 50, -20.0), //Eye Position
-                      glm::vec3(0.0, 0.0, 0.0), //Focus point
+                      glm::vec3(0.0, 50, 0.0), //Focus point
                       glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
 
   projection = glm::perspective( 45.0f, //the FoV typically 90 degrees is good which is what this is set to
                                  float(w)/float(h), //Aspect Ratio, so Circles stay Circular
                                  0.01f, //Distance to the near plane, normally a small value like this
-                                 10000.0f); //Distance to the far plane, 
+                                 100.0f); //Distance to the far plane, 
   return true;
 }
 
 bool Camera::Update(float LR,float UD,float ELR, float EUD,float ZOOM)
 {
 
-  view = glm::lookAt( glm::vec3(0.0, 50, -20), //Eye Position
-                      glm::vec3(0.0, 0.0,0.0), //Focus point
+  view = glm::lookAt( glm::vec3(LR, 50, UD), //Eye Position
+                      glm::vec3(LR, 0.0,UD+40), //Focus point
                       glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
 
 

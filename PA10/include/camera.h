@@ -16,10 +16,10 @@ class Camera
   private:
     glm::mat4 projection;
     glm::mat4 view;
-	float UD = 0;
+	/*float UD = 0;
 	float LR = 0;
 	float ELR = 0;
-	float EUD = 0;
+	float EUD = 0;*/
 };
 
 #endif /* CAMERA_H */

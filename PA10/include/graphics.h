@@ -16,7 +16,7 @@ class Graphics
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     bool Initialize(int width, int height);
-    void Update(unsigned int dt, glm::vec4 a);
+    void Update(unsigned int dt, glm::vec4 a,float LR,float UD);
     void Render();
     void moveBox(int direction);
 
