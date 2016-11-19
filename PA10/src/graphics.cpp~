@@ -13,7 +13,7 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
   dispatcher = new btCollisionDispatcher(collisionConfiguration);
   solver = new btSequentialImpulseConstraintSolver;
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-  dynamicsWorld->setGravity(btVector3(0, -1, 0));
+  dynamicsWorld->setGravity(btVector3(0, -9.8, -3.8));
 
 }
 
@@ -116,6 +116,54 @@ bool Graphics::Initialize(int width, int height)
   btRigidBody::btRigidBodyConstructionInfo wallRigidBodyCI(0, wallMotionState, walls, btVector3(0, 0, 0));
   wallRigidBody = new btRigidBody(wallRigidBodyCI);
   dynamicsWorld->addRigidBody(wallRigidBody);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  btTriangleMesh *objTriMesh2 = new btTriangleMesh();
+  m_plunger = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
+  plunger = new btBvhTriangleMeshShape(objTriMesh2, true);
+  plungerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo plungerRigidBodyCI(1, plungerMotionState, plunger, btVector3(0, 0, 0));
+  plungerRigidBody = new btRigidBody(plungerRigidBodyCI);
+  dynamicsWorld->addRigidBody(plungerRigidBody);
+
+  btTriangleMesh *objTriMesh3 = new btTriangleMesh();
+  m_lPaddle1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
+  lPaddle1 = new btBvhTriangleMeshShape(objTriMesh3, true);
+  lPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo lPaddle1RigidBodyCI(1, lPaddle1MotionState, lPaddle1, btVector3(0, 0, 0));
+  lPaddle1RigidBody = new btRigidBody(lPaddle1RigidBodyCI);
+  dynamicsWorld->addRigidBody(lPaddle1RigidBody);
+
+  btTriangleMesh *objTriMesh4 = new btTriangleMesh();
+  m_rPaddle1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
+  rPaddle1 = new btBvhTriangleMeshShape(objTriMesh4, true);
+  rPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo rPaddle1RigidBodyCI(1, rPaddle1MotionState, rPaddle1, btVector3(0, 0, 0));
+  rPaddle1RigidBody = new btRigidBody(rPaddle1RigidBodyCI);
+  dynamicsWorld->addRigidBody(rPaddle1RigidBody);
+
+  btTriangleMesh *objTriMesh5 = new btTriangleMesh();
+  m_lPaddle2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
+  lPaddle2 = new btBvhTriangleMeshShape(objTriMesh5, true);
+  lPaddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo lPaddle2RigidBodyCI(1, lPaddle2MotionState, lPaddle2, btVector3(0, 0, 0));
+  lPaddle2RigidBody = new btRigidBody(lPaddle2RigidBodyCI);
+  dynamicsWorld->addRigidBody(lPaddle2RigidBody);
+
+  btTriangleMesh *objTriMesh6 = new btTriangleMesh();
+  m_rPaddle2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
+  rPaddle2 = new btBvhTriangleMeshShape(objTriMesh6, true);
+  rPaddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo rPaddle2RigidBodyCI(1, rPaddle2MotionState, rPaddle2, btVector3(0, 0, 0));
+  rPaddle2RigidBody = new btRigidBody(rPaddle2RigidBodyCI);
+  dynamicsWorld->addRigidBody(rPaddle2RigidBody);
+
+  m_cover = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
+  cover = new btPlaneShape (1);
+  coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 3, 0)));
+  btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(50, vMotionState, cover, btVector3(0, 0, 0));
+  coverRigidBody = new btRigidBody(coverRigidBodyCI);
+  dynamicsWorld->addRigidBody(coverRigidBody);
   
   // Set up the shaders
   m_shader = new Shader("../shaders/vertexVL.vert", "../shaders/fragmentVL.frag");
@@ -280,6 +328,11 @@ void Graphics::Update(unsigned int dt, glm::vec4 a,float LR,float UD)
   trans.getOpenGLMatrix(m);
   //std::cout << "wall height: " << trans.getOrigin().getY() << std::endl;
   m_walls->Update(dt, glm::make_mat4(m));
+
+  coverRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  //std::cout << "wall height: " << trans.getOrigin().getY() << std::endl;
+  //m_cover->Update(dt, glm::make_mat4(m));
 }
 
 void Graphics::Render()
