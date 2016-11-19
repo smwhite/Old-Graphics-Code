@@ -36,6 +36,7 @@ class Engine
     bool m_ROTATION_FLIP_MOON;
     bool m_TRANSLATION_FLIP_MOON;
     int m_PAUSE_MOON;
+    glm::vec4 a = {0.6,0.6,0.6,0.0};
 
     Graphics *m_graphics;
     unsigned int m_DT;

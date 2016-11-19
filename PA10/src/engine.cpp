@@ -82,7 +82,7 @@ void Engine::Run()
     }
 
     // Update and render the graphics
-    m_graphics->Update(m_DT);
+    m_graphics->Update(m_DT,a);
     m_graphics->Render();
 
     // Swap to the Window
@@ -160,49 +160,13 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_1: 
-		cameraPosition = 1;    
+		a += glm::vec4 {0.1,0.1,0.1,0};    
 	    break;
 
 	  case SDLK_2: 
-		cameraPosition = 2;    
+		a -= glm::vec4 {0.1,0.1,0.1,0};   
 	    break;
 
-	  case SDLK_3: 
-		cameraPosition = 3;    
-	    break;
-
-	  case SDLK_4: 
-		cameraPosition = 4;    
-	    break;
-
-	  case SDLK_5: 
-		cameraPosition = 5;    
-	    break;
-
-	  case SDLK_6: 
-		cameraPosition = 6;    
-	    break;
-
-	  case SDLK_7: 
-		cameraPosition =7;    
-	    break;
-
-	  case SDLK_8: 
-		cameraPosition = 8;    
-	    break;
-
-	  case SDLK_9: 
-		cameraPosition =9;    
-	    break;
-
-
-	  /*case SDLK_q: 
-		LR += 0.1;
-	    break;
-
-	  case SDLK_e: 
-		LR -= 0.1;
-	    break;*/
 
 
 

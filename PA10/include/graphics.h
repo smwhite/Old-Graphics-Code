@@ -16,7 +16,7 @@ class Graphics
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     bool Initialize(int width, int height);
-    void Update(unsigned int dt);
+    void Update(unsigned int dt, glm::vec4 a);
     void Render();
     void moveBox(int direction);
 
@@ -38,6 +38,8 @@ class Graphics
 	GLint m_AmbientProduct;
     GLint m_DiffuseProduct;
     GLint m_SpecularProduct;
+
+    glm::vec4 amb = {0.6,0.6,0.6,0.0};
 
 
 
