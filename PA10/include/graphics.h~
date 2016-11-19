@@ -16,7 +16,7 @@ class Graphics
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     bool Initialize(int width, int height);
-    void Update(unsigned int dt, glm::vec4 a,float LR,float RD);
+    void Update(unsigned int dt, glm::vec4 a,float LR,float UD);
     void Render();
     void moveBox(int direction);
 
@@ -73,8 +73,12 @@ class Graphics
     Object *m_cylinder1;
     Object *m_cylinder2;
 	Object *m_walls;
-    Object *m_lPaddle;
-    Object *m_rPaddle;
+    Object *m_plunger;
+    Object *m_lPaddle1;
+    Object *m_rPaddle1;
+    Object *m_lPaddle2;
+    Object *m_rPaddle2;
+    Object *m_cover;
     glm::mat4 c;
 
     string vertexFile;
@@ -93,8 +97,12 @@ class Graphics
     btCollisionShape *cylinder1;
     btCollisionShape *cylinder2;
     btCollisionShape *walls;
-    btCollisionShape *lPaddle;
-    btCollisionShape *rPaddle;
+    btCollisionShape *plunger;
+    btCollisionShape *lPaddle1;
+    btCollisionShape *rPaddle1;
+    btCollisionShape *lPaddle2;
+    btCollisionShape *rPaddle2;
+    btCollisionShape *cover;
     
     btDefaultMotionState *ballMotionState = NULL;
     btDefaultMotionState *cubeMotionState = NULL;
@@ -102,8 +110,12 @@ class Graphics
     btDefaultMotionState *cylinder1MotionState = NULL;
     btDefaultMotionState *cylinder2MotionState = NULL;
     btDefaultMotionState *wallMotionState = NULL;
-    btDefaultMotionState *lPaddleMotionState = NULL;
-    btDefaultMotionState *rPaddleMotionState = NULL;
+    btDefaultMotionState *plungerMotionState = NULL;
+    btDefaultMotionState *lPaddle1MotionState = NULL;
+    btDefaultMotionState *rPaddle1MotionState = NULL;
+    btDefaultMotionState *lPaddle2MotionState = NULL;
+    btDefaultMotionState *rPaddle2MotionState = NULL;
+    btDefaultMotionState *coverMotionState = NULL;
 
     btRigidBody *ballRigidBody;
     btRigidBody *cubeRigidBody;
@@ -111,8 +123,12 @@ class Graphics
     btRigidBody *cylinder1RigidBody;
     btRigidBody *cylinder2RigidBody;
     btRigidBody *wallRigidBody;
-    btRigidBody *lPaddleRigidBody;
-    btRigidBody *rPaddleRigidBody;
+    btRigidBody *plungerRigidBody;
+    btRigidBody *lPaddle1RigidBody;
+    btRigidBody *rPaddle1RigidBody;
+    btRigidBody *lPaddle2RigidBody;
+    btRigidBody *rPaddle2RigidBody;
+    btRigidBody *coverRigidBody;
 };
 
 #endif /* GRAPHICS_H */
