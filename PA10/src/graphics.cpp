@@ -118,6 +118,7 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(wallRigidBody);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /*
   btTriangleMesh *objTriMesh2 = new btTriangleMesh();
   m_plunger = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
   plunger = new btBvhTriangleMeshShape(objTriMesh2, true);
@@ -158,13 +159,13 @@ bool Graphics::Initialize(int width, int height)
   rPaddle2RigidBody = new btRigidBody(rPaddle2RigidBodyCI);
   dynamicsWorld->addRigidBody(rPaddle2RigidBody);
 
-  m_cover = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
-  cover = new btPlaneShape (1);
-  coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 3, 0)));
-  btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(50, coverMotionState, cover, btVector3(0, 0, 0));
-  coverRigidBody = new btRigidBody(coverRigidBodyCI);
-  dynamicsWorld->addRigidBody(coverRigidBody);
-  
+  //m_cover = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
+  //cover = new btStaticPlaneShape (1);
+  //coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 3, 0)));
+  //btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(50, coverMotionState, cover, btVector3(0, 0, 0));
+  //coverRigidBody = new btRigidBody(coverRigidBodyCI);
+  //dynamicsWorld->addRigidBody(coverRigidBody);
+  */
   // Set up the shaders
   m_shader = new Shader("../shaders/vertexVL.vert", "../shaders/fragmentVL.frag");
   if(!m_shader->Initialize())
@@ -329,8 +330,8 @@ void Graphics::Update(unsigned int dt, glm::vec4 a,float LR,float UD)
   //std::cout << "wall height: " << trans.getOrigin().getY() << std::endl;
   m_walls->Update(dt, glm::make_mat4(m));
 
-  coverRigidBody->getMotionState()->getWorldTransform(trans);
-  trans.getOpenGLMatrix(m);
+  //coverRigidBody->getMotionState()->getWorldTransform(trans);
+  //trans.getOpenGLMatrix(m);
   //std::cout << "wall height: " << trans.getOrigin().getY() << std::endl;
   //m_cover->Update(dt, glm::make_mat4(m));
 }
