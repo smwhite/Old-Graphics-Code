@@ -124,11 +124,11 @@ void Engine::Keyboard()
 	    break;
 
       case SDLK_z: 
-		UD += 1;
+		m_graphics->leftPaddle();
 	    break;
 
 	  case SDLK_x: 
-	    UD -= 1;
+	    m_graphics->rightPaddle();
 	    break;
 
 	  case SDLK_UP: 
@@ -149,6 +149,11 @@ void Engine::Keyboard()
 	  case SDLK_RIGHT: 
         //moveR -= 1;
         m_graphics->moveBox(4);	    
+	    break;
+
+	  case SDLK_RIGHT: 
+        //moveR -= 1;
+        m_graphics->moveBox(5);	    
 	    break;
 
 

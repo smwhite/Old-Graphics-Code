@@ -62,6 +62,13 @@ class Graphics
     btDefaultMotionState *cylinder2MotionState = NULL;
     btRigidBody *cylinder2RigidBody;
 
+    Object *m_cube;
+    btCollisionShape *cube;
+    btDefaultMotionState *cubeMotionState = NULL;
+    btRigidBody *cubeRigidBody;
+
+    Object *m_backboard;
+
     btCollisionShape *cover;
     btDefaultMotionState *coverMotionState = NULL;
     btRigidBody *coverRigidBody;
