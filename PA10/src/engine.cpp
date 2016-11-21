@@ -82,8 +82,7 @@ void Engine::Run()
     }
 
     // Update and render the graphics
-    m_graphics->Update(m_DT,m_ROTATION_FLIP,m_TRANSLATION_FLIP,m_PAUSE,m_ROTATION_FLIP_MOON,m_TRANSLATION_FLIP_MOON,m_PAUSE_MOON,LR,UD,ELR,EUD
-		,ZOOM,multiplier,cameraPosition);
+    m_graphics->Update(m_DT,LR,UD);
     m_graphics->Render();
 
     // Swap to the Window

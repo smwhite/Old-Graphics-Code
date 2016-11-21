@@ -4,13 +4,14 @@
 #include <vector>
 #include <Magick++.h>
 #include "graphics_headers.h"
+#include <btBulletDynamicsCommon.h>
 
 class Object
 {
   public:
-    Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpeed, std::string vFile, std::string fFile, std::string mFile);
+    Object(std::string vFile, std::string fFile, std::string mFile, bool usingTriMesh, btTriangleMesh *objTriMesh);
     ~Object();
-    void Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale,  float multiplier);
+    void Update(unsigned int dt, glm::mat4 location);
     void Render();
 
     glm::mat4 GetModel();
