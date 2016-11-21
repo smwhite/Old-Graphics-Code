@@ -4,20 +4,16 @@
 #include <assimp/postprocess.h>
 #include <assimp/color4.h>
 #include <Magick++.h>
-#include <btBulletDynamicsCommon.h>
-#include <iostream>
 
 using namespace Magick;
 
-Object::Object(std::string vFile, std::string fFile, std::string mFile, bool usingTriMesh, btTriangleMesh *objTriMesh)
+Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpeed, std::string vFile, std::string fFile, std::string mFile)
 {  
-  InitializeMagick(NULL);
-  
   vertexFile = vFile;
   fragmentFile = fFile;
   modelFile = mFile;
   
-  //std::cout << "1?" << std::endl; 
+
 
   Assimp::Importer importer;
   const aiScene* scene = importer.ReadFile(modelFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs 
@@ -25,89 +21,103 @@ Object::Object(std::string vFile, std::string fFile, std::string mFile, bool usi
 
   aiMesh* mesh = scene->mMeshes[0];
 
-
   for(unsigned int i=0;i< mesh->mNumVertices;i++)
   {
     const aiVector3D* pos = &(mesh->mVertices[i]);
-    const aiVector3D* norm = &(mesh->mNormals[i]);
+    const aiVector3D* uv = &(mesh->mTextureCoords[0][i]);
 
     v.vertex = glm::vec3 {pos->x,pos->y,pos->z};
-
+	v.uv = glm::vec2{uv->x,uv->y};
     Vertices.push_back(v);
-
-    v.vertex = glm::vec3 {norm->x,norm->y,norm->z};
-    Normals.push_back(v);
-
-
   }
 
 
-
-  //std::cout << "3?" << std::endl;
-  btVector3 triArray[3];
 
   for(unsigned int i=0;i<mesh->mNumFaces;i++)
   {
     const aiFace& face = mesh->mFaces[i];
     assert(face.mNumIndices ==3);
-    
-    if(usingTriMesh == true)
-        {
-         aiVector3D position = mesh->mVertices[face.mIndices[0]];
-         triArray[0] = btVector3(position.x, position.y, position.z);
-
-         position = mesh->mVertices[face.mIndices[1]];
-         triArray[1] = btVector3(position.x, position.y, position.z);
-
-         position = mesh->mVertices[face.mIndices[2]];
-         triArray[2] = btVector3(position.x, position.y, position.z);
-
-         objTriMesh->addTriangle(triArray[0], triArray[1], triArray[2]);
-        }
 
     Indices.push_back(face.mIndices[0]);
     Indices.push_back(face.mIndices[1]);
-    Indices.push_back(face.mIndices[2]);   
+    Indices.push_back(face.mIndices[2]);    
   }
-
-  //std::cout << "4?" << std::endl;
 
   aiString mat;
   scene->mMaterials[1]->GetTexture(aiTextureType_DIFFUSE,0,&mat);
-  //std::cout << "sgh" << std::endl;
   std::string matFile = mat.C_Str();
   std::string m_fileName = "../models/"+matFile;
   m_image.read(m_fileName);
   m_image.write(&m_blob, "RGBA");
 
-  //std::cout << "5?" << std::endl;
+  angle = 0.0f;
+
+
+
   glGenBuffers(1, &VB);
   glBindBuffer(GL_ARRAY_BUFFER, VB);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
-
-  //std::cout << "6?" << std::endl;
 
   glGenBuffers(1, &IB);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //glActiveTexture(GL_TEXTURE0);
+  //glBindTexture(GL_TEXTURE_2D, m_texObj);
 
-  glGenBuffers(1, &NB);
-  glBindBuffer(GL_ARRAY_BUFFER, NB);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Normals.size(), &Normals[0], GL_STATIC_DRAW);
+  //glBindTexture(GL_TEXTURE_2D, 0);  
 
-  //std::cout << "7?" << std::endl;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  centerOfOrbit = center;
+  orbSize = orbitSize;
+  orbSpeed = orbitSpeed;
+  rotSpeed = rotationSpeed;
+  location= glm::mat4(1.0f);
+
 }
 
 Object::~Object()
 {
-
+  Vertices.clear();
+  Indices.clear();
 }
 
-void Object::Update(unsigned int dt, glm::mat4 location)
-    {
-     model = location;
-    }
+void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale, float multiplier)
+{
+  angle += dt * M_PI/1000;
+
+  rateR=M_PI/rotSpeed * multiplier;
+  rateT=M_PI/orbSpeed * multiplier;
+
+  angleR += dt * rateR;
+
+
+  glm::mat4 rot= glm::rotate(glm::mat4(1.0f), (angleR), glm::vec3(0.0, 1.0, 0.0));
+
+
+  angleT += dt * rateT;
+
+
+  glm::vec3 circle(orbSize * cos(angleT), 0.0f, orbSize * sin(angleT));
+  glm::mat4 trans= glm::translate(center,circle);
+
+  if(orbSize != 0.0)
+  {
+    location = trans;
+
+    trans = glm::scale(trans,glm::vec3(scale,scale,scale));
+    model= trans*rot;
+  }
+
+  else
+  {
+   location = trans;
+   rot = glm::scale(rot,glm::vec3(scale,scale,scale));
+   model= rot;
+  }
+}
 
 glm::mat4 Object::GetModel()
 {
@@ -128,7 +138,6 @@ void Object::Render()
 
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
-  glEnableVertexAttribArray(2);
 
   glBindBuffer(GL_ARRAY_BUFFER, VB);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
@@ -138,14 +147,8 @@ void Object::Render()
 
   glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
 
-  //glBindBuffer(GL_NORMAL_ARRAY_BUFFER_BINDING, NB);
-
-
-
-
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
-  glDisableVertexAttribArray(2);
 }
 
 glm::mat4 Object::GetLocation()

@@ -8,7 +8,6 @@ using namespace std;
 #include "camera.h"
 #include "shader.h"
 #include "object.h"
-#include <btBulletDynamicsCommon.h>
 
 class Graphics
 {
@@ -16,9 +15,9 @@ class Graphics
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     bool Initialize(int width, int height);
-    void Update(unsigned int dt, glm::vec4 a,float LR,float UD);
+    void Update(unsigned int dt, bool rotation,bool translation,int pause,bool moonR,bool moonT, int moonP, float LR,float UD
+						, float ELR,float EUD, float ZOOM, float mult, int camPos );
     void Render();
-    void moveBox(int direction);
 
   private:
     std::string ErrorString(GLenum error);
@@ -31,103 +30,32 @@ class Graphics
     GLint m_modelMatrix;
 	GLint m_gSampler;
 
-    GLint m_ModelView;
-    GLint m_LightPosition;
-    GLint m_Projection;
-	GLint m_Shininess;
-	GLint m_AmbientProduct;
-    GLint m_DiffuseProduct;
-    GLint m_SpecularProduct;
+    Object *m_sun;
+	Object *m_mercury;
+    Object *m_venus;
+    Object *m_earth;
+	Object *m_mars;
+    Object *m_jupiter;
+	Object *m_saturn;
+    Object *m_uranus;
+	Object *m_neptune;
+    Object *m_pluto;
 
-    glm::vec4 amb = {0.6,0.6,0.6,0.0};
+    Object *m_eMoon;
+    Object *m_mMoon;
+    Object *m_jMoon;
+    Object *m_nMoon;
+    Object *m_sRing;
+    Object *m_uRing;
 
+    Object *m_cube;
+	Object *m_moon;
 
-
-   GLfloat *mat_specular;
-   GLfloat *mat_shininess;
-   GLfloat *mat_ambient;
-   GLfloat *mat_diffuse;
-   GLfloat *light_position;
-   GLfloat *lightmode;
-    //Object *m_sun;
-	//Object *m_mercury;
-    //Object *m_venus;
-    //Object *m_earth;
-	//Object *m_mars;
-    //Object *m_jupiter;
-	//Object *m_saturn;
-    //Object *m_uranus;
-	//Object *m_neptune;
-    //Object *m_pluto;
-
-    //Object *m_eMoon;
-    //Object *m_mMoon;
-    //Object *m_jMoon;
-    //Object *m_nMoon;
-    //Object *m_sRing;
-    //Object *m_uRing;
-
-    Object *m_ball;
-	Object *m_cube;
-    Object *m_cylinder;
-    Object *m_cylinder1;
-    Object *m_cylinder2;
-	Object *m_walls;
-    Object *m_plunger;
-    Object *m_lPaddle1;
-    Object *m_rPaddle1;
-    Object *m_lPaddle2;
-    Object *m_rPaddle2;
     glm::mat4 c;
 
     string vertexFile;
     string fragmentFile;
     string modelFile;
-
-    btBroadphaseInterface* broadphase;
-    btDefaultCollisionConfiguration* collisionConfiguration;
-    btCollisionDispatcher *dispatcher;
-    btSequentialImpulseConstraintSolver *solver;
-    btDiscreteDynamicsWorld *dynamicsWorld;
-
-    btCollisionShape *ball;
-    btCollisionShape *cube;
-    btCollisionShape *cylinder;
-    btCollisionShape *cylinder1;
-    btCollisionShape *cylinder2;
-    btCollisionShape *walls;
-    btCollisionShape *plunger;
-    btCollisionShape *lPaddle1;
-    btCollisionShape *rPaddle1;
-    btCollisionShape *lPaddle2;
-    btCollisionShape *rPaddle2;
-    btCollisionShape *cover;
-    
-    btDefaultMotionState *ballMotionState = NULL;
-    btDefaultMotionState *cubeMotionState = NULL;
-    btDefaultMotionState *cylinderMotionState = NULL;
-    btDefaultMotionState *cylinder1MotionState = NULL;
-    btDefaultMotionState *cylinder2MotionState = NULL;
-    btDefaultMotionState *wallMotionState = NULL;
-    btDefaultMotionState *plungerMotionState = NULL;
-    btDefaultMotionState *lPaddle1MotionState = NULL;
-    btDefaultMotionState *rPaddle1MotionState = NULL;
-    btDefaultMotionState *lPaddle2MotionState = NULL;
-    btDefaultMotionState *rPaddle2MotionState = NULL;
-    btDefaultMotionState *coverMotionState = NULL;
-
-    btRigidBody *ballRigidBody;
-    btRigidBody *cubeRigidBody;
-    btRigidBody *cylinderRigidBody;
-    btRigidBody *cylinder1RigidBody;
-    btRigidBody *cylinder2RigidBody;
-    btRigidBody *wallRigidBody;
-    btRigidBody *plungerRigidBody;
-    btRigidBody *lPaddle1RigidBody;
-    btRigidBody *rPaddle1RigidBody;
-    btRigidBody *lPaddle2RigidBody;
-    btRigidBody *rPaddle2RigidBody;
-    btRigidBody *coverRigidBody;
 };
 
 #endif /* GRAPHICS_H */

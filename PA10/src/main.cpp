@@ -17,8 +17,8 @@ int main(int argc, char **argv)
   if( argc == 2)
     {
      modelFile = argv[1];
-     fragFile = "../shaders/fragmentfl.frag";
-     vertFile = "../shaders/vertexfl.vert";
+     fragFile = "../shaders/fragment.frag";
+     vertFile = "../shaders/vertex.vert";
     }
 
   // If argc is 3, the program will assume that the first one is the model file, and the second one is the vertex shader
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     {
      modelFile = argv[1];
      vertFile = argv[2];
-     fragFile = "../shaders/fragmentfl.frag";
+     fragFile = "../shaders/fragment.frag";
     }
 
   // If argc is 4 or greater, the program will assume that the first one is the model file, the second one is the vertex shader, and the third one is the fragment shader.
@@ -40,9 +40,9 @@ int main(int argc, char **argv)
   // If Argc is 1 then that means there were no arguments given by the user and the program will default to the provided shaders and model
   else
     {
-     vertFile = "../shaders/vertexfl.vert";
-     fragFile = "../shaders/fragmentfl.frag";
-	 modelFile = "../models/ball.obj";
+     vertFile = "../shaders/vertex.vert";
+     fragFile = "../shaders/fragment.frag";
+	 modelFile = "../models/earth.obj";
     }
 
   //cout << vertFile << endl;
@@ -50,7 +50,7 @@ int main(int argc, char **argv)
   //cout << modelFile << endl;
 
   // Start an engine and run it then cleanup after
-  Engine *engine = new Engine("Tutorial", 800, 600, vertFile, fragFile, modelFile);
+  Engine *engine = new Engine("Tutorial Window Name", 800, 600, vertFile, fragFile, modelFile);
   if(!engine->Initialize())
   {
     printf("The engine failed to start.\n");

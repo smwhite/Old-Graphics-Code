@@ -82,7 +82,8 @@ void Engine::Run()
     }
 
     // Update and render the graphics
-    m_graphics->Update(m_DT,a);
+    m_graphics->Update(m_DT,m_ROTATION_FLIP,m_TRANSLATION_FLIP,m_PAUSE,m_ROTATION_FLIP_MOON,m_TRANSLATION_FLIP_MOON,m_PAUSE_MOON,LR,UD,ELR,EUD
+		,ZOOM,multiplier,cameraPosition);
     m_graphics->Render();
 
     // Swap to the Window
@@ -128,23 +129,11 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_UP: 
-        //moveF += true; 
-        m_graphics->moveBox(1);   
+        ZOOM += 1;    
 	    break;
 
 	  case SDLK_DOWN: 
-        //moveB -= 1;	  
-        m_graphics->moveBox(2);  
-	    break;
-
-      case SDLK_LEFT: 
-        //moveL += 1;   
-        m_graphics->moveBox(3); 
-	    break;
-
-	  case SDLK_RIGHT: 
-        //moveR -= 1;
-        m_graphics->moveBox(4);	    
+        ZOOM -= 1;	    
 	    break;
 
       case SDLK_p: 
@@ -160,13 +149,49 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_1: 
-		a += glm::vec4 {0.01,0.01,0.01,0};    
+		cameraPosition = 1;    
 	    break;
 
 	  case SDLK_2: 
-		a -= glm::vec4 {0.01,0.01,0.01,0};   
+		cameraPosition = 2;    
 	    break;
 
+	  case SDLK_3: 
+		cameraPosition = 3;    
+	    break;
+
+	  case SDLK_4: 
+		cameraPosition = 4;    
+	    break;
+
+	  case SDLK_5: 
+		cameraPosition = 5;    
+	    break;
+
+	  case SDLK_6: 
+		cameraPosition = 6;    
+	    break;
+
+	  case SDLK_7: 
+		cameraPosition =7;    
+	    break;
+
+	  case SDLK_8: 
+		cameraPosition = 8;    
+	    break;
+
+	  case SDLK_9: 
+		cameraPosition =9;    
+	    break;
+
+
+	  /*case SDLK_q: 
+		LR += 0.1;
+	    break;
+
+	  case SDLK_e: 
+		LR -= 0.1;
+	    break;*/
 
 
 

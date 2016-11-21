@@ -1,7 +1,7 @@
-PA8 Bullet
+PA7 Solar System
 Shawn White, Jonathan Martinez, Edward Miles
 
-to make run the following commands from inside PA8.
+to make run the following commands from inside PA7.
  
 mkdir build
 cd build
@@ -9,15 +9,26 @@ cp ../makefile .
 make
 ./Tutorial
 
-Beginning of Pinball
-You can move the box around the board with the arrow keys and it can collide with the sphere and make it move around the board. And the cylinder is just a static unmovable object that the box and sphere can collide with
+The Solar System
+-All NINE planets are included (because pluto is still a planet in my heart)
+-Four planets have moons: Earth, Mars, Jupiter, and Neptune
+-Two planets have rings: Saturn and Uranus
+-All planets rotate and orbit at different speeds 
+
 controls
 
-Left Arrow: moves camera left
+A: moves camera left
 
-Right Arrow: moves camera right
+D: moves camera right
 
-Up Arrow: moves camera up
+W: moves camera up
 
-Down Arrow: moves camera down
+S: moves camera down
 
+P: Increases the rotation and orbit speed of everything
+
+M: Decreases the rotation and orbit speed of everything(If decreased low enough it will pause everything and if decreased lower it will reverse the orbit of everything)
+
+Up Arrow: Zoom In
+
+Down Arrow: Zoom Out

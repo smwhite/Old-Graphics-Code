@@ -36,7 +36,6 @@ class Engine
     bool m_ROTATION_FLIP_MOON;
     bool m_TRANSLATION_FLIP_MOON;
     int m_PAUSE_MOON;
-    glm::vec4 a = {0.6,0.6,0.6,0.0};
 
     Graphics *m_graphics;
     unsigned int m_DT;
@@ -48,7 +47,7 @@ class Engine
     string modelFile;
 
 	float LR = 0;
-	float UD = -20;
+	float UD = 0;
 	float ELR = 0;
 	float EUD = 20;
 	float ZOOM = -100.0;
