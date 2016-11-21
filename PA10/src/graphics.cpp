@@ -150,6 +150,12 @@ ballRigidBody->setRestitution(1.0);
   dynamicsWorld->addRigidBody(rPaddle1RigidBody);
   rPaddle1RigidBody->setActivationState(true);
   rPaddle1RigidBody->activate(true);
+
+  cover = new btStaticPlaneShape (btVector3(0, -1, 0), 1);
+  coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(0, coverMotionState, cover, btVector3(0, 0, 0));
+  coverRigidBody = new btRigidBody(coverRigidBodyCI);
+  dynamicsWorld->addRigidBody(coverRigidBody);
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -227,6 +233,9 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   dynamicsWorld->stepSimulation(1/60.f, 10);
 
   m_camera->Update(LR,UD,0.0,0.0,0.0);
+
+  ballRigidBody->activate(true);
+  ballRigidBody->applyCentralForce(btVector3(0, 5, 0));
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);

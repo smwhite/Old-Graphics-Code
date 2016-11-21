@@ -133,7 +133,7 @@ ballRigidBody->setRestitution(1.0);
   btTriangleMesh *objTriMesh3 = new btTriangleMesh();
   m_lPaddle1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/paddle.obj", true, objTriMesh3);
   lPaddle1 = new btBvhTriangleMeshShape(objTriMesh3, true);
-  lPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(19, -1, -16)));
+  lPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(19, -1, -17)));
   btRigidBody::btRigidBodyConstructionInfo lPaddle1RigidBodyCI(0, lPaddle1MotionState, lPaddle1, btVector3(0, 0, 0));
   lPaddle1RigidBody = new btRigidBody(lPaddle1RigidBodyCI);
   dynamicsWorld->addRigidBody(lPaddle1RigidBody);
@@ -144,12 +144,18 @@ ballRigidBody->setRestitution(1.0);
   btTriangleMesh *objTriMesh4 = new btTriangleMesh();
   m_rPaddle1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/paddle.obj", true, objTriMesh4);
   rPaddle1 = new btBvhTriangleMeshShape(objTriMesh4, true);
-  rPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-10, -1, -16)));
+  rPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-10, -1, -17)));
   btRigidBody::btRigidBodyConstructionInfo rPaddle1RigidBodyCI(0, rPaddle1MotionState, rPaddle1, btVector3(0, 0, 0));
   rPaddle1RigidBody = new btRigidBody(rPaddle1RigidBodyCI);
   dynamicsWorld->addRigidBody(rPaddle1RigidBody);
   rPaddle1RigidBody->setActivationState(true);
   rPaddle1RigidBody->activate(true);
+
+  cover = new btStaticPlaneShape (btVector3(0, -1, 0), 1);
+  coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(0, coverMotionState, cover, btVector3(0, 0, 0));
+  coverRigidBody = new btRigidBody(coverRigidBodyCI);
+  dynamicsWorld->addRigidBody(coverRigidBody);
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -227,6 +233,9 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   dynamicsWorld->stepSimulation(1/60.f, 10);
 
   m_camera->Update(LR,UD,0.0,0.0,0.0);
+
+  ballRigidBody->activate(true);
+  ballRigidBody->applyCentralForce(btVector3(0, 5, 0));
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
