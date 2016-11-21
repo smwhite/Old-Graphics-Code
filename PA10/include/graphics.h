@@ -21,6 +21,8 @@ class Graphics
     void Update(unsigned int dt,float LR,float UD);
     void Render();
     void moveBox(int direction);
+    void leftPaddle();
+    void rightPaddle();
 
     //int score = 0;
 
