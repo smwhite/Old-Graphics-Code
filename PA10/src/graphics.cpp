@@ -2,6 +2,21 @@
 #include <btBulletDynamicsCommon.h>
 #include <iostream>
 
+int score = 0;
+
+bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+  {
+    score ++;
+    std::cout << "Score: " << score << endl;
+    return false;
+  }
+
+//bool lossCallback(btManifoldPoint& cp, const btCollisionObject* obj1, int id1, int index1, const btCollisionObject* obj2, int id2, int index2)
+  //{
+    //std::cout << "Collided with Loss Box" << endl;
+    //return false;
+  //}
+
 Graphics::Graphics(string vFile, string fFile, string mFile)
 {
   vertexFile = vFile;
@@ -14,6 +29,7 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
   solver = new btSequentialImpulseConstraintSolver;
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
   dynamicsWorld->setGravity(btVector3(0, -5.8, -2.8));
+  gContactAddedCallback=bumperCallback;
 }
 
 Graphics::~Graphics()
@@ -33,6 +49,7 @@ Graphics::~Graphics()
   delete broadphase;
   broadphase = NULL; 
 }
+
 
 bool Graphics::Initialize(int width, int height)
 {
@@ -92,7 +109,8 @@ ballRigidBody->setRestitution(1.0);
   btRigidBody::btRigidBodyConstructionInfo cylinderRigidBodyCI(0, cylinderMotionState, cylinder, btVector3(0, 1, 0));
   cylinderRigidBody = new btRigidBody(cylinderRigidBodyCI);
   dynamicsWorld->addRigidBody(cylinderRigidBody);
-cylinderRigidBody->setRestitution(1.0);
+  cylinderRigidBody->setRestitution(1.0);
+  cylinderRigidBody->setCollisionFlags(cylinderRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
   m_cylinder1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder1 = new btCylinderShape(btVector3(1, 1, 1));
@@ -100,7 +118,8 @@ cylinderRigidBody->setRestitution(1.0);
   btRigidBody::btRigidBodyConstructionInfo cylinder1RigidBodyCI(0, cylinder1MotionState, cylinder1, btVector3(0, 1, 0));
   cylinder1RigidBody = new btRigidBody(cylinder1RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder1RigidBody);
-cylinder1RigidBody->setRestitution(1.0);
+  cylinder1RigidBody->setRestitution(1.0);
+  cylinder1RigidBody->setCollisionFlags(cylinder1RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
   m_cylinder2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder2 = new btCylinderShape(btVector3(1, 1, 1));
@@ -109,6 +128,7 @@ cylinder1RigidBody->setRestitution(1.0);
   cylinder2RigidBody = new btRigidBody(cylinder2RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder2RigidBody);
   cylinder2RigidBody->setRestitution(1.0);
+  cylinder2RigidBody->setCollisionFlags(cylinder2RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
