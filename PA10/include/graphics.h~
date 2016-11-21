@@ -16,7 +16,7 @@ class Graphics
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     bool Initialize(int width, int height);
-    void Update(unsigned int dt, glm::vec4 a,float LR,float UD);
+    void Update(unsigned int dt,float LR,float UD);
     void Render();
 
   private:
@@ -29,6 +29,11 @@ class Graphics
     GLint m_viewMatrix;
     GLint m_modelMatrix;
 	GLint m_gSampler;
+
+    Object *m_ball;
+    btCollisionShape *ball;
+    btDefaultMotionState *ballMotionState = NULL;
+    btRigidBody *ballRigidBody;
 
     Object *m_walls;
     btCollisionShape *walls;

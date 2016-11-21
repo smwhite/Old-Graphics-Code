@@ -30,10 +30,30 @@ class Graphics
     GLint m_modelMatrix;
 	GLint m_gSampler;
 
+    Object *m_ball;
+    btCollisionShape *ball;
+    btDefaultMotionState *ballMotionState = NULL;
+    btRigidBody *ballRigidBody;
+
     Object *m_walls;
     btCollisionShape *walls;
     btDefaultMotionState *wallMotionState = NULL;
     btRigidBody *wallRigidBody;
+
+    Object *m_cylinder;
+    btCollisionShape *cylinder;
+    btDefaultMotionState *cylinderMotionState = NULL;
+    btRigidBody *cylinderRigidBody;
+
+    Object *m_cylinder1;
+    btCollisionShape *cylinder1;  
+    btDefaultMotionState *cylinder1MotionState = NULL;  
+    btRigidBody *cylinder1RigidBody;
+
+    Object *m_cylinder2;
+    btCollisionShape *cylinder2;
+    btDefaultMotionState *cylinder2MotionState = NULL;
+    btRigidBody *cylinder2RigidBody;
 
     glm::mat4 c;
 
