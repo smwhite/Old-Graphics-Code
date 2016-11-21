@@ -23,6 +23,7 @@ class Graphics
     void moveBox(int direction);
     void leftPaddle();
     void rightPaddle();
+    void reset();
 
     //int score = 0;
 
@@ -72,6 +73,10 @@ class Graphics
     btCollisionShape *cover;
     btDefaultMotionState *coverMotionState = NULL;
     btRigidBody *coverRigidBody;
+
+    btCollisionShape *loss;
+    btDefaultMotionState *lossMotionState = NULL;
+    btRigidBody *lossRigidBody;
 
     Object *m_lPaddle1;
     btCollisionShape *lPaddle1;

@@ -123,6 +123,10 @@ void Engine::Keyboard()
 	    UD -= 1;
 	    break;
 
+      case SDLK_r: 
+	    m_graphics->reset();
+	    break;
+
       case SDLK_z: 
 		m_graphics->leftPaddle();
 	    break;
