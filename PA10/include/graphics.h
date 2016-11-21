@@ -8,6 +8,7 @@ using namespace std;
 #include "camera.h"
 #include "shader.h"
 #include "object.h"
+#include <btBulletDynamicsCommon.h>
 
 class Graphics
 {
@@ -30,32 +31,22 @@ class Graphics
     GLint m_modelMatrix;
 	GLint m_gSampler;
 
-    Object *m_sun;
-	Object *m_mercury;
-    Object *m_venus;
-    Object *m_earth;
-	Object *m_mars;
-    Object *m_jupiter;
-	Object *m_saturn;
-    Object *m_uranus;
-	Object *m_neptune;
-    Object *m_pluto;
-
-    Object *m_eMoon;
-    Object *m_mMoon;
-    Object *m_jMoon;
-    Object *m_nMoon;
-    Object *m_sRing;
-    Object *m_uRing;
-
-    Object *m_cube;
-	Object *m_moon;
+    Object *m_walls;
+    btCollisionShape *walls;
+    btDefaultMotionState *wallMotionState = NULL;
+    btRigidBody *wallRigidBody;
 
     glm::mat4 c;
 
     string vertexFile;
     string fragmentFile;
     string modelFile;
+
+    btBroadphaseInterface* broadphase;
+    btDefaultCollisionConfiguration* collisionConfiguration;
+    btCollisionDispatcher *dispatcher;
+    btSequentialImpulseConstraintSolver *solver;
+    btDiscreteDynamicsWorld *dynamicsWorld;
 };
 
 #endif /* GRAPHICS_H */
