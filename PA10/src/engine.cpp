@@ -151,6 +151,11 @@ void Engine::Keyboard()
         m_graphics->moveBox(4);	    
 	    break;
 
+	  case SDLK_SPACE: 
+        //moveR -= 1;
+        m_graphics->moveBox(5);	    
+	    break;
+
 
 
 

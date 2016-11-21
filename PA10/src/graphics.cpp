@@ -97,7 +97,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_ball = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
   ball = new btSphereShape (1);
-  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, -1, 0)));
+  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, -1, -8)));
   btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
@@ -130,6 +130,16 @@ ballRigidBody->setRestitution(1.0);
   cylinder2RigidBody->setRestitution(1.0);
   cylinder2RigidBody->setCollisionFlags(cylinder2RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
+
+  m_cube = new Object(vertexFile, fragmentFile, "../models/box.obj", false, NULL);
+  cube = new btBoxShape (btVector3(1, 1, 1));
+  cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, -1, -10)));
+  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(1, cubeMotionState, cube, btVector3(0, 0, 0));
+  cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
+  dynamicsWorld->addRigidBody(cubeRigidBody);
+
+
+  m_backboard = new Object(vertexFile, fragmentFile, "../models/backboard.obj", false, NULL);
 /*
   btTriangleMesh *objTriMesh1 = new btTriangleMesh();
   m_walls = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/boardfinal.obj", true, objTriMesh1);
@@ -282,6 +292,10 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   trans.getOpenGLMatrix(m);
   m_lPaddle1->Update(dt, glm::make_mat4(m));
 
+  cubeRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cube->Update(dt, glm::make_mat4(m));
+
   //rPaddle1RigidBody->getMotionState()->getWorldTransform(trans);
   //trans.getOpenGLMatrix(m);
   //m_rPaddle1->Update(dt, glm::make_mat4(m));
@@ -327,6 +341,12 @@ void Graphics::Render()
   //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_rPaddle1->GetModel()));
   //m_rPaddle1->Render();
 
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  m_cube->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_backboard->GetModel()));
+  m_backboard->Render();
+
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )
@@ -358,6 +378,13 @@ void Graphics::moveBox(int direction)
          case 4:
 			ballRigidBody->activate(true);
             ballRigidBody->applyCentralForce(btVector3(-300, 0, 0));
+            break;
+   
+         case 5:
+			ballRigidBody->activate(true);
+            ballRigidBody->applyCentralForce(btVector3(0, 0, 3000));
+			cubeRigidBody->activate(true);
+            cubeRigidBody->applyCentralForce(btVector3(0, 0, 300));
             break;   
         }
     }
