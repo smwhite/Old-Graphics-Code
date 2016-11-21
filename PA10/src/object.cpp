@@ -7,8 +7,11 @@
 
 using namespace Magick;
 
-Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpeed, std::string vFile, std::string fFile, std::string mFile)
+Object::Object(std::string vFile, std::string fFile, std::string mFile, bool usingTriMesh, btTriangleMesh *objTriMesh)
 {  
+  //?????????????????????
+  InitializeMagick(NULL);
+
   vertexFile = vFile;
   fragmentFile = fFile;
   modelFile = mFile;
@@ -32,11 +35,25 @@ Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpe
   }
 
 
-
+  btVector3 triArray[3];
   for(unsigned int i=0;i<mesh->mNumFaces;i++)
   {
     const aiFace& face = mesh->mFaces[i];
     assert(face.mNumIndices ==3);
+
+    if(usingTriMesh == true)
+        {
+         aiVector3D position = mesh->mVertices[face.mIndices[0]];
+         triArray[0] = btVector3(position.x, position.y, position.z);
+
+         position = mesh->mVertices[face.mIndices[1]];
+         triArray[1] = btVector3(position.x, position.y, position.z);
+
+         position = mesh->mVertices[face.mIndices[2]];
+         triArray[2] = btVector3(position.x, position.y, position.z);
+
+         objTriMesh->addTriangle(triArray[0], triArray[1], triArray[2]);
+        }
 
     Indices.push_back(face.mIndices[0]);
     Indices.push_back(face.mIndices[1]);
@@ -70,10 +87,6 @@ Object::Object(glm::mat4 center,float orbitSize, int orbitSpeed, int rotationSpe
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  centerOfOrbit = center;
-  orbSize = orbitSize;
-  orbSpeed = orbitSpeed;
-  rotSpeed = rotationSpeed;
   location= glm::mat4(1.0f);
 
 }
@@ -84,8 +97,10 @@ Object::~Object()
   Indices.clear();
 }
 
-void Object::Update(unsigned int dt,bool rotation,bool translation, int pause,glm::mat4 center,float scale, float multiplier)
-{/*
+void Object::Update(unsigned int dt, glm::mat4 location)
+{
+  model = location;
+/*
   angle += dt * M_PI/1000;
 
   rateR=M_PI/rotSpeed * multiplier;

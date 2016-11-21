@@ -16,8 +16,7 @@ class Graphics
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     bool Initialize(int width, int height);
-    void Update(unsigned int dt, bool rotation,bool translation,int pause,bool moonR,bool moonT, int moonP, float LR,float UD
-						, float ELR,float EUD, float ZOOM, float mult, int camPos );
+    void Update(unsigned int dt,float LR,float UD);
     void Render();
 
   private:

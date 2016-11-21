@@ -146,14 +146,13 @@ bool Graphics::Initialize(int width, int height)
   return true;
 }
 
-void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP, float LR, float UD,float ELR, float EUD, float ZOOM, float mult, int camPos)
+void Graphics::Update(unsigned int dt,float LR,float UD)
 {
   // Update the object
   btTransform trans;
   btScalar m[16];
   dynamicsWorld->stepSimulation(1/60.f, 10);
 
-  amb = a;
   m_camera->Update(LR,UD,0.0,0.0,0.0);
 
   wallRigidBody->getMotionState()->getWorldTransform(trans);
@@ -186,7 +185,7 @@ void Graphics::Render()
   glUniform1i(m_gSampler,1);
 
   // Render the object
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_walls->GetModel()));
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_walls->GetModel()));
   m_walls->Render();
 
  
