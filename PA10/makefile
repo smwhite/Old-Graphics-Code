@@ -4,7 +4,7 @@ UNAME_S := $(shell uname -s)
 # Linux
 ifeq ($(UNAME_S), Linux)
 	CC=g++
-	LIBS=-lSDL2 -lGLEW -lGL -lassimp `Magick++-config --ldflags --libs`
+	LIBS=-lSDL2 -lGLEW -lGL -lassimp -lBulletDynamics -lBulletCollision -lBulletSoftBody -lLinearMath `Magick++-config --ldflags --libs`
 # Mac
 else
 	CC=clang++
@@ -22,7 +22,7 @@ CXXFLAGS=-g -Wall -std=c++0x
 O_FILES=main.o camera.o engine.o graphics.o object.o shader.o window.o
 
 # Point to includes of local directories
-INDLUDES=-I../include  -I/usr/include/ImageMagick
+INDLUDES=-I../include  -I/usr/include/ImageMagick -I/usr/include/bullet/
 
 
 all: $(O_FILES)
