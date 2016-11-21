@@ -13,7 +13,7 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
   dispatcher = new btCollisionDispatcher(collisionConfiguration);
   solver = new btSequentialImpulseConstraintSolver;
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-  dynamicsWorld->setGravity(btVector3(0, -2.8, -4.8));
+  dynamicsWorld->setGravity(btVector3(0, -5.8, -2.8));
 }
 
 Graphics::~Graphics()
@@ -77,6 +77,34 @@ bool Graphics::Initialize(int width, int height)
   btRigidBody::btRigidBodyConstructionInfo wallRigidBodyCI(0, wallMotionState, walls, btVector3(0, 0, 0));
   wallRigidBody = new btRigidBody(wallRigidBodyCI);
   dynamicsWorld->addRigidBody(wallRigidBody);
+
+  m_ball = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
+  ball = new btSphereShape (1);
+  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
+  ballRigidBody = new btRigidBody(ballRigidBodyCI);
+  dynamicsWorld->addRigidBody(ballRigidBody);
+
+  m_cylinder = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
+  cylinder = new btCylinderShape(btVector3(1, 1, 1));
+  cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo cylinderRigidBodyCI(0, cylinderMotionState, cylinder, btVector3(0, 1, 0));
+  cylinderRigidBody = new btRigidBody(cylinderRigidBodyCI);
+  dynamicsWorld->addRigidBody(cylinderRigidBody);
+
+  m_cylinder1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
+  cylinder1 = new btCylinderShape(btVector3(1, 1, 1));
+  cylinder1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo cylinder1RigidBodyCI(0, cylinder1MotionState, cylinder1, btVector3(0, 1, 0));
+  cylinder1RigidBody = new btRigidBody(cylinder1RigidBodyCI);
+  dynamicsWorld->addRigidBody(cylinder1RigidBody);
+
+  m_cylinder2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
+  cylinder2 = new btCylinderShape(btVector3(1, 1, 1));
+  cylinder2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, -5)));
+  btRigidBody::btRigidBodyConstructionInfo cylinder2RigidBodyCI(0, cylinder2MotionState, cylinder2, btVector3(0, 1, 0));
+  cylinder2RigidBody = new btRigidBody(cylinder2RigidBodyCI);
+  dynamicsWorld->addRigidBody(cylinder2RigidBody);
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -155,10 +183,25 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
 
   m_camera->Update(LR,UD,0.0,0.0,0.0);
 
+  ballRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_ball->Update(dt, glm::make_mat4(m));
+
   wallRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  //std::cout << "wall height: " << trans.getOrigin().getY() << std::endl;
   m_walls->Update(dt, glm::make_mat4(m));
+
+  cylinderRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cylinder->Update(dt, glm::make_mat4(m));
+
+  cylinder1RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cylinder1->Update(dt, glm::make_mat4(m));
+
+  cylinder2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cylinder2->Update(dt, glm::make_mat4(m));
   
 
 
@@ -185,9 +228,16 @@ void Graphics::Render()
   glUniform1i(m_gSampler,1);
 
   // Render the object
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
+  m_ball->Render();
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_walls->GetModel()));
   m_walls->Render();
-
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+  m_cylinder->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder1->GetModel()));
+  m_cylinder1->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder2->GetModel()));
+  m_cylinder2->Render();
  
 
 
