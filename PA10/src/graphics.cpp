@@ -19,20 +19,27 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
 
 Graphics::~Graphics()
 {
-  delete broadphase;
-  broadphase = NULL;
-
-  delete collisionConfiguration;
-  collisionConfiguration = NULL;
-
-  delete dispatcher;
-  dispatcher = NULL;
+  delete dynamicsWorld;
+  dynamicsWorld = NULL;
 
   delete solver;
   solver = NULL;
 
-  delete dynamicsWorld;
-  dynamicsWorld = NULL;
+  delete dispatcher;
+  dispatcher = NULL;
+
+  delete collisionConfiguration;
+  collisionConfiguration = NULL;
+
+  delete broadphase;
+  broadphase = NULL;
+
+
+
+
+
+
+
 }
 
 bool Graphics::Initialize(int width, int height)

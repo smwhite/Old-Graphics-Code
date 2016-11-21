@@ -118,6 +118,7 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(wallRigidBody);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /*
   btTriangleMesh *objTriMesh2 = new btTriangleMesh();
   m_plunger = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
   plunger = new btBvhTriangleMeshShape(objTriMesh2, true);
@@ -164,7 +165,7 @@ bool Graphics::Initialize(int width, int height)
   //btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(50, coverMotionState, cover, btVector3(0, 0, 0));
   //coverRigidBody = new btRigidBody(coverRigidBodyCI);
   //dynamicsWorld->addRigidBody(coverRigidBody);
-  
+  */
   // Set up the shaders
   m_shader = new Shader("../shaders/vertexVL.vert", "../shaders/fragmentVL.frag");
   if(!m_shader->Initialize())
