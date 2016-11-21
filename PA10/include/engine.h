@@ -47,7 +47,7 @@ class Engine
     string modelFile;
 
 	float LR = 0;
-	float UD = 0;
+	float UD = -30;
 	float ELR = 0;
 	float EUD = 20;
 	float ZOOM = -100.0;

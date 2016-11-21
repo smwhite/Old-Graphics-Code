@@ -108,23 +108,20 @@ void Engine::Keyboard()
 	    break;
 
 	  case SDLK_a: 
-		LR += 1.5;
-		ELR += 1.5; 
+		LR += 1;
 	    break; 
 	
 	  case SDLK_d: 
-		LR -= 1.5;
-		ELR -= 1.5;
+		LR -= 1;
 	    break;
 
 	  case SDLK_w: 
-		UD += 1.5;
-	    EUD += 1.5;	
+		UD += 1;
 	    break;
 
 	  case SDLK_s: 
-	    UD -= 1.5;
-	    EUD -= 1.5;
+	    UD -= 1;
+
 	    break;
 
 	  case SDLK_UP: 
@@ -143,45 +140,8 @@ void Engine::Keyboard()
 		multiplier -= 0.05;    
 	    break;
 
-	  case SDLK_0: 
-		cameraPosition = 0;    
-	    break;
 
-	  case SDLK_1: 
-		cameraPosition = 1;    
-	    break;
 
-	  case SDLK_2: 
-		cameraPosition = 2;    
-	    break;
-
-	  case SDLK_3: 
-		cameraPosition = 3;    
-	    break;
-
-	  case SDLK_4: 
-		cameraPosition = 4;    
-	    break;
-
-	  case SDLK_5: 
-		cameraPosition = 5;    
-	    break;
-
-	  case SDLK_6: 
-		cameraPosition = 6;    
-	    break;
-
-	  case SDLK_7: 
-		cameraPosition =7;    
-	    break;
-
-	  case SDLK_8: 
-		cameraPosition = 8;    
-	    break;
-
-	  case SDLK_9: 
-		cameraPosition =9;    
-	    break;
 
 
 	  /*case SDLK_q: 
