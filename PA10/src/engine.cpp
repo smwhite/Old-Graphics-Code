@@ -124,20 +124,25 @@ void Engine::Keyboard()
 
 	    break;
 
+
 	  case SDLK_UP: 
-        ZOOM += 1.5;    
+        //moveF += true; 
+        m_graphics->moveBox(1);   
 	    break;
 
 	  case SDLK_DOWN: 
-        ZOOM -= 1.5;	    
+        //moveB -= 1;	  
+        m_graphics->moveBox(2);  
 	    break;
 
-      case SDLK_p: 
-		multiplier += 0.05;    
+      case SDLK_LEFT: 
+        //moveL += 1;   
+        m_graphics->moveBox(3); 
 	    break;
 
-	  case SDLK_m: 
-		multiplier -= 0.05;    
+	  case SDLK_RIGHT: 
+        //moveR -= 1;
+        m_graphics->moveBox(4);	    
 	    break;
 
 

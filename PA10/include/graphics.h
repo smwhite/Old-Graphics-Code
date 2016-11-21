@@ -18,6 +18,7 @@ class Graphics
     bool Initialize(int width, int height);
     void Update(unsigned int dt,float LR,float UD);
     void Render();
+    void moveBox(int direction);
 
   private:
     std::string ErrorString(GLenum error);
