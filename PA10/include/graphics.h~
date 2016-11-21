@@ -8,6 +8,7 @@ using namespace std;
 #include "camera.h"
 #include "shader.h"
 #include "object.h"
+#include <btBulletDynamicsCommon.h>
 
 class Graphics
 {
@@ -51,11 +52,17 @@ class Graphics
     Object *m_cube;
 	Object *m_moon;
 
-    glm::mat4 cubeLocation;
+    glm::mat4 c;
 
     string vertexFile;
     string fragmentFile;
     string modelFile;
+
+    btBroadphaseInterface* broadphase;
+    btDefaultCollisionConfiguration* collisionConfiguration;
+    btCollisionDispatcher *dispatcher;
+    btSequentialImpulseConstraintSolver *solver;
+    btDiscreteDynamicsWorld *dynamicsWorld;
 };
 
 #endif /* GRAPHICS_H */

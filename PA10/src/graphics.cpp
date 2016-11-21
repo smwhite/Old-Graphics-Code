@@ -1,15 +1,37 @@
 #include "graphics.h"
+#include <btBulletDynamicsCommon.h>
+#include <iostream>
 
 Graphics::Graphics(string vFile, string fFile, string mFile)
 {
   vertexFile = vFile;
   fragmentFile = fFile;
   modelFile = mFile;
+
+  broadphase = new btDbvtBroadphase();
+  collisionConfiguration = new btDefaultCollisionConfiguration();
+  dispatcher = new btCollisionDispatcher(collisionConfiguration);
+  solver = new btSequentialImpulseConstraintSolver;
+  dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+  dynamicsWorld->setGravity(btVector3(0, -2.8, -4.8));
 }
 
 Graphics::~Graphics()
 {
+  delete dynamicsWorld;
+  dynamicsWorld = NULL;
 
+  delete solver;
+  solver = NULL;
+
+  delete dispatcher;
+  dispatcher = NULL;
+
+  delete collisionConfiguration;
+  collisionConfiguration = NULL; 
+
+  delete broadphase;
+  broadphase = NULL; 
 }
 
 bool Graphics::Initialize(int width, int height)
@@ -47,6 +69,14 @@ bool Graphics::Initialize(int width, int height)
   }
 
 // create objects
+
+  btTriangleMesh *objTriMesh1 = new btTriangleMesh();
+  m_walls = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/boardfinal.obj", true, objTriMesh1);
+  walls = new btBvhTriangleMeshShape(objTriMesh1, true);
+  wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo wallRigidBodyCI(0, wallMotionState, walls, btVector3(0, 0, 0));
+  wallRigidBody = new btRigidBody(wallRigidBodyCI);
+  dynamicsWorld->addRigidBody(wallRigidBody);
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -119,12 +149,21 @@ bool Graphics::Initialize(int width, int height)
 void Graphics::Update(unsigned int dt,bool rotation,bool translation, int pause,bool moonR,bool moonT, int moonP, float LR, float UD,float ELR, float EUD, float ZOOM, float mult, int camPos)
 {
   // Update the object
+  btTransform trans;
+  btScalar m[16];
+  dynamicsWorld->stepSimulation(1/60.f, 10);
 
+  amb = a;
+  m_camera->Update(LR,UD,0.0,0.0,0.0);
 
+  wallRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  //std::cout << "wall height: " << trans.getOrigin().getY() << std::endl;
+  m_walls->Update(dt, glm::make_mat4(m));
   
 
 
-	m_camera->Update(LR,UD,ELR,EUD,ZOOM);
+	//m_camera->Update(LR,UD,ELR,EUD,ZOOM);
 
 
 
@@ -147,7 +186,8 @@ void Graphics::Render()
   glUniform1i(m_gSampler,1);
 
   // Render the object
-
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_walls->GetModel()));
+  m_walls->Render();
 
  
 
