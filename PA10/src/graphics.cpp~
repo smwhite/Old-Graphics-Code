@@ -11,15 +11,11 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
   {
     if(std::string(obj1->getCollisionShape()->getName()) == "CylinderY")
     {
-     std::cout << obj1->getCollisionShape()->getName() << endl; 
-     std::cout << obj2->getCollisionShape()->getName() << endl;
      score ++;
      std::cout << "Score: " << score << endl; 
     }
     else if(std::string(obj2->getCollisionShape()->getName()) == "CylinderY")
     {
-     std::cout << obj1->getCollisionShape()->getName() << endl; 
-     std::cout << obj2->getCollisionShape()->getName() << endl;
      score ++;
      std::cout << "Score: " << score << endl; 
     }
@@ -177,8 +173,8 @@ bool Graphics::Initialize(int width, int height)
   m_backboard = new Object(vertexFile, fragmentFile, "../models/backboard.obj", false, NULL);
 
   m_lPaddle1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/left.obj",false, NULL);
-  lPaddle1 = new btBoxShape (btVector3(4, 1, 1));
-  lPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(18, 1, -21)));
+  lPaddle1 = new btBoxShape (btVector3(1, 1, 1));
+  lPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(19, 1, -21)));
   btRigidBody::btRigidBodyConstructionInfo lPaddle1RigidBodyCI(0, lPaddle1MotionState, lPaddle1, btVector3(0, 1, 0));
   lPaddle1RigidBody = new btRigidBody(lPaddle1RigidBodyCI);
   dynamicsWorld->addRigidBody(lPaddle1RigidBody);
@@ -193,7 +189,7 @@ bool Graphics::Initialize(int width, int height)
   lPaddle1RigidBody->setActivationState(true);
 
   m_rPaddle1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/right.obj",false, NULL);
-  rPaddle1 = new btBoxShape (btVector3(4, 1, 1));
+  rPaddle1 = new btBoxShape (btVector3(1, 1, 1));
   rPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-10, 1, -21)));
   btRigidBody::btRigidBodyConstructionInfo rPaddle1RigidBodyCI(0, rPaddle1MotionState, rPaddle1, btVector3(0, 1, 0));
   rPaddle1RigidBody = new btRigidBody(rPaddle1RigidBodyCI);
@@ -305,6 +301,7 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
 
   else if(gameOver == true)
     {
+     gameOver = false;
      ballRigidBody->activate(true);
      ballRigidBody->translate(btVector3(-28, -1, -8)- ballRigidBody->getCenterOfMassPosition());
      //btTransform newTrans;
@@ -447,34 +444,43 @@ void Graphics::moveBox(int direction)
 
 void Graphics::leftPaddle()
     {
-     //btTransform newTrans;
-     //btQuaternion rot;
-     //rot.setEuler(10, 0, 0);
-     //lPaddle1RigidBody->getMotionState()->getWorldTransform(newTrans);
-     //newTrans.setRotation(rot);
-     //lPaddle1RigidBody->getMotionState()->setWorldTransform(newTrans);
+     btTransform newTr;
+     btQuaternion rot;
+     rot.setEuler(10, 0, 0);
+     lPaddle1RigidBody->getMotionState()->getWorldTransform(newTr);
+     newTr.setRotation(rot);
+     lPaddle1RigidBody->getMotionState()->setWorldTransform(newTr);
 
-     //rot.setEuler(-10, 0, 0);
-     //lPaddle1RigidBody->getMotionState()->getWorldTransform(newTrans);
-     //newTrans.setRotation(rot);
-     //lPaddle1RigidBody->getMotionState()->setWorldTransform(newTrans);
-     lPaddle1RigidBody->activate(true);
-     //lPaddle1RigidBody->applyCentralForce(btVector3(-300, 0, 0));
-     lPaddle1RigidBody->applyTorqueImpulse(btVector3(0, 100, 0)); 
-     lPaddle1RigidBody-> setLinearVelocity(btVector3(0,0,0));
-     //lPaddle1RigidBody->applyTorqueImpulse(btVector3(0, 1000, 0)); 
+     for(int i  = 0; i < 1000; i++)
+        {
+
+        }
+
+     rot.setEuler(-10, 0, 0);
+     lPaddle1RigidBody->getMotionState()->getWorldTransform(newTr);
+     newTr.setRotation(rot);
+     lPaddle1RigidBody->getMotionState()->setWorldTransform(newTr);
+
     }
 
 void Graphics::rightPaddle()
     {
-     //std::cout << "bruh right" << endl;
-     //btTransform newTrans;
-     //rPaddle1RigidBody->getMotionState()->getWorldTransform(newTrans);
-     //newTrans.getOrigin() += (btVector3(0, 0.1f, 0));
-     //rPaddle1RigidBody->getMotionState()->setWorldTransform(newTrans);
-     //rPaddle1RigidBody->activate(true);
-     //rPaddle1RigidBody->applyCentralForce(btVector3(-300, 0, 0));
-     //rPaddle1RigidBody->applyTorque(btVector3(0, 300, 0));
+     btTransform newTr;
+     btQuaternion rot;
+     rot.setEuler(-10, 0, 0);
+     rPaddle1RigidBody->getMotionState()->getWorldTransform(newTr);
+     newTr.setRotation(rot);
+     rPaddle1RigidBody->getMotionState()->setWorldTransform(newTr);
+     
+     for(int i  = 0; i < 1000; i++)
+        {
+           
+        }
+
+     rot.setEuler(10, 0, 0);
+     rPaddle1RigidBody->getMotionState()->getWorldTransform(newTr);
+     newTr.setRotation(rot);
+     rPaddle1RigidBody->getMotionState()->setWorldTransform(newTr);
     }
 
 void Graphics::reset()
