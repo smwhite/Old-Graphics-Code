@@ -60,6 +60,20 @@ class Graphics
     btDefaultMotionState *cylinder2MotionState = NULL;
     btRigidBody *cylinder2RigidBody;
 
+    btCollisionShape *cover;
+    btDefaultMotionState *coverMotionState = NULL;
+    btRigidBody *coverRigidBody;
+
+    Object *m_lPaddle1;
+    btCollisionShape *lPaddle1;
+    btDefaultMotionState *lPaddle1MotionState = NULL;
+    btRigidBody *lPaddle1RigidBody;
+
+    Object *m_rPaddle1;
+    btCollisionShape *rPaddle1;
+    btDefaultMotionState *rPaddle1MotionState = NULL;
+    btRigidBody *rPaddle1RigidBody;
+
     glm::mat4 c;
 
     string vertexFile;

@@ -22,7 +22,7 @@ class Graphics
     void Render();
     void moveBox(int direction);
 
-    int score = 0;
+    //int score = 0;
 
   private:
     std::string ErrorString(GLenum error);
@@ -59,6 +59,10 @@ class Graphics
     btCollisionShape *cylinder2;
     btDefaultMotionState *cylinder2MotionState = NULL;
     btRigidBody *cylinder2RigidBody;
+
+    btCollisionShape *cover;
+    btDefaultMotionState *coverMotionState = NULL;
+    btRigidBody *coverRigidBody;
 
     glm::mat4 c;
 
