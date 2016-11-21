@@ -84,6 +84,7 @@ bool Graphics::Initialize(int width, int height)
   btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
+ballRigidBody->setRestitution(1.0);
 
   m_cylinder = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder = new btCylinderShape(btVector3(1, 1, 1));
@@ -91,6 +92,7 @@ bool Graphics::Initialize(int width, int height)
   btRigidBody::btRigidBodyConstructionInfo cylinderRigidBodyCI(0, cylinderMotionState, cylinder, btVector3(0, 1, 0));
   cylinderRigidBody = new btRigidBody(cylinderRigidBodyCI);
   dynamicsWorld->addRigidBody(cylinderRigidBody);
+cylinderRigidBody->setRestitution(1.0);
 
   m_cylinder1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder1 = new btCylinderShape(btVector3(1, 1, 1));
@@ -98,6 +100,7 @@ bool Graphics::Initialize(int width, int height)
   btRigidBody::btRigidBodyConstructionInfo cylinder1RigidBodyCI(0, cylinder1MotionState, cylinder1, btVector3(0, 1, 0));
   cylinder1RigidBody = new btRigidBody(cylinder1RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder1RigidBody);
+cylinder1RigidBody->setRestitution(1.0);
 
   m_cylinder2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder2 = new btCylinderShape(btVector3(1, 1, 1));
@@ -105,6 +108,7 @@ bool Graphics::Initialize(int width, int height)
   btRigidBody::btRigidBodyConstructionInfo cylinder2RigidBodyCI(0, cylinder2MotionState, cylinder2, btVector3(0, 1, 0));
   cylinder2RigidBody = new btRigidBody(cylinder2RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder2RigidBody);
+  cylinder2RigidBody->setRestitution(1.0);
   
   // Set up the shaders
   m_shader = new Shader(vertexFile, fragmentFile);
@@ -249,6 +253,32 @@ void Graphics::Render()
     std::cout<< "Error initializing OpenGL! " << error << ", " << val << std::endl;
   }
 }
+
+void Graphics::moveBox(int direction)
+    {
+     switch(direction)
+        {
+         case 1:
+            ballRigidBody->activate(true);
+            ballRigidBody->applyCentralForce(btVector3(0, 0, 300));   
+            break;
+
+         case 2:
+			ballRigidBody->activate(true);
+            ballRigidBody->applyCentralForce(btVector3(0, 0, -300));
+            break;
+
+         case 3:
+			ballRigidBody->activate(true);	
+            ballRigidBody->applyCentralForce(btVector3(300, 0, 0));
+            break;
+
+         case 4:
+			ballRigidBody->activate(true);
+            ballRigidBody->applyCentralForce(btVector3(-300, 0, 0));
+            break;   
+        }
+    }
 
 std::string Graphics::ErrorString(GLenum error)
 {
