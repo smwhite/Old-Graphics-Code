@@ -130,7 +130,7 @@ bool Graphics::Initialize(int width, int height)
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
   ballRigidBody->setRestitution(1.0);
-  ballRigidBody->setGravity(btVector3(0, -9.8, -9.8));
+  ballRigidBody->setGravity(btVector3(0, -9.8, 0));
   
 
   m_cylinder = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
@@ -415,30 +415,26 @@ void Graphics::moveBox(int direction)
         {
          case 1:
             ballRigidBody->activate(true);
-            ballRigidBody->applyCentralForce(btVector3(0, 0, 300));   
+            //ballRigidBody->applyCentralForce(btVector3(0, 0, 300));
+  			ballRigidBody->setLinearVelocity(btVector3(0, 0, 5));
             break;
 
          case 2:
 			ballRigidBody->activate(true);
-            ballRigidBody->applyCentralForce(btVector3(0, 0, -300));
+            ballRigidBody->setLinearVelocity(btVector3(0, 0, -5));
             break;
 
          case 3:
 			ballRigidBody->activate(true);	
-            ballRigidBody->applyCentralForce(btVector3(300, 0, 0));
+            ballRigidBody->setLinearVelocity(btVector3(5, 0, 0));
             break;
 
          case 4:
 			ballRigidBody->activate(true);
-            ballRigidBody->applyCentralForce(btVector3(-300, 0, 0));
+            ballRigidBody->setLinearVelocity(btVector3(-5, 0, 0));
             break;
    
-         case 5:
-			ballRigidBody->activate(true);
-            ballRigidBody->applyCentralForce(btVector3(0, 0, 3000));
-			cubeRigidBody->activate(true);
-            cubeRigidBody->applyCentralForce(btVector3(0, 0, 300));
-            break;   
+
         }
     }
 
