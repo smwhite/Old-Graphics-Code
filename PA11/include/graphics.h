@@ -15,7 +15,7 @@ class Graphics
   public:
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
-    //bool bumperCallback(btManifoldPoint& cp, btCollisionObject* obj1, int id1, int index1, btCollisionObject* obj2, int id2, int index2);
+    friend bool bumperCallback(btManifoldPoint& cp, btCollisionObject* obj1, int id1, int index1, btCollisionObject* obj2, int id2, int index2);
     //bool lossCallback(btManifoldPoint& cp, btCollisionObject* obj1, int id1, int index1, btCollisionObject* obj2, int id2, int index2);
     bool Initialize(int width, int height);
     void Update(unsigned int dt,float LR,float UD);
@@ -24,6 +24,7 @@ class Graphics
     void leftPaddle();
     void rightPaddle();
     void reset();
+    void deleteObj(btCollisionObject* obj);
 
     //int score = 0;
 
@@ -67,6 +68,11 @@ class Graphics
     btCollisionShape *cube;
     btDefaultMotionState *cubeMotionState = NULL;
     btRigidBody *cubeRigidBody;
+
+    Object *m_collectible;
+    btCollisionShape *collectible;
+    btDefaultMotionState *collectibleMotionState = NULL;
+    btRigidBody *collectibleRigidBody;
 
     Object *m_backboard;
 
