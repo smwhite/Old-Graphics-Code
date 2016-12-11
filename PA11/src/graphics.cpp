@@ -9,6 +9,33 @@ bool lostBall = false;
 
 bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
   {
+    /*
+    if(obj1->getCollisionShape()->getUserIndex() == 1 || obj2->getCollisionShape()->getUserIndex() == 1)
+    {
+        cout << ":D0" << endl;
+    }
+
+    if(int(obj1->getCollisionShape()->getUserIndex()) == 2 || int(obj2->getCollisionShape()->getUserIndex()) == 2)
+    {
+        cout << ":D1" << endl;
+    }
+
+    if(int(obj1->getCollisionShape()->getUserIndex()) == 3 || int(obj2->getCollisionShape()->getUserIndex()) == 3)
+    {
+        cout << ":D2" << endl;
+    }
+
+    if(int(obj1->getCollisionShape()->getUserIndex()) == 4 || int(obj2->getCollisionShape()->getUserIndex()) == 4)
+    {
+        cout << ":D3" << endl;
+    }
+    
+    if(int(obj1->getCollisionShape()->getUserIndex()) == 5 || int(obj2->getCollisionShape()->getUserIndex()) == 5)
+    {
+        cout << ":D4" << endl;
+    }
+    */
+
     if(std::string(obj1->getCollisionShape()->getName()) == "CylinderY")
     {
      score ++;
@@ -23,7 +50,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
      //btCollisionObject* temp = obj2->getCollisionShape();
      //Graphics::deleteObj(temp);
     }
-    /*else
+    else
     {
      if(numBalls >= 1)
         {
@@ -39,7 +66,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
       std::cout << "Final score: " << score << endl; 
       std::cout << "Press R to Play Again" << endl;
      }
-    }*/
+    }
     return false;
   }
 
@@ -138,11 +165,39 @@ bool Graphics::Initialize(int width, int height)
 
   m_collectible = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible = new btBoxShape (btVector3(1, 1, 1));
-  collectibleMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, -1, -10)));
+  //collectible->setUserIndex(1);
+  collectibleMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, 5)));
   btRigidBody::btRigidBodyConstructionInfo collectibleRigidBodyCI(0, collectibleMotionState, collectible, btVector3(0, 0, 0));
   collectibleRigidBody = new btRigidBody(collectibleRigidBodyCI);
   dynamicsWorld->addRigidBody(collectibleRigidBody);
-  
+
+  m_collectible1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  collectible1 = new btBoxShape (btVector3(1, 1, 1));
+  collectible1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, -1, 5)));
+  btRigidBody::btRigidBodyConstructionInfo collectible1RigidBodyCI(0, collectible1MotionState, collectible1, btVector3(0, 0, 0));
+  collectible1RigidBody = new btRigidBody(collectible1RigidBodyCI);
+  dynamicsWorld->addRigidBody(collectible1RigidBody);
+
+  m_collectible2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  collectible2 = new btBoxShape (btVector3(1, 1, 1));
+  collectible2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 5)));
+  btRigidBody::btRigidBodyConstructionInfo collectible2RigidBodyCI(0, collectible2MotionState, collectible2, btVector3(0, 0, 0));
+  collectible2RigidBody = new btRigidBody(collectible2RigidBodyCI);
+  dynamicsWorld->addRigidBody(collectible2RigidBody);
+
+  m_collectible3 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  collectible3 = new btBoxShape (btVector3(1, 1, 1));
+  collectible3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, -5)));
+  btRigidBody::btRigidBodyConstructionInfo collectible3RigidBodyCI(0, collectible3MotionState, collectible3, btVector3(0, 0, 0));
+  collectible3RigidBody = new btRigidBody(collectible3RigidBodyCI);
+  dynamicsWorld->addRigidBody(collectible3RigidBody);
+
+  m_collectible4 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  collectible4 = new btBoxShape (btVector3(1, 1, 1));
+  collectible4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, -1, -5)));
+  btRigidBody::btRigidBodyConstructionInfo collectible4RigidBodyCI(0, collectible4MotionState, collectible4, btVector3(0, 0, 0));
+  collectible4RigidBody = new btRigidBody(collectible4RigidBodyCI);
+  dynamicsWorld->addRigidBody(collectible4RigidBody);  
 
   m_cylinder = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder = new btCylinderShape(btVector3(1, 1, 1));
@@ -179,7 +234,6 @@ bool Graphics::Initialize(int width, int height)
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   dynamicsWorld->addRigidBody(cubeRigidBody);
   //cubeRigidBody->setGravity(btVector3(0, -6.8, -6.8));
-
 
   m_backboard = new Object(vertexFile, fragmentFile, "../models/backboard.obj", false, NULL);
 
@@ -340,6 +394,22 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   trans.getOpenGLMatrix(m);
   m_walls->Update(dt, glm::make_mat4(m));
 
+  collectibleRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_collectible->Update(dt, glm::make_mat4(m));
+  collectible1RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_collectible1->Update(dt, glm::make_mat4(m));
+  collectible2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_collectible2->Update(dt, glm::make_mat4(m));
+  collectible3RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_collectible3->Update(dt, glm::make_mat4(m));
+  collectible4RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_collectible4->Update(dt, glm::make_mat4(m));
+
   cylinderRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_cylinder->Update(dt, glm::make_mat4(m));
@@ -399,6 +469,17 @@ void Graphics::Render()
   m_cylinder1->Render();
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder2->GetModel()));
   m_cylinder2->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible->GetModel()));
+  m_collectible->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible1->GetModel()));
+  m_collectible1->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible2->GetModel()));
+  m_collectible2->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible3->GetModel()));
+  m_collectible3->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible4->GetModel()));
+  m_collectible4->Render();
  
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_lPaddle1->GetModel()));
   m_lPaddle1->Render();
