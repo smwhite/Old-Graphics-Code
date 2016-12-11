@@ -40,6 +40,17 @@ class Graphics
     GLint m_modelMatrix;
 	GLint m_gSampler;
 
+   glm::vec4 amb = {0.6,0.6,0.6,0.0};
+    GLint m_ModelView;
+    GLint m_LightPosition;
+    GLint m_Projection;
+	GLint m_Shininess;
+	GLint m_AmbientProduct;
+    GLint m_DiffuseProduct;
+    GLint m_SpecularProduct;
+
+
+
     Object *m_ball;
     btCollisionShape *ball;
     btDefaultMotionState *ballMotionState = NULL;

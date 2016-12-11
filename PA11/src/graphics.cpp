@@ -285,7 +285,7 @@ bool Graphics::Initialize(int width, int height)
   //lossRigidBody->setUserIndex(2);
   
   // Set up the shaders
-  m_shader = new Shader(vertexFile, fragmentFile);
+  m_shader = new Shader("../shaders/vertexFL.vert", "../shaders/fragmentFL.frag");
   if(!m_shader->Initialize())
   {
     printf("Shader Failed to Initialize\n");
@@ -336,14 +336,67 @@ bool Graphics::Initialize(int width, int height)
     printf("m_modelMatrix not found\n");
     return false;
   }
-
   // Locate the model texture in the shader
   m_gSampler = m_shader->GetUniformLocation("gSampler");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_gSampler == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_gSampler not found\n");
     return false;
   } 
+
+  // Locate the ModelView
+  m_ModelView = m_shader->GetUniformLocation("ModelView");
+  if (m_ModelView == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_ModelView not found\n");
+    return false;
+  } 
+  // Locate the LightPosition
+  m_LightPosition = m_shader->GetUniformLocation("LightPosition");
+  if (m_LightPosition == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_LightPosition not found\n");
+    return false;
+  } 
+  // Locate the Projection
+  m_Projection = m_shader->GetUniformLocation("Projection");
+  if (m_Projection == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_Projection not found\n");
+    return false;
+  } 
+
+  // Locate the Shininess
+  m_Shininess = m_shader->GetUniformLocation("Shininess");
+  if (m_Shininess == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_Shininess not found\n");
+    return false;
+  } 
+
+  // Locate the AmbientProduct
+  m_AmbientProduct = m_shader->GetUniformLocation("AmbientProduct");
+  if (m_AmbientProduct == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_AmbientProduct not found\n");
+    return false;
+  } 
+
+  // Locate the DiffuseProduct
+  m_DiffuseProduct = m_shader->GetUniformLocation("DiffuseProduct");
+  if (m_DiffuseProduct == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_DiffuseProduct not found\n");
+    return false;
+  } 
+
+  // Locate the SpecularProduct
+  m_SpecularProduct = m_shader->GetUniformLocation("SpecularProduct");
+  if (m_SpecularProduct == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_SpecularProduct not found\n");
+    return false;
+  }
 
   //enable depth testing
   glEnable(GL_DEPTH_TEST);
@@ -380,7 +433,6 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   btScalar m[16];
   dynamicsWorld->stepSimulation(1/60.f, 10);
 
-  m_camera->Update(LR,UD,0.0,0.0,0.0);
 
   //btTransform newTrans;
   //lPaddle1RigidBody->getMotionState()->getWorldTransform(newTrans);
@@ -390,6 +442,8 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_ball->Update(dt, glm::make_mat4(m));
+
+  m_camera->Update(LR,UD,0.0,0.0,0.0);
 
   wallRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -454,43 +508,52 @@ void Graphics::Render()
   // Start the correct program
   m_shader->Enable();
 
-  // Send in the projection and view to the shader
+  /*/ Send in the projection and view to the shader/*
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
+  glUniform1i(m_gSampler,1);*/
+
+  glUniformMatrix4fv(m_Projection, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection()));
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
+  glUniform4fv(m_LightPosition,1,glm::value_ptr(glm::vec4(10.0, 10.0, 0.0, 0.0)));
+  glUniform4fv(m_AmbientProduct,1,glm::value_ptr(amb));
+  glUniform4fv(m_DiffuseProduct,1,glm::value_ptr(glm::vec4(1.0, 1.0, 1.0, 1.0)));
+  glUniform4fv(m_SpecularProduct,1,glm::value_ptr(glm::vec4(1.0, 1.0, 1.0, 1.0)));
   glUniform1i(m_gSampler,1);
+  glUniform1f(m_Shininess,1.0);
 
   // Render the object
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
   m_ball->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_walls->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_walls->GetModel()));
   m_walls->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
   m_cylinder->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder1->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder1->GetModel()));
   m_cylinder1->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder2->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder2->GetModel()));
   m_cylinder2->Render();
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible->GetModel()));
   m_collectible->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible1->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible1->GetModel()));
   m_collectible1->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible2->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible2->GetModel()));
   m_collectible2->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible3->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible3->GetModel()));
   m_collectible3->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible4->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible4->GetModel()));
   m_collectible4->Render();
  
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_lPaddle1->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_lPaddle1->GetModel()));
   m_lPaddle1->Render();
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_rPaddle1->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_rPaddle1->GetModel()));
   m_rPaddle1->Render();
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render();
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_backboard->GetModel()));
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_backboard->GetModel()));
   m_backboard->Render();
 
   // Get any errors from OpenGL

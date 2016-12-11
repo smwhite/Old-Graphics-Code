@@ -25,6 +25,7 @@ class Graphics
     void rightPaddle();
     void reset();
     void deleteObj(btCollisionObject* obj);
+	bool canJump;
 
     //int score = 0;
 
@@ -38,6 +39,17 @@ class Graphics
     GLint m_viewMatrix;
     GLint m_modelMatrix;
 	GLint m_gSampler;
+
+
+    GLint m_ModelView;
+    GLint m_LightPosition;
+    GLint m_Projection;
+	GLint m_Shininess;
+	GLint m_AmbientProduct;
+    GLint m_DiffuseProduct;
+    GLint m_SpecularProduct;
+
+
 
     Object *m_ball;
     btCollisionShape *ball;
@@ -125,6 +137,7 @@ class Graphics
     btCollisionDispatcher *dispatcher;
     btSequentialImpulseConstraintSolver *solver;
     btDiscreteDynamicsWorld *dynamicsWorld;
+	
 };
 
 #endif /* GRAPHICS_H */
