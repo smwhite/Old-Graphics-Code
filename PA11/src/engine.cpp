@@ -135,35 +135,22 @@ void Engine::Keyboard()
 	    m_graphics->rightPaddle();
 	    break;
 
+/*
 	  case SDLK_UP: 
-        //moveF += true; 
-        m_graphics->moveBox(1);   
+		m_graphics->moveBox(1);
 	    break;
 
 	  case SDLK_DOWN: 
-        //moveB -= 1;	  
-        m_graphics->moveBox(2);  
+		m_graphics->moveBox(2);
 	    break;
 
-      case SDLK_LEFT: 
-        //moveL += 1;   
-        m_graphics->moveBox(3); 
+	  case SDLK_LEFT: 
+		m_graphics->moveBox(3);
 	    break;
 
 	  case SDLK_RIGHT: 
-        //moveR -= 1;
-        m_graphics->moveBox(4);	    
-	    break;
-
-	  case SDLK_SPACE: 
-        //moveR -= 1;
-        m_graphics->moveBox(5);	    
-	    break;
-
-
-
-
-
+		m_graphics->moveBox(4);
+	    break;*/
 	  /*case SDLK_q: 
 		LR += 0.1;
 	    break;
@@ -175,6 +162,31 @@ void Engine::Keyboard()
 
 
 	}
+
+	const Uint8 *keystate = SDL_GetKeyboardState(NULL);
+
+	if ( keystate[SDL_SCANCODE_UP] )
+	{
+		m_graphics->moveBox(1);  
+	}
+	if ( keystate[SDL_SCANCODE_DOWN] )
+	{
+		m_graphics->moveBox(2);  
+	}
+	if ( keystate[SDL_SCANCODE_LEFT] )
+	{
+		m_graphics->moveBox(3);  
+	}
+	if ( keystate[SDL_SCANCODE_RIGHT] )
+	{
+		m_graphics->moveBox(4);  
+	}
+	if ( keystate[SDL_SCANCODE_SPACE] )
+	{
+		m_graphics->moveBox(5);  
+	}
+
+
   }
 }
 

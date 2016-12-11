@@ -74,6 +74,26 @@ class Graphics
     btDefaultMotionState *collectibleMotionState = NULL;
     btRigidBody *collectibleRigidBody;
 
+    Object *m_collectible1;
+    btCollisionShape *collectible1;
+    btDefaultMotionState *collectible1MotionState = NULL;
+    btRigidBody *collectible1RigidBody;
+
+    Object *m_collectible2;
+    btCollisionShape *collectible2;
+    btDefaultMotionState *collectible2MotionState = NULL;
+    btRigidBody *collectible2RigidBody;
+
+    Object *m_collectible3;
+    btCollisionShape *collectible3;
+    btDefaultMotionState *collectible3MotionState = NULL;
+    btRigidBody *collectible3RigidBody;
+
+    Object *m_collectible4;
+    btCollisionShape *collectible4;
+    btDefaultMotionState *collectible4MotionState = NULL;
+    btRigidBody *collectible4RigidBody;
+
     Object *m_backboard;
 
     btCollisionShape *cover;

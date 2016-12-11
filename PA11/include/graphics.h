@@ -25,6 +25,7 @@ class Graphics
     void rightPaddle();
     void reset();
     void deleteObj(btCollisionObject* obj);
+	bool canJump;
 
     //int score = 0;
 
@@ -125,6 +126,7 @@ class Graphics
     btCollisionDispatcher *dispatcher;
     btSequentialImpulseConstraintSolver *solver;
     btDiscreteDynamicsWorld *dynamicsWorld;
+	
 };
 
 #endif /* GRAPHICS_H */

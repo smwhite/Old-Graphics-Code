@@ -87,8 +87,9 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
   dispatcher = new btCollisionDispatcher(collisionConfiguration);
   solver = new btSequentialImpulseConstraintSolver;
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-  dynamicsWorld->setGravity(btVector3(0, 9.81, 0));
+  dynamicsWorld->setGravity(btVector3(0, 0, 0));
   gContactAddedCallback=bumperCallback;
+  canJump = true;
 }
 
 Graphics::~Graphics()
@@ -161,11 +162,11 @@ bool Graphics::Initialize(int width, int height)
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
   ballRigidBody->setRestitution(1.0);
-  ballRigidBody->setGravity(btVector3(0, -9.8, 0));
+  ballRigidBody->setGravity(btVector3(0, 1, 0));
 
   m_collectible = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible = new btBoxShape (btVector3(1, 1, 1));
-  collectible->setUserIndex(1);
+  //collectible->setUserIndex(1);
   collectibleMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, 5)));
   btRigidBody::btRigidBodyConstructionInfo collectibleRigidBodyCI(0, collectibleMotionState, collectible, btVector3(0, 0, 0));
   collectibleRigidBody = new btRigidBody(collectibleRigidBodyCI);
@@ -503,29 +504,65 @@ void Graphics::Render()
 
 void Graphics::moveBox(int direction)
     {
+	 btVector3 move = ballRigidBody->getLinearVelocity();
      switch(direction)
         {
          case 1:
             ballRigidBody->activate(true);
             //ballRigidBody->applyCentralForce(btVector3(0, 0, 300));
-  			ballRigidBody->setLinearVelocity(btVector3(0, 0, 15));
+			move = move + btVector3(0, 0, 5);
+			if(move.z() > 15)
+			{
+				move =btVector3(move.x(),move.y(),15);
+			}
+  			ballRigidBody->setLinearVelocity(move);
             break;
 
          case 2:
 			ballRigidBody->activate(true);
-            ballRigidBody->setLinearVelocity(btVector3(0, 0, -15));
+			move = move - btVector3(0, 0, 5);
+			if(move.z() < -15)
+			{
+				move =btVector3(move.x(),move.y(),-15);
+			}
+            ballRigidBody->setLinearVelocity(move);
             break;
 
          case 3:
-			ballRigidBody->activate(true);	
-            ballRigidBody->setLinearVelocity(btVector3(15, 0, 0));
+			ballRigidBody->activate(true);
+			move = move + btVector3(5, 0, 0);
+			if(move.x() > 15)
+			{
+				move =btVector3(15,move.y(),move.z());
+			}
+            ballRigidBody->setLinearVelocity(move);
             break;
 
          case 4:
 			ballRigidBody->activate(true);
-            ballRigidBody->setLinearVelocity(btVector3(-15, 0, 0));
+			move = move - btVector3(5, 0, 0);
+			if(move.x() < -15)
+			{
+				move =btVector3(-15,move.y(),move.z());
+			}
+            ballRigidBody->setLinearVelocity(move);
             break;
-   
+
+         case 5:
+			ballRigidBody->activate(true);
+			if(!canJump)
+			{
+				if(move.y() == 0)
+				{
+					canJump=true;
+				}
+			}
+			if(canJump)
+			{
+				move = move + btVector3(0, 20, 0);
+            	ballRigidBody->setLinearVelocity(move);
+			}
+            break;
 
         }
     }
