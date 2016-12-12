@@ -115,6 +115,76 @@ class Graphics
     btDefaultMotionState *cylinder5MotionState = NULL;
     btRigidBody *cylinder5RigidBody;
 
+    Object *m_cylinder6;
+    btCollisionShape *cylinder6;
+    btDefaultMotionState *cylinder6MotionState = NULL;
+    btRigidBody *cylinder6RigidBody;
+
+    Object *m_cylinder7;
+    btCollisionShape *cylinder7;  
+    btDefaultMotionState *cylinder7MotionState = NULL;  
+    btRigidBody *cylinder7RigidBody;
+
+    Object *m_cylinder8;
+    btCollisionShape *cylinder8;
+    btDefaultMotionState *cylinder8MotionState = NULL;
+    btRigidBody *cylinder8RigidBody;
+
+    Object *m_cylinder9;
+    btCollisionShape *cylinder9;
+    btDefaultMotionState *cylinder9MotionState = NULL;
+    btRigidBody *cylinder9RigidBody;
+
+    Object *m_cylinder10;
+    btCollisionShape *cylinder10;  
+    btDefaultMotionState *cylinder10MotionState = NULL;  
+    btRigidBody *cylinder10RigidBody;
+
+    Object *m_cylinder11;
+    btCollisionShape *cylinder11;
+    btDefaultMotionState *cylinder11MotionState = NULL;
+    btRigidBody *cylinder11RigidBody;
+
+    Object *m_cylinder12;
+    btCollisionShape *cylinder12;
+    btDefaultMotionState *cylinder12MotionState = NULL;
+    btRigidBody *cylinder12RigidBody;
+
+    Object *m_cylinder13;
+    btCollisionShape *cylinder13;
+    btDefaultMotionState *cylinder13MotionState = NULL;
+    btRigidBody *cylinder13RigidBody;
+
+    Object *m_cylinder14;
+    btCollisionShape *cylinder14;
+    btDefaultMotionState *cylinder14MotionState = NULL;
+    btRigidBody *cylinder14RigidBody;
+
+    Object *m_cylinder15;
+    btCollisionShape *cylinder15;
+    btDefaultMotionState *cylinder15MotionState = NULL;
+    btRigidBody *cylinder15RigidBody;
+
+    Object *m_cylinder16;
+    btCollisionShape *cylinder16;
+    btDefaultMotionState *cylinder16MotionState = NULL;
+    btRigidBody *cylinder16RigidBody;
+
+    Object *m_cylinder17;
+    btCollisionShape *cylinder17;
+    btDefaultMotionState *cylinder17MotionState = NULL;
+    btRigidBody *cylinder17RigidBody;
+
+    Object *m_cylinder18;
+    btCollisionShape *cylinder18;
+    btDefaultMotionState *cylinder18MotionState = NULL;
+    btRigidBody *cylinder18RigidBody;
+
+    Object *m_cylinder19;
+    btCollisionShape *cylinder19;
+    btDefaultMotionState *cylinder19MotionState = NULL;
+    btRigidBody *cylinder19RigidBody;
+
     Object *m_cube;
     btCollisionShape *cube;
     btDefaultMotionState *cubeMotionState = NULL;
