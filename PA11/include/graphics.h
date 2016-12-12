@@ -24,8 +24,10 @@ class Graphics
     void leftPaddle();
     void rightPaddle();
     void reset();
-    void deleteObj(btCollisionObject* obj);
 	bool canJump;
+    //void levelOne(Graphics *temp);
+    //void levelTwo(Graphics *temp);
+    //void levelThree(Graphics *temp);
 
   private:
     std::string ErrorString(GLenum error);
