@@ -319,14 +319,13 @@ bool Graphics::Initialize(int width, int height)
   rPaddle1RigidBody->setActivationState(true);
 
 
-  cover = new btStaticPlaneShape (btVector3(0, -1, 0), 1);
-  coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-  btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(0, coverMotionState, cover, btVector3(0, 0, 0));
-  coverRigidBody = new btRigidBody(coverRigidBodyCI);
-  dynamicsWorld->addRigidBody(coverRigidBody);
+  //cover = new btStaticPlaneShape (btVector3(0, -1, 0), 1);
+  //coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  //btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(0, coverMotionState, cover, btVector3(0, 0, 0));
+  //coverRigidBody = new btRigidBody(coverRigidBodyCI);
+  //dynamicsWorld->addRigidBody(coverRigidBody);
 
   loss = new btStaticPlaneShape (btVector3(0, 0, 1), 1);
-
   lossMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -30)));
   btRigidBody::btRigidBodyConstructionInfo lossRigidBodyCI(0, lossMotionState, loss, btVector3(0, 0, 0));
   lossRigidBody = new btRigidBody(lossRigidBodyCI);
@@ -559,7 +558,7 @@ void Graphics::Render()
   // Start the correct program
   m_shader->Enable();
 
-  /*/ Send in the projection and view to the shader/*
+  /*/ Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
   glUniform1i(m_gSampler,1);*/
