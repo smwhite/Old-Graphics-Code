@@ -105,58 +105,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         tempBallRigidBody->translate(btVector3(500, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
-    if(temp1Ptr == level1Ptr || temp2Ptr == level1Ptr)
-    {
-        canJump = true;
-    }
-
-    else if(temp1Ptr == level2Ptr || temp2Ptr == level2Ptr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level3Ptr || temp2Ptr == level3Ptr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level4Ptr || temp2Ptr == level4Ptr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level5Ptr || temp2Ptr == level5Ptr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level6jPtr || temp2Ptr == level6jPtr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level6rPtr || temp2Ptr == level6rPtr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level6dPtr || temp2Ptr == level6dPtr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level6aPtr || temp2Ptr == level6aPtr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
+  
 
 
     //if(jumping == true)
@@ -1299,68 +1248,22 @@ void Graphics::moveBox(int direction)
 
          case 5:
 			ballRigidBody->activate(true);
-			//if(!canJump)
-			//{
-				//if(move.y() < 1 && move.y() >-1 )
-				//{
-					//canJump=true;
-				//}
-                //else
-				//{
-					//std::cout<<move.y()<<"  no jump"<<std::endl;
-				//}
-			//}
-			if(jumping == true && canJump == true)
+			if(!canJump)
 			{
-                jumping = false;
-            }
+				if(move.y() < 0.01 && move.y() >-(0.01) )
+				{
+					canJump=true;
+				}
 
-            else if(jumping == false && canJump == true)
-            {
-                jumping = true;
-                canJump=false;
-				move = move + btVector3(0, 5, 0);
+			}
+			if(canJump)
+			{
+				move = move + btVector3(0, 6, 0);
             	ballRigidBody->setLinearVelocity(move);
  				//ballRigidBody->applyCentralForce(btVector3(0, 400, 0));
 				std::cout<<move.y()<<std::endl;
-            }
-
-            else if(jumping == true && canJump == false)
-            {
-                
-            }
-            
-            else
-            {
-                canJump = true;
-            }
-
-			/*if(jumping == true && canJump == true)
-			{
-                if(canJump == true && jumping == true)
-                {
-                    jumping = false;
-                }
-
-                else
-                {
-                    jumping = true;
-                    canJump=false;
-				    move = move + btVector3(0, 5, 0);
-            	    ballRigidBody->setLinearVelocity(move);
- 				    //ballRigidBody->applyCentralForce(btVector3(0, 400, 0));
-				    std::cout<<move.y()<<std::endl;
-                }
-            }*/
-
-            //else
-            //{
-                //if(canJump == true)
-                //{
-                    //jumping = false;
-                //}
-            //}
-
+				canJump=false;
+			}
         }
     }
 
