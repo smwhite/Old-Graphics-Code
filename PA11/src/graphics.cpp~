@@ -192,7 +192,7 @@ bool Graphics::Initialize(int width, int height)
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
   ballRigidBody->setRestitution(1.0);
-  ballRigidBody->setGravity(btVector3(0, 1, 0));
+  ballRigidBody->setGravity(btVector3(0, -9.8, 0));
 
   m_collectible = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible = new btBoxShape (btVector3(1, 1, 1));
@@ -624,9 +624,9 @@ void Graphics::moveBox(int direction)
             ballRigidBody->activate(true);
             //ballRigidBody->applyCentralForce(btVector3(0, 0, 300));
 			move = move + btVector3(0, 0, 5);
-			if(move.z() > 15)
+			if(move.z() > 10)
 			{
-				move =btVector3(move.x(),move.y(),15);
+				move =btVector3(move.x(),move.y(),10);
 			}
   			ballRigidBody->setLinearVelocity(move);
             break;
@@ -634,9 +634,9 @@ void Graphics::moveBox(int direction)
          case 2:
 			ballRigidBody->activate(true);
 			move = move - btVector3(0, 0, 5);
-			if(move.z() < -15)
+			if(move.z() < -10)
 			{
-				move =btVector3(move.x(),move.y(),-15);
+				move =btVector3(move.x(),move.y(),-10);
 			}
             ballRigidBody->setLinearVelocity(move);
             break;
@@ -644,9 +644,9 @@ void Graphics::moveBox(int direction)
          case 3:
 			ballRigidBody->activate(true);
 			move = move + btVector3(5, 0, 0);
-			if(move.x() > 15)
+			if(move.x() > 10)
 			{
-				move =btVector3(15,move.y(),move.z());
+				move =btVector3(10,move.y(),move.z());
 			}
             ballRigidBody->setLinearVelocity(move);
             break;
@@ -654,9 +654,9 @@ void Graphics::moveBox(int direction)
          case 4:
 			ballRigidBody->activate(true);
 			move = move - btVector3(5, 0, 0);
-			if(move.x() < -15)
+			if(move.x() < -10)
 			{
-				move =btVector3(-15,move.y(),move.z());
+				move =btVector3(-10,move.y(),move.z());
 			}
             ballRigidBody->setLinearVelocity(move);
             break;
@@ -665,17 +665,23 @@ void Graphics::moveBox(int direction)
 			ballRigidBody->activate(true);
 			if(!canJump)
 			{
-				if(move.y() == 0)
+				if(move.y() < 0.01 && move.y() >-0.01 )
 				{
 					canJump=true;
+				}
+                else
+				{
+					std::cout<<move.y()<<"  no jump"<<std::endl;
 				}
 			}
 			if(canJump)
 			{
-				move = move + btVector3(0, 10, 0);
-            	ballRigidBody->setLinearVelocity(move);
+				//move = move + btVector3(0, 3, 0);
+            	//ballRigidBody->setLinearVelocity(move);
+ 				ballRigidBody->applyCentralForce(btVector3(0, 400, 0));
+				std::cout<<move.y()<<std::endl;
+				canJump=false;
 			}
-            break;
 
         }
     }
