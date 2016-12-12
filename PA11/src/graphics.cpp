@@ -651,7 +651,7 @@ void Graphics::moveBox(int direction)
 			ballRigidBody->activate(true);
 			if(!canJump)
 			{
-				if(move.y() < 0.1 && move.y() >-0.1 )
+				if(move.y() < 0.01 && move.y() >-0.01 )
 				{
 					canJump=true;
 				}
