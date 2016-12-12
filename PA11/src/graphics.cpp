@@ -45,7 +45,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
         tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
-        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->translate(btVector3(-100, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == endGoal1Ptr || temp2Ptr == endGoal1Ptr)
@@ -55,7 +55,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
         tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
-        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->translate(btVector3(-250, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == endGoal2Ptr || temp2Ptr == endGoal2Ptr)
@@ -64,7 +64,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
-        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->translate(btVector3(0, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == endGoal3Ptr || temp2Ptr == endGoal3Ptr)
@@ -74,7 +74,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
         tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
-        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->translate(btVector3(0, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == endGoal4Ptr || temp2Ptr == endGoal4Ptr)
@@ -84,14 +84,14 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
         tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
-        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->translate(btVector3(0, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == endGoal5Ptr || temp2Ptr == endGoal5Ptr)
     {
         cout << "C5" << endl;
-        score ++;
-        std::cout << "Score: " << score << endl;
+        //score ++;
+        //std::cout << "Score: " << score << endl;
         //tempBallRigidBody->activate(true);
         //tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
         //tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
@@ -173,16 +173,58 @@ bool Graphics::Initialize(int width, int height)
 // create objects
 
   btTriangleMesh *objTriMesh1 = new btTriangleMesh();
-  m_walls = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh1);
-  walls = new btBvhTriangleMeshShape(objTriMesh1, true);
-  wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
-  btRigidBody::btRigidBodyConstructionInfo wallRigidBodyCI(0, wallMotionState, walls, btVector3(0, 0, 0));
-  wallRigidBody = new btRigidBody(wallRigidBodyCI);
-  dynamicsWorld->addRigidBody(wallRigidBody);
+  m_level1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh1);
+  level1 = new btBvhTriangleMeshShape(objTriMesh1, true);
+  level1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo level1RigidBodyCI(0, level1MotionState, level1, btVector3(0, 0, 0));
+  level1RigidBody = new btRigidBody(level1RigidBodyCI);
+  dynamicsWorld->addRigidBody(level1RigidBody);
+
+  btTriangleMesh *objTriMesh2 = new btTriangleMesh();
+  m_level2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/anglefloor.obj", true, objTriMesh2);
+  level2 = new btBvhTriangleMeshShape(objTriMesh2, true);
+  level2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-103, -1, 50)));
+  btRigidBody::btRigidBodyConstructionInfo level2RigidBodyCI(0, level2MotionState, level2, btVector3(0, 0, 0));
+  level2RigidBody = new btRigidBody(level2RigidBodyCI);
+  dynamicsWorld->addRigidBody(level2RigidBody);
+
+  btTriangleMesh *objTriMesh3 = new btTriangleMesh();
+  m_level3 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/diamondfloor.obj", true, objTriMesh3);
+  level3 = new btBvhTriangleMeshShape(objTriMesh3, true);
+  level3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-250, -1, 10)));
+  btRigidBody::btRigidBodyConstructionInfo level3RigidBodyCI(0, level3MotionState, level3, btVector3(0, 0, 0));
+  level3RigidBody = new btRigidBody(level3RigidBodyCI);
+  dynamicsWorld->addRigidBody(level3RigidBody);
+
+/*
+  btTriangleMesh *objTriMesh4 = new btTriangleMesh();
+  m_level4 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh4);
+  level4 = new btBvhTriangleMeshShape(objTriMesh4, true);
+  level4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo level4RigidBodyCI(0, level4MotionState, level4, btVector3(0, 0, 0));
+  level4RigidBody = new btRigidBody(level4RigidBodyCI);
+  dynamicsWorld->addRigidBody(level4RigidBody);
+
+  btTriangleMesh *objTriMesh5 = new btTriangleMesh();
+  m_level5 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh5);
+  level5 = new btBvhTriangleMeshShape(objTriMesh5, true);
+  level5MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo level5RigidBodyCI(0, level5MotionState, level5, btVector3(0, 0, 0));
+  level5RigidBody = new btRigidBody(level5RigidBodyCI);
+  dynamicsWorld->addRigidBody(level5RigidBody);
+
+  btTriangleMesh *objTriMesh6 = new btTriangleMesh();
+  m_level6 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh6);
+  level6 = new btBvhTriangleMeshShape(objTriMesh6, true);
+  level6MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
+  btRigidBody::btRigidBodyConstructionInfo level6RigidBodyCI(0, level6MotionState, level6, btVector3(0, 0, 0));
+  level6RigidBody = new btRigidBody(level6RigidBodyCI);
+  dynamicsWorld->addRigidBody(level6RigidBody);
+*/
 
   m_ball = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
   ball = new btSphereShape (1);
-  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -20)));
+  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -25)));
   btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
@@ -204,7 +246,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_endGoal1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   endGoal1 = new btBoxShape (btVector3(1, 1, 1));
-  endGoal1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, 5)));
+  endGoal1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-103, 0, 65)));
   btRigidBody::btRigidBodyConstructionInfo endGoal1RigidBodyCI(0, endGoal1MotionState, endGoal1, btVector3(0, 0, 0));
   endGoal1RigidBody = new btRigidBody(endGoal1RigidBodyCI);
   endGoal1RigidBody->setUserPointer(endGoal1RigidBody);
@@ -426,7 +468,7 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   if(gameOver == false && lostBall == true)
     {
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(0, 0, -20)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->translate(btVector3(0, 0, -25)- ballRigidBody->getCenterOfMassPosition());
      ballRigidBody->setLinearVelocity(btVector3(0,0,0));
      lostBall = false;
     }
@@ -435,7 +477,7 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
     {
      gameOver = false;
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(0, 0, -20)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->translate(btVector3(0, 0, -25)- ballRigidBody->getCenterOfMassPosition());
      ballRigidBody->setLinearVelocity(btVector3(0,0,0));
     }
   // Update the object
@@ -450,9 +492,17 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   glm::mat4 test = glm::make_mat4(m);
   m_camera->Update(test[3].x,test[3].z,0.0,0.0,0.0);
 
-  wallRigidBody->getMotionState()->getWorldTransform(trans);
+  level1RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  m_walls->Update(dt, glm::make_mat4(m));
+  m_level1->Update(dt, glm::make_mat4(m));
+
+  level2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_level2->Update(dt, glm::make_mat4(m));
+
+  level3RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_level3->Update(dt, glm::make_mat4(m));
 
   endGoalRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -517,8 +567,12 @@ void Graphics::Render()
   // Render the object
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
   m_ball->Render();
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_walls->GetModel()));
-  m_walls->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level1->GetModel()));
+  m_level1->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level2->GetModel()));
+  m_level2->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level3->GetModel()));
+  m_level3->Render();
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
   m_cylinder->Render();
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder1->GetModel()));
@@ -621,7 +675,7 @@ void Graphics::moveBox(int direction)
 void Graphics::reset()
     {
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(0, -1, -20)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->translate(btVector3(0, -1, -25)- ballRigidBody->getCenterOfMassPosition());
      score = 0;
      numBalls = 3;
      gameOver = false;
