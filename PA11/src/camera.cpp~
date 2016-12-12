@@ -31,7 +31,7 @@ bool Camera::Update(float LR,float UD,float ELR, float EUD,float ZOOM)
 {
 
   view = glm::lookAt( glm::vec3(LR, 50, UD), //Eye Position
-                      glm::vec3(0.0, 0.0, UD+30), //Focus point
+                      glm::vec3(LR, 0.0, UD+30), //Focus point
                       glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up
 
 

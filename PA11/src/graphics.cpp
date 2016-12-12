@@ -493,7 +493,8 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   trans.getOpenGLMatrix(m);
   m_ball->Update(dt, glm::make_mat4(m));
 
-  m_camera->Update(LR,UD,0.0,0.0,0.0);
+  glm::mat4 test = glm::make_mat4(m);
+  m_camera->Update(test[3].x,test[3].z,0.0,0.0,0.0);
 
   wallRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -558,7 +559,7 @@ void Graphics::Render()
   // Start the correct program
   m_shader->Enable();
 
-  /*/ Send in the projection and view to the shader/*
+  /*/ Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
   glUniform1i(m_gSampler,1);*/
