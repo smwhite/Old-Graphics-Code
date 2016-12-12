@@ -183,7 +183,7 @@ bool Graphics::Initialize(int width, int height)
 // create objects
 
   btTriangleMesh *objTriMesh1 = new btTriangleMesh();
-  m_walls = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/boardfinal.obj", true, objTriMesh1);
+  m_walls = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh1);
   walls = new btBvhTriangleMeshShape(objTriMesh1, true);
   wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
   btRigidBody::btRigidBodyConstructionInfo wallRigidBodyCI(0, wallMotionState, walls, btVector3(0, 0, 0));
@@ -192,7 +192,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_ball = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
   ball = new btSphereShape (1);
-  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, -1, -8)));
+  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, 0, -8)));
   btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
@@ -202,7 +202,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_collectible = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible = new btBoxShape (btVector3(1, 1, 1));
-  collectibleMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, 5)));
+  collectibleMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, 5)));
   btRigidBody::btRigidBodyConstructionInfo collectibleRigidBodyCI(0, collectibleMotionState, collectible, btVector3(0, 0, 0));
   collectibleRigidBody = new btRigidBody(collectibleRigidBodyCI);  
   collectibleRigidBody->setUserPointer(collectibleRigidBody);
@@ -214,7 +214,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_collectible1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible1 = new btBoxShape (btVector3(1, 1, 1));
-  collectible1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, -1, 5)));
+  collectible1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, 5)));
   btRigidBody::btRigidBodyConstructionInfo collectible1RigidBodyCI(0, collectible1MotionState, collectible1, btVector3(0, 0, 0));
   collectible1RigidBody = new btRigidBody(collectible1RigidBodyCI);
   collectible1RigidBody->setUserPointer(collectible1RigidBody);
@@ -225,7 +225,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_collectible2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible2 = new btBoxShape (btVector3(1, 1, 1));
-  collectible2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 5)));
+  collectible2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 5)));
   btRigidBody::btRigidBodyConstructionInfo collectible2RigidBodyCI(0, collectible2MotionState, collectible2, btVector3(0, 0, 0));
   collectible2RigidBody = new btRigidBody(collectible2RigidBodyCI);
   collectible2RigidBody->setUserPointer(collectible2RigidBody);
@@ -236,7 +236,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_collectible3 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible3 = new btBoxShape (btVector3(1, 1, 1));
-  collectible3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, -5)));
+  collectible3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, -5)));
   btRigidBody::btRigidBodyConstructionInfo collectible3RigidBodyCI(0, collectible3MotionState, collectible3, btVector3(0, 0, 0));
   collectible3RigidBody = new btRigidBody(collectible3RigidBodyCI);
   collectible3RigidBody->setUserPointer(collectible3RigidBody);
@@ -247,7 +247,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_collectible4 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible4 = new btBoxShape (btVector3(1, 1, 1));
-  collectible4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, -1, -5)));
+  collectible4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, -5)));
   btRigidBody::btRigidBodyConstructionInfo collectible4RigidBodyCI(0, collectible4MotionState, collectible4, btVector3(0, 0, 0));
   collectible4RigidBody = new btRigidBody(collectible4RigidBodyCI);
   collectible4RigidBody->setUserPointer(collectible4RigidBody);
@@ -258,7 +258,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder = new btCylinderShape(btVector3(1, 1, 1));
-  cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, -1, 0)));
+  cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, 0)));
   btRigidBody::btRigidBodyConstructionInfo cylinderRigidBodyCI(0, cylinderMotionState, cylinder, btVector3(0, 0, 0));
   cylinderRigidBody = new btRigidBody(cylinderRigidBodyCI);
   dynamicsWorld->addRigidBody(cylinderRigidBody);
@@ -267,7 +267,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder1 = new btCylinderShape(btVector3(1, 1, 1));
-  cylinder1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, 0)));
+  cylinder1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, 0)));
   btRigidBody::btRigidBodyConstructionInfo cylinder1RigidBodyCI(0, cylinder1MotionState, cylinder1, btVector3(0, 0, 0));
   cylinder1RigidBody = new btRigidBody(cylinder1RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder1RigidBody);
@@ -276,7 +276,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder2 = new btCylinderShape(btVector3(1, 1, 1));
-  cylinder2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, -5)));
+  cylinder2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -5)));
   btRigidBody::btRigidBodyConstructionInfo cylinder2RigidBodyCI(0, cylinder2MotionState, cylinder2, btVector3(0, 0, 0));
   cylinder2RigidBody = new btRigidBody(cylinder2RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder2RigidBody);
