@@ -7,15 +7,17 @@ int numBalls = 3;
 bool gameOver = false;
 bool lostBall = false;
 void *collectiblePtr;
+void *collectible1Ptr;
+void *collectible2Ptr;
+void *collectible3Ptr;
+void *collectible4Ptr;
 
 bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
   {
-    void *temp1Ptr = obj1->getCollisionShape()->getUserPointer();
-    void *temp2Ptr = obj2->getCollisionShape()->getUserPointer();
-    if(temp1Ptr == collectiblePtr || temp2Ptr == collectiblePtr)
-    {
-        cout << ":D0" << endl;
-    }
+    void *temp1Ptr = obj1->getCollisionObject()->getUserPointer();
+    cout << temp1Ptr << endl;
+    void *temp2Ptr = obj2->getCollisionObject()->getUserPointer();
+    cout << temp2Ptr << endl;
     /*
     if(int(obj1->getCollisionShape()->getUserIndex()) == 2 || int(obj2->getCollisionShape()->getUserIndex()) == 2)
     {
@@ -69,6 +71,32 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
          std::cout << "Press R to Play Again" << endl;
         }
     }
+
+    else if(temp1Ptr == collectiblePtr || temp2Ptr == collectiblePtr)
+    {
+        cout << "C0" << endl;
+    }
+
+    else if(temp1Ptr == collectible1Ptr || temp2Ptr == collectible1Ptr)
+    {
+        cout << "C1" << endl;
+    }
+
+    else if(temp1Ptr == collectible2Ptr || temp2Ptr == collectible2Ptr)
+    {
+        cout << "C2" << endl;
+    }
+
+    else if(temp1Ptr == collectible3Ptr || temp2Ptr == collectible3Ptr)
+    {
+        cout << "C3" << endl;
+    }
+
+    else if(temp1Ptr == collectible4Ptr || temp2Ptr == collectible4Ptr)
+    {
+        cout << "C4" << endl;
+    }
+
     return false;
   }
 
@@ -170,8 +198,10 @@ bool Graphics::Initialize(int width, int height)
   collectible = new btBoxShape (btVector3(1, 1, 1));
   collectibleMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, 5)));
   btRigidBody::btRigidBodyConstructionInfo collectibleRigidBodyCI(0, collectibleMotionState, collectible, btVector3(0, 0, 0));
-  collectibleRigidBody = new btRigidBody(collectibleRigidBodyCI);
-  collectibleRigidBody->setUserPointer(collectiblePtr);
+  collectibleRigidBody = new btRigidBody(collectibleRigidBodyCI);  
+  collectibleRigidBody->setUserPointer(collectibleRigidBody);
+  collectiblePtr = collectibleRigidBody->getUserPointer();
+  cout << collectiblePtr << endl;
   dynamicsWorld->addRigidBody(collectibleRigidBody);
   collectibleRigidBody->setCollisionFlags(collectibleRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -181,7 +211,9 @@ bool Graphics::Initialize(int width, int height)
   collectible1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, -1, 5)));
   btRigidBody::btRigidBodyConstructionInfo collectible1RigidBodyCI(0, collectible1MotionState, collectible1, btVector3(0, 0, 0));
   collectible1RigidBody = new btRigidBody(collectible1RigidBodyCI);
-  collectible1RigidBody->setUserPointer(collectible1Ptr);
+  collectible1RigidBody->setUserPointer(collectible1RigidBody);
+  collectible1Ptr = collectible1RigidBody->getUserPointer();
+  cout << collectible1Ptr << endl;
   dynamicsWorld->addRigidBody(collectible1RigidBody);
   collectible1RigidBody->setCollisionFlags(collectible1RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -190,7 +222,9 @@ bool Graphics::Initialize(int width, int height)
   collectible2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 5)));
   btRigidBody::btRigidBodyConstructionInfo collectible2RigidBodyCI(0, collectible2MotionState, collectible2, btVector3(0, 0, 0));
   collectible2RigidBody = new btRigidBody(collectible2RigidBodyCI);
-  collectible2RigidBody->setUserPointer(collectible2Ptr);
+  collectible2RigidBody->setUserPointer(collectible2RigidBody);
+  collectible2Ptr = collectible2RigidBody->getUserPointer();
+  cout << collectible2Ptr << endl;
   dynamicsWorld->addRigidBody(collectible2RigidBody);
   collectible2RigidBody->setCollisionFlags(collectible2RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -199,7 +233,9 @@ bool Graphics::Initialize(int width, int height)
   collectible3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, -1, -5)));
   btRigidBody::btRigidBodyConstructionInfo collectible3RigidBodyCI(0, collectible3MotionState, collectible3, btVector3(0, 0, 0));
   collectible3RigidBody = new btRigidBody(collectible3RigidBodyCI);
-  collectible3RigidBody->setUserPointer(collectible3Ptr);
+  collectible3RigidBody->setUserPointer(collectible3RigidBody);
+  collectible3Ptr = collectible3RigidBody->getUserPointer();
+  cout << collectible3Ptr << endl;
   dynamicsWorld->addRigidBody(collectible3RigidBody);
   collectible3RigidBody->setCollisionFlags(collectible3RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -208,7 +244,9 @@ bool Graphics::Initialize(int width, int height)
   collectible4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, -1, -5)));
   btRigidBody::btRigidBodyConstructionInfo collectible4RigidBodyCI(0, collectible4MotionState, collectible4, btVector3(0, 0, 0));
   collectible4RigidBody = new btRigidBody(collectible4RigidBodyCI);
-  collectible4RigidBody->setUserPointer(collectible4Ptr);
+  collectible4RigidBody->setUserPointer(collectible4RigidBody);
+  collectible4Ptr = collectible4RigidBody->getUserPointer();
+  cout << collectible4Ptr << endl;
   dynamicsWorld->addRigidBody(collectible4RigidBody);  
   collectible4RigidBody->setCollisionFlags(collectible4RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -634,7 +672,7 @@ void Graphics::moveBox(int direction)
 			}
 			if(canJump)
 			{
-				move = move + btVector3(0, 200, 0);
+				move = move + btVector3(0, 10, 0);
             	ballRigidBody->setLinearVelocity(move);
 			}
             break;
