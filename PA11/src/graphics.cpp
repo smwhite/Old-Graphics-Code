@@ -105,7 +105,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
         tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
-        tempBallRigidBody->translate(btVector3(-650, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->translate(btVector3(-850, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     if(temp1Ptr == level1Ptr || temp2Ptr == level1Ptr)
@@ -428,12 +428,28 @@ bool Graphics::Initialize(int width, int height)
   cylinder5RigidBody->setRestitution(1.0);
   cylinder5RigidBody->setCollisionFlags(cylinder5RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
+//LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
   m_cube = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
-  cube = new btBoxShape (btVector3(1, 1, 1));
-  cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, 0, -10)));
-  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(1, cubeMotionState, cube, btVector3(0, 0, 0));
+  cube = new btBoxShape (btVector3(3.5, 3.5, 3.5));
+  cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-838, 3, 8)));
+  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(0, cubeMotionState, cube, btVector3(0, 0, 0));
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   dynamicsWorld->addRigidBody(cubeRigidBody);
+
+  m_cube1 = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
+  cube1 = new btBoxShape (btVector3(3.5, 3.5, 3.5));
+  cube1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-862, 3, -2)));
+  btRigidBody::btRigidBodyConstructionInfo cube1RigidBodyCI(0, cube1MotionState, cube1, btVector3(0, 0, 0));
+  cube1RigidBody = new btRigidBody(cube1RigidBodyCI);
+  dynamicsWorld->addRigidBody(cube1RigidBody);
+
+  m_cube2 = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
+  cube2 = new btBoxShape (btVector3(3.5, 3.5, 3.5));
+  cube2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-838, 3, -12)));
+  btRigidBody::btRigidBodyConstructionInfo cube2RigidBodyCI(0, cube2MotionState, cube2, btVector3(0, 0, 0));
+  cube2RigidBody = new btRigidBody(cube2RigidBodyCI);
+  dynamicsWorld->addRigidBody(cube2RigidBody);
+//LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
 
   loss = new btStaticPlaneShape (btVector3(0, 1, 0), 1);
   lossMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -10, 0)));
@@ -660,9 +676,19 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   trans.getOpenGLMatrix(m);
   m_cylinder5->Update(dt, glm::make_mat4(m));
 
+//LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
   cubeRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_cube->Update(dt, glm::make_mat4(m));
+
+  cube1RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cube1->Update(dt, glm::make_mat4(m));
+
+  cube2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cube2->Update(dt, glm::make_mat4(m));
+//LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
 }
 
 void Graphics::Render()
@@ -728,9 +754,16 @@ void Graphics::Render()
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_endGoal5->GetModel()));
   m_endGoal5->Render();
 
+//LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render();
 
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube1->GetModel()));
+  m_cube1->Render();
+
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube2->GetModel()));
+  m_cube2->Render();
+//LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )
