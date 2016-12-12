@@ -83,7 +83,7 @@ class Graphics
     btCollisionShape *collectible;
     btDefaultMotionState *collectibleMotionState = NULL;
     btRigidBody *collectibleRigidBody;
-    void *collectiblePtr;
+    //void *collectiblePtr;
 
     Object *m_collectible1;
     btCollisionShape *collectible1;
