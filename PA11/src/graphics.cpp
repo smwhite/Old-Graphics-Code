@@ -434,7 +434,7 @@ bool Graphics::Initialize(int width, int height)
 //////////LEVEL 2 BUMPERS////////////////////////////////////////////////////////////////////
   m_cylinder8 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder8 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder8MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-12, -1, 80)));
+  cylinder8MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, -10)));
   btRigidBody::btRigidBodyConstructionInfo cylinder8RigidBodyCI(0, cylinder8MotionState, cylinder8, btVector3(0, 0, 0));
   cylinder8RigidBody = new btRigidBody(cylinder8RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder8RigidBody);
@@ -443,7 +443,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder9 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder9 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder9MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-18, -1, 80)));
+  cylinder9MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(507, -1, 5)));
   btRigidBody::btRigidBodyConstructionInfo cylinder9RigidBodyCI(0, cylinder9MotionState, cylinder9, btVector3(0, 0, 0));
   cylinder9RigidBody = new btRigidBody(cylinder9RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder9RigidBody);
@@ -452,7 +452,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder10 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder10 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder10MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-24, -1, 80)));
+  cylinder10MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(493, -1, 5)));
   btRigidBody::btRigidBodyConstructionInfo cylinder10RigidBodyCI(0, cylinder10MotionState, cylinder10, btVector3(0, 0, 0));
   cylinder10RigidBody = new btRigidBody(cylinder10RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder10RigidBody);
@@ -461,7 +461,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder11 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder11 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder11MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-30, -1, 80)));
+  cylinder11MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 5)));
   btRigidBody::btRigidBodyConstructionInfo cylinder11RigidBodyCI(0, cylinder11MotionState, cylinder11, btVector3(0, 0, 0));
   cylinder11RigidBody = new btRigidBody(cylinder11RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder11RigidBody);
@@ -470,7 +470,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder12 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder12 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder12MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-36, -1, 80)));
+  cylinder12MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 80)));
   btRigidBody::btRigidBodyConstructionInfo cylinder12RigidBodyCI(0, cylinder12MotionState, cylinder12, btVector3(0, 0, 0));
   cylinder12RigidBody = new btRigidBody(cylinder12RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder12RigidBody);
@@ -479,7 +479,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder13 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder13 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder13MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-42, -1, 80)));
+  cylinder13MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 95)));
   btRigidBody::btRigidBodyConstructionInfo cylinder13RigidBodyCI(0, cylinder13MotionState, cylinder13, btVector3(0, 0, 0));
   cylinder13RigidBody = new btRigidBody(cylinder13RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder13RigidBody);
@@ -488,7 +488,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder14 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder14 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder14MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-48, -1, 80)));
+  cylinder14MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(505, -1, 99)));
   btRigidBody::btRigidBodyConstructionInfo cylinder14RigidBodyCI(0, cylinder14MotionState, cylinder14, btVector3(0, 0, 0));
   cylinder14RigidBody = new btRigidBody(cylinder14RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder14RigidBody);
@@ -497,7 +497,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder15 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder15 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder15MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-54, -1, 80)));
+  cylinder15MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 99)));
   btRigidBody::btRigidBodyConstructionInfo cylinder15RigidBodyCI(0, cylinder15MotionState, cylinder15, btVector3(0, 0, 0));
   cylinder15RigidBody = new btRigidBody(cylinder15RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder15RigidBody);
@@ -506,7 +506,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder16 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder16 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder16MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-60, -1, 80)));
+  cylinder16MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(495, -1, 99)));
   btRigidBody::btRigidBodyConstructionInfo cylinder16RigidBodyCI(0, cylinder16MotionState, cylinder16, btVector3(0, 0, 0));
   cylinder16RigidBody = new btRigidBody(cylinder16RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder16RigidBody);
@@ -515,7 +515,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder17 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder17 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder17MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-66, -1, 80)));
+  cylinder17MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(497.5, -1, 104)));
   btRigidBody::btRigidBodyConstructionInfo cylinder17RigidBodyCI(0, cylinder17MotionState, cylinder17, btVector3(0, 0, 0));
   cylinder17RigidBody = new btRigidBody(cylinder17RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder17RigidBody);
@@ -524,7 +524,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder18 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder18 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder18MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-72, -1, 80)));
+  cylinder18MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(502.5, -1, 104)));
   btRigidBody::btRigidBodyConstructionInfo cylinder18RigidBodyCI(0, cylinder18MotionState, cylinder18, btVector3(0, 0, 0));
   cylinder18RigidBody = new btRigidBody(cylinder18RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder18RigidBody);
@@ -533,7 +533,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_cylinder19 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/caution.obj", false, NULL);
   cylinder19 = new btCylinderShape(btVector3(1, 10, 1));
-  cylinder19MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-78, -1, 80)));
+  cylinder19MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 109)));
   btRigidBody::btRigidBodyConstructionInfo cylinder19RigidBodyCI(0, cylinder19MotionState, cylinder19, btVector3(0, 0, 0));
   cylinder19RigidBody = new btRigidBody(cylinder19RigidBodyCI);
   dynamicsWorld->addRigidBody(cylinder19RigidBody);

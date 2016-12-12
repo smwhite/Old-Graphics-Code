@@ -105,58 +105,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         tempBallRigidBody->translate(btVector3(500, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
-    if(temp1Ptr == level1Ptr || temp2Ptr == level1Ptr)
-    {
-        canJump = true;
-    }
-
-    else if(temp1Ptr == level2Ptr || temp2Ptr == level2Ptr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level3Ptr || temp2Ptr == level3Ptr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level4Ptr || temp2Ptr == level4Ptr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level5Ptr || temp2Ptr == level5Ptr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level6jPtr || temp2Ptr == level6jPtr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level6rPtr || temp2Ptr == level6rPtr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level6dPtr || temp2Ptr == level6dPtr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
-
-    else if(temp1Ptr == level6aPtr || temp2Ptr == level6aPtr)
-    {
-        canJump = true;
-        //cout << "can jump again!" << endl;
-    }
+  
 
 
     //if(jumping == true)
