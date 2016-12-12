@@ -23,7 +23,7 @@ class Graphics
     void leftPaddle();
     void rightPaddle();
     void reset();
-	bool canJump;
+	//bool canJump;
 
   private:
     std::string ErrorString(GLenum error);
@@ -96,6 +96,21 @@ class Graphics
     btCollisionShape *cylinder2;
     btDefaultMotionState *cylinder2MotionState = NULL;
     btRigidBody *cylinder2RigidBody;
+
+    Object *m_cylinder3;
+    btCollisionShape *cylinder3;
+    btDefaultMotionState *cylinder3MotionState = NULL;
+    btRigidBody *cylinder3RigidBody;
+
+    Object *m_cylinder4;
+    btCollisionShape *cylinder4;  
+    btDefaultMotionState *cylinder4MotionState = NULL;  
+    btRigidBody *cylinder4RigidBody;
+
+    Object *m_cylinder5;
+    btCollisionShape *cylinder5;
+    btDefaultMotionState *cylinder5MotionState = NULL;
+    btRigidBody *cylinder5RigidBody;
 
     Object *m_cube;
     btCollisionShape *cube;

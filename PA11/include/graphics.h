@@ -97,10 +97,35 @@ class Graphics
     btDefaultMotionState *cylinder2MotionState = NULL;
     btRigidBody *cylinder2RigidBody;
 
+    Object *m_cylinder3;
+    btCollisionShape *cylinder3;
+    btDefaultMotionState *cylinder3MotionState = NULL;
+    btRigidBody *cylinder3RigidBody;
+
+    Object *m_cylinder4;
+    btCollisionShape *cylinder4;  
+    btDefaultMotionState *cylinder4MotionState = NULL;  
+    btRigidBody *cylinder4RigidBody;
+
+    Object *m_cylinder5;
+    btCollisionShape *cylinder5;
+    btDefaultMotionState *cylinder5MotionState = NULL;
+    btRigidBody *cylinder5RigidBody;
+
     Object *m_cube;
     btCollisionShape *cube;
     btDefaultMotionState *cubeMotionState = NULL;
     btRigidBody *cubeRigidBody;
+
+    Object *m_cube1;
+    btCollisionShape *cube1;
+    btDefaultMotionState *cube1MotionState = NULL;
+    btRigidBody *cube1RigidBody;
+
+    Object *m_cube2;
+    btCollisionShape *cube2;
+    btDefaultMotionState *cube2MotionState = NULL;
+    btRigidBody *cube2RigidBody;
 
     Object *m_endGoal;
     btCollisionShape *endGoal;
