@@ -21,7 +21,7 @@ void *level5Ptr;
 void *level6Ptr;
 
 bool canJump;
-bool jumping;
+bool jumping = false;
 
 btRigidBody *tempBallRigidBody;
 
@@ -111,43 +111,42 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
     if((temp1Ptr == level1Ptr || temp2Ptr == level1Ptr) && jumping == false)
     {
         canJump = true;
-        cout << "can jump again!" << endl;
     }
 
-    else if(temp1Ptr == level2Ptr || temp2Ptr == level2Ptr)
+    else if((temp1Ptr == level2Ptr || temp2Ptr == level2Ptr) && jumping == false)
     {
         canJump = true;
-        cout << "can jump again!" << endl;
+        //cout << "can jump again!" << endl;
     }
 
-    else if(temp1Ptr == level3Ptr || temp2Ptr == level3Ptr)
+    else if((temp1Ptr == level3Ptr || temp2Ptr == level3Ptr) && jumping == false)
     {
         canJump = true;
-        cout << "can jump again!" << endl;
+        //cout << "can jump again!" << endl;
     }
 
-    else if(temp1Ptr == level4Ptr || temp2Ptr == level4Ptr)
+    else if((temp1Ptr == level4Ptr || temp2Ptr == level4Ptr) && jumping == false)
     {
         canJump = true;
-        cout << "can jump again!" << endl;
+        //cout << "can jump again!" << endl;
     }
 
-    else if(temp1Ptr == level5Ptr || temp2Ptr == level5Ptr)
+    else if((temp1Ptr == level5Ptr || temp2Ptr == level5Ptr) && jumping == false)
     {
         canJump = true;
-        cout << "can jump again!" << endl;
+        //cout << "can jump again!" << endl;
     }
 
-    else if(temp1Ptr == level6Ptr || temp2Ptr == level6Ptr)
+    else if((temp1Ptr == level6Ptr || temp2Ptr == level6Ptr) && jumping == false)
     {
         canJump = true;
-        cout << "can jump again!" << endl;
+        //cout << "can jump again!" << endl;
     }
 
-    if(jumping == true)
-    {
-     jumping = false;
-    }
+    //if(jumping == true)
+    //{
+        //jumping = false;
+   // }
 
     return false;
   }
@@ -731,26 +730,42 @@ void Graphics::moveBox(int direction)
 
          case 5:
 			ballRigidBody->activate(true);
-			if(!canJump)
+			//if(!canJump)
+			//{
+				//if(move.y() < 1 && move.y() >-1 )
+				//{
+					//canJump=true;
+				//}
+                //else
+				//{
+					//std::cout<<move.y()<<"  no jump"<<std::endl;
+				//}
+			//}
+			if(jumping == false)
 			{
-				if(move.y() < 1 && move.y() >-1 )
-				{
-					canJump=true;
-				}
+                if(canJump == true && jumping == true)
+                {
+                    jumping = false;
+                }
+
                 else
-				{
-					std::cout<<move.y()<<"  no jump"<<std::endl;
-				}
-			}
-			if(canJump)
-			{
-                jumping = true;
-                canJump=false;
-				move = move + btVector3(0, 5, 0);
-            	ballRigidBody->setLinearVelocity(move);
- 				//ballRigidBody->applyCentralForce(btVector3(0, 400, 0));
-				std::cout<<move.y()<<std::endl;
-			}
+                {
+                    jumping = true;
+                    canJump=false;
+				    move = move + btVector3(0, 5, 0);
+            	    ballRigidBody->setLinearVelocity(move);
+ 				    //ballRigidBody->applyCentralForce(btVector3(0, 400, 0));
+				    std::cout<<move.y()<<std::endl;
+                }
+            }
+
+            else
+            {
+                if(canJump == true)
+                {
+                    jumping = false;
+                }
+            }
 
         }
     }
@@ -758,7 +773,7 @@ void Graphics::moveBox(int direction)
 void Graphics::reset()
     {
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(0, -1, -25)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->translate(btVector3(0, 0, -25)- ballRigidBody->getCenterOfMassPosition());
      score = 0;
      numBalls = 3;
      gameOver = false;
