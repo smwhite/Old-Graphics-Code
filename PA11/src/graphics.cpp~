@@ -308,7 +308,7 @@ bool Graphics::Initialize(int width, int height)
   cout << level5Ptr << endl;
   dynamicsWorld->addRigidBody(level5RigidBody);
   level5RigidBody->setCollisionFlags(level5RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-//////////////////////////////////////LEVEL 5///////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////LEVEL 6///////////////////////////////////////////////////////////////////////////////////
   btTriangleMesh *objTriMesh6 = new btTriangleMesh();
   m_level6j = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/jumpfloor.obj", true, objTriMesh6);
   level6j = new btBvhTriangleMeshShape(objTriMesh6, true);
@@ -321,20 +321,9 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(level6jRigidBody);
   level6jRigidBody->setCollisionFlags(level6jRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-  m_level6a = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/anglefloor.obj", true, objTriMesh6);
-  level6a = new btBvhTriangleMeshShape(objTriMesh6, true);
-  level6aMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 170)));
-  btRigidBody::btRigidBodyConstructionInfo level6aRigidBodyCI(0, level6aMotionState, level6a, btVector3(0, 0, 0));
-  level6aRigidBody = new btRigidBody(level6aRigidBodyCI);
-  level6aRigidBody->setUserPointer(level6aRigidBody);
-  level6aPtr = level6aRigidBody->getUserPointer();
-  cout << level6aPtr << endl;
-  dynamicsWorld->addRigidBody(level6aRigidBody);
-  level6aRigidBody->setCollisionFlags(level6aRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-
   m_level6d = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/diamondfloor.obj", true, objTriMesh6);
   level6d = new btBvhTriangleMeshShape(objTriMesh6, true);
-  level6dMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 260)));
+  level6dMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 130)));
   btRigidBody::btRigidBodyConstructionInfo level6dRigidBodyCI(0, level6dMotionState, level6d, btVector3(0, 0, 0));
   level6dRigidBody = new btRigidBody(level6dRigidBodyCI);
   level6dRigidBody->setUserPointer(level6dRigidBody);
@@ -343,16 +332,6 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(level6dRigidBody);
   level6dRigidBody->setCollisionFlags(level6dRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-  m_level6r = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh6);
-  level6r = new btBvhTriangleMeshShape(objTriMesh6, true);
-  level6rMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 225)));
-  btRigidBody::btRigidBodyConstructionInfo level6rRigidBodyCI(0, level6rMotionState, level6r, btVector3(0, 0, 0));
-  level6rRigidBody = new btRigidBody(level6rRigidBodyCI);
-  level6rRigidBody->setUserPointer(level6rRigidBody);
-  level6rPtr = level6rRigidBody->getUserPointer();
-  cout << level6rPtr << endl;
-  dynamicsWorld->addRigidBody(level6rRigidBody);
-  level6rRigidBody->setCollisionFlags(level6rRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   m_ball = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
@@ -637,6 +616,38 @@ bool Graphics::Initialize(int width, int height)
   cube2RigidBody = new btRigidBody(cube2RigidBodyCI);
   cube2RigidBody->setRestitution(1.0);
   dynamicsWorld->addRigidBody(cube2RigidBody);
+
+  m_cube3 = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
+  cube3 = new btBoxShape (btVector3(3.5, 3.5, 3.5));
+  cube3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(450, 3, 140)));
+  btRigidBody::btRigidBodyConstructionInfo cube3RigidBodyCI(1, cube3MotionState, cube3, btVector3(0, 0, 0));
+  cube3RigidBody = new btRigidBody(cube3RigidBodyCI);
+  cube3RigidBody->setRestitution(1.0);
+  dynamicsWorld->addRigidBody(cube3RigidBody);
+
+  m_cube4 = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
+  cube4 = new btBoxShape (btVector3(3.5, 3.5, 3.5));
+  cube4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(550, 3, 140)));
+  btRigidBody::btRigidBodyConstructionInfo cube4RigidBodyCI(1, cube4MotionState, cube4, btVector3(0, 0, 0));
+  cube4RigidBody = new btRigidBody(cube4RigidBodyCI);
+  cube4RigidBody->setRestitution(1.0);
+  dynamicsWorld->addRigidBody(cube4RigidBody);
+
+  m_cube5 = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
+  cube5 = new btBoxShape (btVector3(3.5, 3.5, 3.5));
+  cube5MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(520, 3, 50)));
+  btRigidBody::btRigidBodyConstructionInfo cube5RigidBodyCI(1, cube5MotionState, cube5, btVector3(0, 0, 0));
+  cube5RigidBody = new btRigidBody(cube5RigidBodyCI);
+  cube5RigidBody->setRestitution(1.0);
+  dynamicsWorld->addRigidBody(cube5RigidBody);
+
+  m_cube6 = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
+  cube6 = new btBoxShape (btVector3(3.5, 3.5, 3.5));
+  cube6MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(520, 3, 0)));
+  btRigidBody::btRigidBodyConstructionInfo cube6RigidBodyCI(1, cube6MotionState, cube6, btVector3(0, 0, 0));
+  cube6RigidBody = new btRigidBody(cube6RigidBodyCI);
+  cube6RigidBody->setRestitution(1.0);
+  dynamicsWorld->addRigidBody(cube6RigidBody);
 //LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
 
   loss = new btStaticPlaneShape (btVector3(0, 1, 0), 1);
@@ -820,17 +831,9 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   trans.getOpenGLMatrix(m);
   m_level6j->Update(dt, glm::make_mat4(m));
 
-  level6aRigidBody->getMotionState()->getWorldTransform(trans);
-  trans.getOpenGLMatrix(m);
-  m_level6a->Update(dt, glm::make_mat4(m));
-
   level6dRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_level6d->Update(dt, glm::make_mat4(m));
-
-  level6rRigidBody->getMotionState()->getWorldTransform(trans);
-  trans.getOpenGLMatrix(m);
-  m_level6r->Update(dt, glm::make_mat4(m));
 
   endGoalRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -956,7 +959,29 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
 
   glm::mat4 cube2 = glm::make_mat4(m);
 
+  cube3RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cube3->Update(dt, glm::make_mat4(m));
 
+  glm::mat4 cube3 = glm::make_mat4(m);
+
+  cube4RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cube4->Update(dt, glm::make_mat4(m));
+
+  glm::mat4 cube4 = glm::make_mat4(m);
+
+  cube5RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cube5->Update(dt, glm::make_mat4(m));
+
+  glm::mat4 cube5 = glm::make_mat4(m);
+
+  cube6RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cube6->Update(dt, glm::make_mat4(m));
+
+  glm::mat4 cube6 = glm::make_mat4(m);
 
   if(bcube0)
   {
@@ -1055,12 +1080,9 @@ void Graphics::Render()
   m_level4->Render();
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level5->GetModel()));
   m_level5->Render();
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level6r->GetModel()));
-  m_level6r->Render();
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level6d->GetModel()));
   m_level6d->Render();
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level6a->GetModel()));
-  m_level6a->Render();
+
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level6j->GetModel()));
   m_level6j->Render();
 
@@ -1127,6 +1149,18 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube2->GetModel()));
   m_cube2->Render();
+
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube3->GetModel()));
+  m_cube3->Render();
+
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube4->GetModel()));
+  m_cube4->Render();
+
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube5->GetModel()));
+  m_cube5->Render();
+
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube6->GetModel()));
+  m_cube6->Render();
 //LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
   // Get any errors from OpenGL
   auto error = glGetError();

@@ -85,20 +85,10 @@ class Graphics
     btDefaultMotionState *level6jMotionState = NULL;
     btRigidBody *level6jRigidBody;
 
-    Object *m_level6a;
-    btCollisionShape *level6a;
-    btDefaultMotionState *level6aMotionState = NULL;
-    btRigidBody *level6aRigidBody;
-
     Object *m_level6d;
     btCollisionShape *level6d;
     btDefaultMotionState *level6dMotionState = NULL;
     btRigidBody *level6dRigidBody;
-
-    Object *m_level6r;
-    btCollisionShape *level6r;
-    btDefaultMotionState *level6rMotionState = NULL;
-    btRigidBody *level6rRigidBody;
 
     Object *m_cylinder;
     btCollisionShape *cylinder;
@@ -214,6 +204,26 @@ class Graphics
     btCollisionShape *cube2;
     btDefaultMotionState *cube2MotionState = NULL;
     btRigidBody *cube2RigidBody;
+
+    Object *m_cube3;
+    btCollisionShape *cube3;
+    btDefaultMotionState *cube3MotionState = NULL;
+    btRigidBody *cube3RigidBody;
+
+    Object *m_cube4;
+    btCollisionShape *cube4;
+    btDefaultMotionState *cube4MotionState = NULL;
+    btRigidBody *cube4RigidBody;
+
+    Object *m_cube5;
+    btCollisionShape *cube5;
+    btDefaultMotionState *cube5MotionState = NULL;
+    btRigidBody *cube5RigidBody;
+
+    Object *m_cube6;
+    btCollisionShape *cube6;
+    btDefaultMotionState *cube6MotionState = NULL;
+    btRigidBody *cube6RigidBody;
 
     Object *m_endGoal;
     btCollisionShape *endGoal;
