@@ -61,7 +61,6 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
 
     else if(temp1Ptr == endGoalPtr || temp2Ptr == endGoalPtr)
     {
-        cout << "C0" << endl;
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
@@ -71,7 +70,6 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
 
     else if(temp1Ptr == endGoal1Ptr || temp2Ptr == endGoal1Ptr)
     {
-        cout << "C1" << endl;
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
@@ -81,7 +79,6 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
 
     else if(temp1Ptr == endGoal2Ptr || temp2Ptr == endGoal2Ptr)
     {
-        cout << "C2" << endl;
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
@@ -90,27 +87,6 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
 
     else if(temp1Ptr == endGoal3Ptr || temp2Ptr == endGoal3Ptr)
     {
-        cout << "C3" << endl;
-        score ++;
-        std::cout << "Score: " << score << endl;
-        tempBallRigidBody->activate(true);
-        tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
-        tempBallRigidBody->translate(btVector3(-850, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
-    }
-
-    else if(temp1Ptr == endGoal4Ptr || temp2Ptr == endGoal4Ptr)
-    {
-        cout << "C4" << endl;
-        score ++;
-        std::cout << "Score: " << score << endl;
-        tempBallRigidBody->activate(true);
-        tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
-        tempBallRigidBody->translate(btVector3(0, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
-    }
-
-    else if(temp1Ptr == endGoal5Ptr || temp2Ptr == endGoal5Ptr)
-    {
-        cout << "C5" << endl;
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
@@ -118,13 +94,24 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         tempBallRigidBody->translate(btVector3(500, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
-  
+    else if(temp1Ptr == endGoal4Ptr || temp2Ptr == endGoal4Ptr)
+    {
+        score ++;
+        std::cout << "Score: " << score << endl;
+        std::cout << "Good Job! Keep playing to increase your score!" << endl;
+        tempBallRigidBody->activate(true);
+        tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
+        tempBallRigidBody->translate(btVector3(0, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
+    }
 
-
-    //if(jumping == true)
-    //{
-        //jumping = false;
-   // }
+    else if(temp1Ptr == endGoal5Ptr || temp2Ptr == endGoal5Ptr)
+    {
+        score ++;
+        std::cout << "Score: " << score << endl;
+        tempBallRigidBody->activate(true);
+        tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
+        tempBallRigidBody->translate(btVector3(500, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
+    }
 
     return false;
   }
@@ -217,7 +204,6 @@ bool Graphics::Initialize(int width, int height)
   level1RigidBody = new btRigidBody(level1RigidBodyCI);
   level1RigidBody->setUserPointer(level1RigidBody);
   level1Ptr = level1RigidBody->getUserPointer();
-  cout << level1Ptr << endl;
   dynamicsWorld->addRigidBody(level1RigidBody);
   level1RigidBody->setCollisionFlags(level1RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -229,7 +215,6 @@ bool Graphics::Initialize(int width, int height)
   level2RigidBody = new btRigidBody(level2RigidBodyCI);
   level2RigidBody->setUserPointer(level2RigidBody);
   level2Ptr = level2RigidBody->getUserPointer();
-  cout << level2Ptr << endl;
   dynamicsWorld->addRigidBody(level2RigidBody);
   level2RigidBody->setCollisionFlags(level2RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -241,7 +226,6 @@ bool Graphics::Initialize(int width, int height)
   level3RigidBody = new btRigidBody(level3RigidBodyCI);
   level3RigidBody->setUserPointer(level3RigidBody);
   level3Ptr = level3RigidBody->getUserPointer();
-  cout << level3Ptr << endl;
   dynamicsWorld->addRigidBody(level3RigidBody);
   level3RigidBody->setCollisionFlags(level3RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -253,7 +237,6 @@ bool Graphics::Initialize(int width, int height)
   level4RigidBody = new btRigidBody(level4RigidBodyCI);
   level4RigidBody->setUserPointer(level4RigidBody);
   level4Ptr = level4RigidBody->getUserPointer();
-  cout << level4Ptr << endl;
   dynamicsWorld->addRigidBody(level4RigidBody);
   level4RigidBody->setCollisionFlags(level4RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -266,7 +249,6 @@ bool Graphics::Initialize(int width, int height)
   level5RigidBody = new btRigidBody(level5RigidBodyCI);
   level5RigidBody->setUserPointer(level5RigidBody);
   level5Ptr = level5RigidBody->getUserPointer();
-  cout << level5Ptr << endl;
   dynamicsWorld->addRigidBody(level5RigidBody);
   level5RigidBody->setCollisionFlags(level5RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 //////////////////////////////////////LEVEL 6///////////////////////////////////////////////////////////////////////////////////
@@ -278,7 +260,6 @@ bool Graphics::Initialize(int width, int height)
   level6jRigidBody = new btRigidBody(level6jRigidBodyCI);
   level6jRigidBody->setUserPointer(level6jRigidBody);
   level6jPtr = level6jRigidBody->getUserPointer();
-  cout << level6jPtr << endl;
   dynamicsWorld->addRigidBody(level6jRigidBody);
   level6jRigidBody->setCollisionFlags(level6jRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -289,7 +270,6 @@ bool Graphics::Initialize(int width, int height)
   level6dRigidBody = new btRigidBody(level6dRigidBodyCI);
   level6dRigidBody->setUserPointer(level6dRigidBody);
   level6dPtr = level6dRigidBody->getUserPointer();
-  cout << level6dPtr << endl;
   dynamicsWorld->addRigidBody(level6dRigidBody);
   level6dRigidBody->setCollisionFlags(level6dRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -308,12 +288,11 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh *egTriMesh = new btTriangleMesh();
   m_endGoal = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/goal.obj", true, egTriMesh);
   endGoal = new btBvhTriangleMeshShape(egTriMesh, true);
-  endGoalMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 25)));
+  endGoalMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, 25)));
   btRigidBody::btRigidBodyConstructionInfo endGoalRigidBodyCI(0, endGoalMotionState, endGoal, btVector3(0, 0, 0));
   endGoalRigidBody = new btRigidBody(endGoalRigidBodyCI);  
   endGoalRigidBody->setUserPointer(endGoalRigidBody);
   endGoalPtr = endGoalRigidBody->getUserPointer();
-  cout << endGoalPtr << endl;
   dynamicsWorld->addRigidBody(endGoalRigidBody);
   endGoalRigidBody->setCollisionFlags(endGoalRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
   
@@ -324,7 +303,6 @@ bool Graphics::Initialize(int width, int height)
   endGoal1RigidBody = new btRigidBody(endGoal1RigidBodyCI);
   endGoal1RigidBody->setUserPointer(endGoal1RigidBody);
   endGoal1Ptr = endGoal1RigidBody->getUserPointer();
-  cout << endGoal1Ptr << endl;
   dynamicsWorld->addRigidBody(endGoal1RigidBody);
   endGoal1RigidBody->setCollisionFlags(endGoal1RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -335,7 +313,6 @@ bool Graphics::Initialize(int width, int height)
   endGoal2RigidBody = new btRigidBody(endGoal2RigidBodyCI);
   endGoal2RigidBody->setUserPointer(endGoal2RigidBody);
   endGoal2Ptr = endGoal2RigidBody->getUserPointer();
-  cout << endGoal2Ptr << endl;
   dynamicsWorld->addRigidBody(endGoal2RigidBody);
   endGoal2RigidBody->setCollisionFlags(endGoal2RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -346,29 +323,26 @@ bool Graphics::Initialize(int width, int height)
   endGoal3RigidBody = new btRigidBody(endGoal3RigidBodyCI);
   endGoal3RigidBody->setUserPointer(endGoal3RigidBody);
   endGoal3Ptr = endGoal3RigidBody->getUserPointer();
-  cout << endGoal3Ptr << endl;
   dynamicsWorld->addRigidBody(endGoal3RigidBody);
   endGoal3RigidBody->setCollisionFlags(endGoal3RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
   m_endGoal4 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/goal.obj", true, egTriMesh);
   endGoal4 = new btBvhTriangleMeshShape(egTriMesh, true);
-  endGoal4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, -5)));
+  endGoal4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, 0, 160)));
   btRigidBody::btRigidBodyConstructionInfo endGoal4RigidBodyCI(0, endGoal4MotionState, endGoal4, btVector3(0, 0, 0));
   endGoal4RigidBody = new btRigidBody(endGoal4RigidBodyCI);
   endGoal4RigidBody->setUserPointer(endGoal4RigidBody);
   endGoal4Ptr = endGoal4RigidBody->getUserPointer();
-  cout << endGoal4Ptr << endl;
-  dynamicsWorld->addRigidBody(endGoal4RigidBody);  
+  dynamicsWorld->addRigidBody(endGoal4RigidBody);
   endGoal4RigidBody->setCollisionFlags(endGoal4RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
   m_endGoal5 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/goal.obj", true, egTriMesh);
   endGoal5 = new btBvhTriangleMeshShape(egTriMesh, true);
-  endGoal5MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, 8)));
+  endGoal5MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, 25)));
   btRigidBody::btRigidBodyConstructionInfo endGoal5RigidBodyCI(0, endGoal5MotionState, endGoal5, btVector3(0, 0, 0));
   endGoal5RigidBody = new btRigidBody(endGoal5RigidBodyCI);
   endGoal5RigidBody->setUserPointer(endGoal5RigidBody);
   endGoal5Ptr = endGoal5RigidBody->getUserPointer();
-  cout << endGoal5Ptr << endl;
   dynamicsWorld->addRigidBody(endGoal5RigidBody);  
   endGoal5RigidBody->setCollisionFlags(endGoal5RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
@@ -1263,7 +1237,7 @@ void Graphics::moveBox(int direction)
 			ballRigidBody->activate(true);
 			if(!canJump)
 			{
-				if(move.y() < 0.01 && move.y() >-(0.01) )
+				if(move.y() < 0.05 && move.y() >-(0.05) )
 				{
 					canJump=true;
 				}
@@ -1274,7 +1248,6 @@ void Graphics::moveBox(int direction)
 				move = move + btVector3(0, 6, 0);
             	ballRigidBody->setLinearVelocity(move);
  				//ballRigidBody->applyCentralForce(btVector3(0, 400, 0));
-				std::cout<<move.y()<<std::endl;
 				canJump=false;
 			}
         }

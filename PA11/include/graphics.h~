@@ -31,7 +31,6 @@ class Graphics
 	bool bcube4;
 	bool bcube5;
 	bool bcube6;
-	bool canMove;
 
   private:
     std::string ErrorString(GLenum error);
@@ -249,11 +248,6 @@ class Graphics
     btCollisionShape *endGoal3;
     btDefaultMotionState *endGoal3MotionState = NULL;
     btRigidBody *endGoal3RigidBody;
-
-    Object *m_endGoal4;
-    btCollisionShape *endGoal4;
-    btDefaultMotionState *endGoal4MotionState = NULL;
-    btRigidBody *endGoal4RigidBody;
 
     Object *m_endGoal5;
     btCollisionShape *endGoal5;
