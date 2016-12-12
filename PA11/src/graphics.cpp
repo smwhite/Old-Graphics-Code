@@ -19,21 +19,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
 
     void *temp2Ptr = obj2->getCollisionObject()->getUserPointer();
 
-    if(std::string(obj1->getCollisionShape()->getName()) == "CylinderY")
-    {
-     score ++;
-     std::cout << "Score: " << score << endl; 
-     //btCollisionObject* temp = obj1->getCollisionShape();
-     //Graphics::deleteObj(temp);
-    }
-    else if(std::string(obj2->getCollisionShape()->getName()) == "CylinderY")
-    {
-     score ++;
-     std::cout << "Score: " << score << endl; 
-     //btCollisionObject* temp = obj2->getCollisionShape();
-     //Graphics::deleteObj(temp);
-    }
-    else if(std::string(obj2->getCollisionShape()->getName()) == "STATICPLANE")
+    if(std::string(obj2->getCollisionShape()->getName()) == "STATICPLANE")
     {
      if(numBalls >= 1)
         {
@@ -57,10 +43,8 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
-        tempBallRigidBody->translate(btVector3(-28, -1, -8)- tempBallRigidBody->getCenterOfMassPosition());
-        //Graphics::ballRigidBody->activate(true);
-        //Graphics::ballRigidBody->translate(btVector3(-28, -1, -8)- Graphics::ballRigidBody->getCenterOfMassPosition());
-        //Graphics::levelTwo(graphics);
+        tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
+        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == collectible1Ptr || temp2Ptr == collectible1Ptr)
@@ -69,8 +53,8 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
-        tempBallRigidBody->translate(btVector3(-28, -1, -8)- tempBallRigidBody->getCenterOfMassPosition());
-        //Graphics::levelThree(graphics);
+        tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
+        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == collectible2Ptr || temp2Ptr == collectible2Ptr)
@@ -79,8 +63,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
-        tempBallRigidBody->translate(btVector3(-28, 0, -8)- tempBallRigidBody->getCenterOfMassPosition());
-        //Graphics::levelOne(graphics);
+        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == collectible3Ptr || temp2Ptr == collectible3Ptr)
@@ -89,7 +72,8 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
-        tempBallRigidBody->translate(btVector3(-28, 0, -8)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
+        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == collectible4Ptr || temp2Ptr == collectible4Ptr)
@@ -98,24 +82,19 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         score ++;
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
-        tempBallRigidBody->translate(btVector3(-28, 0, -8)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
+        tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     return false;
   }
 
-//bool lossCallback(btManifoldPoint& cp, const btCollisionObject* obj1, int id1, int index1, const btCollisionObject* obj2, int id2, int index2)
-  //{
-    //std::cout << "Collided with Loss Box" << endl;
-    //return false;
-  //}
 
 Graphics::Graphics(string vFile, string fFile, string mFile)
 {
   vertexFile = vFile;
   fragmentFile = fFile;
   modelFile = mFile;
-  //graphics = this;
 
   broadphase = new btDbvtBroadphase();
   collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -192,7 +171,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_ball = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
   ball = new btSphereShape (1);
-  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, 0, -8)));
+  ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -20)));
   btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ball, btVector3(0, 0, 0));
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   dynamicsWorld->addRigidBody(ballRigidBody);
@@ -283,61 +262,21 @@ bool Graphics::Initialize(int width, int height)
   cylinder2RigidBody->setRestitution(1.0);
   cylinder2RigidBody->setCollisionFlags(cylinder2RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-
+  /*
   m_cube = new Object(vertexFile, fragmentFile, "../models/box.obj", false, NULL);
   cube = new btBoxShape (btVector3(1, 1, 1));
   cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-28, 0, -10)));
   btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(1, cubeMotionState, cube, btVector3(0, 0, 0));
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   dynamicsWorld->addRigidBody(cubeRigidBody);
-  //cubeRigidBody->setGravity(btVector3(0, -6.8, -6.8));
+  */
 
-  m_backboard = new Object(vertexFile, fragmentFile, "../models/backboard.obj", false, NULL);
-
-  m_lPaddle1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/left.obj",false, NULL);
-  lPaddle1 = new btBoxShape (btVector3(1, 1, 1));
-  lPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(19, 1, -21)));
-  btRigidBody::btRigidBodyConstructionInfo lPaddle1RigidBodyCI(0, lPaddle1MotionState, lPaddle1, btVector3(0, 1, 0));
-  lPaddle1RigidBody = new btRigidBody(lPaddle1RigidBodyCI);
-  dynamicsWorld->addRigidBody(lPaddle1RigidBody);
-  lPaddle1RigidBody->setRestitution(1.0);
-  lPaddle1RigidBody-> setLinearVelocity(btVector3(0,0,0));
-  btTransform newTrans;
-  btQuaternion rot;
-  rot.setEuler(-10, 0, 0);
-  lPaddle1RigidBody->getMotionState()->getWorldTransform(newTrans);
-  newTrans.setRotation(rot);
-  lPaddle1RigidBody->getMotionState()->setWorldTransform(newTrans);
-  lPaddle1RigidBody->setActivationState(true);
-
-  m_rPaddle1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/right.obj",false, NULL);
-  rPaddle1 = new btBoxShape (btVector3(1, 1, 1));
-  rPaddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-10, 1, -21)));
-  btRigidBody::btRigidBodyConstructionInfo rPaddle1RigidBodyCI(0, rPaddle1MotionState, rPaddle1, btVector3(0, 1, 0));
-  rPaddle1RigidBody = new btRigidBody(rPaddle1RigidBodyCI);
-  dynamicsWorld->addRigidBody(rPaddle1RigidBody);
-  rPaddle1RigidBody->setRestitution(1.0);
-  rPaddle1RigidBody-> setLinearVelocity(btVector3(0,0,0));
-  rot.setEuler(10, 0, 0);
-  rPaddle1RigidBody->getMotionState()->getWorldTransform(newTrans);
-  newTrans.setRotation(rot);
-  rPaddle1RigidBody->getMotionState()->setWorldTransform(newTrans);
-  rPaddle1RigidBody->setActivationState(true);
-
-
-  //cover = new btStaticPlaneShape (btVector3(0, -1, 0), 1);
-  //coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-  //btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(0, coverMotionState, cover, btVector3(0, 0, 0));
-  //coverRigidBody = new btRigidBody(coverRigidBodyCI);
-  //dynamicsWorld->addRigidBody(coverRigidBody);
-
-  loss = new btStaticPlaneShape (btVector3(0, 0, 1), 1);
-  lossMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -30)));
+  loss = new btStaticPlaneShape (btVector3(0, 1, 0), 1);
+  lossMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -10, 0)));
   btRigidBody::btRigidBodyConstructionInfo lossRigidBodyCI(0, lossMotionState, loss, btVector3(0, 0, 0));
   lossRigidBody = new btRigidBody(lossRigidBodyCI);
   dynamicsWorld->addRigidBody(lossRigidBody);
   lossRigidBody->setCollisionFlags(cylinder1RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-  //lossRigidBody->setUserIndex(2);
   
   // Set up the shaders
   m_shader = new Shader("../shaders/vertexFL.vert", "../shaders/fragmentFL.frag");
@@ -465,11 +404,7 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   if(gameOver == false && lostBall == true)
     {
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(-28, -1, -8)- ballRigidBody->getCenterOfMassPosition());
-     //btTransform newTrans;
-     //ballRigidBody->getMotionState()->getWorldTransform(newTrans);
-     //newTrans.getOrigin() = (btVector3(-28, -1, -8));
-     //ballRigidBody->getMotionState()->setWorldTransform(newTrans);
+     ballRigidBody->translate(btVector3(0, 0, -20)- ballRigidBody->getCenterOfMassPosition());
      lostBall = false;
     }
 
@@ -477,22 +412,12 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
     {
      gameOver = false;
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(-28, -1, -8)- ballRigidBody->getCenterOfMassPosition());
-     //btTransform newTrans;
-     //ballRigidBody->getMotionState()->getWorldTransform(newTrans);
-     //newTrans.getOrigin() = (btVector3(-28, -1, -8));
-     //ballRigidBody->getMotionState()->setWorldTransform(newTrans);
+     ballRigidBody->translate(btVector3(0, 0, -20)- ballRigidBody->getCenterOfMassPosition());
     }
   // Update the object
   btTransform trans;
   btScalar m[16];
   dynamicsWorld->stepSimulation(1/60.f, 10);
-
-
-  //btTransform newTrans;
-  //lPaddle1RigidBody->getMotionState()->getWorldTransform(newTrans);
-  //lPaddle1RigidBody->getMotionState()->setWorldTransform(newTrans);
-
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -532,27 +457,6 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   cylinder2RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_cylinder2->Update(dt, glm::make_mat4(m));
-
-  lPaddle1RigidBody->getMotionState()->getWorldTransform(trans);
-  trans.getOpenGLMatrix(m);
-  m_lPaddle1->Update(dt, glm::make_mat4(m));
-
-  cubeRigidBody->getMotionState()->getWorldTransform(trans);
-  trans.getOpenGLMatrix(m);
-  m_cube->Update(dt, glm::make_mat4(m));
-
-  rPaddle1RigidBody->getMotionState()->getWorldTransform(trans);
-  trans.getOpenGLMatrix(m);
-  m_rPaddle1->Update(dt, glm::make_mat4(m));
-  
-
-
-	//m_camera->Update(LR,UD,ELR,EUD,ZOOM);
-
-
-
-
-
 }
 
 void Graphics::Render()
@@ -600,17 +504,9 @@ void Graphics::Render()
   m_collectible3->Render();
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible4->GetModel()));
   m_collectible4->Render();
- 
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_lPaddle1->GetModel()));
-  m_lPaddle1->Render();
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_rPaddle1->GetModel()));
-  m_rPaddle1->Render();
 
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-  m_cube->Render();
-
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_backboard->GetModel()));
-  m_backboard->Render();
+  //glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  //m_cube->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();
@@ -692,51 +588,10 @@ void Graphics::moveBox(int direction)
         }
     }
 
-void Graphics::leftPaddle()
-    {
-     btTransform newTr;
-     btQuaternion rot;
-     rot.setEuler(10, 0, 0);
-     lPaddle1RigidBody->getMotionState()->getWorldTransform(newTr);
-     newTr.setRotation(rot);
-     lPaddle1RigidBody->getMotionState()->setWorldTransform(newTr);
-
-     for(int i  = 0; i < 1000; i++)
-        {
-
-        }
-
-     rot.setEuler(-10, 0, 0);
-     lPaddle1RigidBody->getMotionState()->getWorldTransform(newTr);
-     newTr.setRotation(rot);
-     lPaddle1RigidBody->getMotionState()->setWorldTransform(newTr);
-
-    }
-
-void Graphics::rightPaddle()
-    {
-     btTransform newTr;
-     btQuaternion rot;
-     rot.setEuler(-10, 0, 0);
-     rPaddle1RigidBody->getMotionState()->getWorldTransform(newTr);
-     newTr.setRotation(rot);
-     rPaddle1RigidBody->getMotionState()->setWorldTransform(newTr);
-     
-     for(int i  = 0; i < 1000; i++)
-        {
-           
-        }
-
-     rot.setEuler(10, 0, 0);
-     rPaddle1RigidBody->getMotionState()->getWorldTransform(newTr);
-     newTr.setRotation(rot);
-     rPaddle1RigidBody->getMotionState()->setWorldTransform(newTr);
-    }
-
 void Graphics::reset()
     {
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(-28, -1, -8)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->translate(btVector3(0, -1, -20)- ballRigidBody->getCenterOfMassPosition());
      score = 0;
      numBalls = 3;
      gameOver = false;
@@ -774,22 +629,3 @@ std::string Graphics::ErrorString(GLenum error)
     return "None";
   }
 }
-/*
-void Graphics::levelOne(Graphics *temp)
-{
-    temp->ballRigidBody->activate(true);
-    temp->ballRigidBody->translate(btVector3(-28, -1, -8)- temp->ballRigidBody->getCenterOfMassPosition());
-}
-
-void Graphics::levelTwo(Graphics *temp)
-{
-    temp->ballRigidBody->activate(true);
-    temp->ballRigidBody->translate(btVector3(-28, -1, -8)- temp->ballRigidBody->getCenterOfMassPosition());
-}
-
-void Graphics::levelThree(Graphics *temp)
-{
-    temp->ballRigidBody->activate(true);
-    temp->ballRigidBody->translate(btVector3(-28, -1, -8)- temp->ballRigidBody->getCenterOfMassPosition());
-}
-*/

@@ -16,7 +16,6 @@ class Graphics
     Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     friend bool bumperCallback(btManifoldPoint& cp, btCollisionObject* obj1, int id1, int index1, btCollisionObject* obj2, int id2, int index2);
-    //bool lossCallback(btManifoldPoint& cp, btCollisionObject* obj1, int id1, int index1, btCollisionObject* obj2, int id2, int index2);
     bool Initialize(int width, int height);
     void Update(unsigned int dt,float LR,float UD);
     void Render();
@@ -25,9 +24,6 @@ class Graphics
     void rightPaddle();
     void reset();
 	bool canJump;
-    //void levelOne(Graphics *temp);
-    //void levelTwo(Graphics *temp);
-    //void levelThree(Graphics *temp);
 
   private:
     std::string ErrorString(GLenum error);
@@ -85,51 +81,30 @@ class Graphics
     btCollisionShape *collectible;
     btDefaultMotionState *collectibleMotionState = NULL;
     btRigidBody *collectibleRigidBody;
-    //void *collectiblePtr;
 
     Object *m_collectible1;
     btCollisionShape *collectible1;
     btDefaultMotionState *collectible1MotionState = NULL;
     btRigidBody *collectible1RigidBody;
-    //void *collectible1Ptr;
 
     Object *m_collectible2;
     btCollisionShape *collectible2;
     btDefaultMotionState *collectible2MotionState = NULL;
     btRigidBody *collectible2RigidBody;
-    //void *collectible2Ptr;
 
     Object *m_collectible3;
     btCollisionShape *collectible3;
     btDefaultMotionState *collectible3MotionState = NULL;
     btRigidBody *collectible3RigidBody;
-    //void *collectible3Ptr;
 
     Object *m_collectible4;
     btCollisionShape *collectible4;
     btDefaultMotionState *collectible4MotionState = NULL;
     btRigidBody *collectible4RigidBody;
-    //void *collectible4Ptr;
-
-    Object *m_backboard;
-
-    btCollisionShape *cover;
-    btDefaultMotionState *coverMotionState = NULL;
-    btRigidBody *coverRigidBody;
 
     btCollisionShape *loss;
     btDefaultMotionState *lossMotionState = NULL;
     btRigidBody *lossRigidBody;
-
-    Object *m_lPaddle1;
-    btCollisionShape *lPaddle1;
-    btDefaultMotionState *lPaddle1MotionState = NULL;
-    btRigidBody *lPaddle1RigidBody;
-
-    Object *m_rPaddle1;
-    btCollisionShape *rPaddle1;
-    btDefaultMotionState *rPaddle1MotionState = NULL;
-    btRigidBody *rPaddle1RigidBody;
 
     glm::mat4 c;
 

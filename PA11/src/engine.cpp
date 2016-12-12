@@ -127,13 +127,6 @@ void Engine::Keyboard()
 	    m_graphics->reset();
 	    break;
 
-      case SDLK_z: 
-		m_graphics->leftPaddle();
-	    break;
-
-	  case SDLK_x: 
-	    m_graphics->rightPaddle();
-	    break;
 
 /*
 	  case SDLK_UP: 

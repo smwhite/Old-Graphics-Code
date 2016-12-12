@@ -13,7 +13,7 @@ using namespace std;
 class Graphics
 {
   public:
-    Graphics(string vFile, string fFile, string mFile, Graphics *temp);
+    Graphics(string vFile, string fFile, string mFile);
     ~Graphics();
     friend bool bumperCallback(btManifoldPoint& cp, btCollisionObject* obj1, int id1, int index1, btCollisionObject* obj2, int id2, int index2);
     //bool lossCallback(btManifoldPoint& cp, btCollisionObject* obj1, int id1, int index1, btCollisionObject* obj2, int id2, int index2);
