@@ -27,6 +27,10 @@ class Graphics
 	bool bcube0;
 	bool bcube1;
 	bool bcube2;
+	bool bcube3;
+	bool bcube4;
+	bool bcube5;
+	bool bcube6;
 
   private:
     std::string ErrorString(GLenum error);

@@ -25,6 +25,7 @@ void *level6dPtr;
 
 bool canJump;
 bool jumping = false;
+bool canMove=true;
 
 btRigidBody *tempBallRigidBody;
 
@@ -36,20 +37,13 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
 
     if(std::string(obj2->getCollisionShape()->getName()) == "STATICPLANE")
     {
-     if(numBalls >= 1)
-        {
-         numBalls--;
-         cout << "Lost a ball" << endl;
-         cout << "Balls Left: " << numBalls << endl;
-         lostBall = true;
-        }
-     else
-        {
+
          gameOver = true;
+		 canMove = false;
          cout << "GAME OVER" << endl; 
          std::cout << "Final score: " << score << endl; 
          std::cout << "Press R to Play Again" << endl;
-        }
+        
     }
 
     else if(temp1Ptr == endGoalPtr || temp2Ptr == endGoalPtr)
@@ -191,6 +185,11 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
   bcube0=true;
   bcube1=true;
   bcube2=true;
+  bcube3=true;
+  bcube4=true;
+  bcube5=true;
+  bcube6=true;
+  canMove=false;
 }
 
 Graphics::~Graphics()
@@ -783,7 +782,7 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   if(gameOver == false && lostBall == true)
     {
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(0, 0, -25)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->translate(btVector3(0, -1, -25)- ballRigidBody->getCenterOfMassPosition());
      ballRigidBody->setLinearVelocity(btVector3(0,0,0));
      lostBall = false;
     }
@@ -792,7 +791,7 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
     {
      gameOver = false;
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(0, 0, -25)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->translate(btVector3(0, -1, -25)- ballRigidBody->getCenterOfMassPosition());
      ballRigidBody->setLinearVelocity(btVector3(0,0,0));
     }
   // Update the object
@@ -945,7 +944,6 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   m_cube->Update(dt, glm::make_mat4(m));
 
   glm::mat4 cube0 = glm::make_mat4(m);
-  //m_camera->Update(test[3].x,test[3].z,0.0,0.0,0.0);
 
   cube1RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -1040,6 +1038,88 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
 		bcube2 = true;
 	}
   }
+
+  if(bcube3)
+  {
+    cube3RigidBody->activate(true);
+    cube3RigidBody->setLinearVelocity(btVector3(-10, 0, 0));
+	if(cube3[3].x < 450)
+	{
+		bcube3 = false;
+
+	}
+  }
+  if(!bcube3)
+  {
+    cube3RigidBody->activate(true);
+    cube3RigidBody->setLinearVelocity(btVector3(10, 0, 0));
+	if(cube3[3].x > 490)
+	{
+		bcube3 = true;
+	}
+  }
+
+  if(bcube4)
+  {
+    cube4RigidBody->activate(true);
+    cube4RigidBody->setLinearVelocity(btVector3(-10, 0, 0));
+	if(cube4[3].x < 510)
+	{
+		bcube4 = false;
+
+	}
+  }
+  if(!bcube4)
+  {
+    cube4RigidBody->activate(true);
+    cube4RigidBody->setLinearVelocity(btVector3(10, 0, 0));
+	if(cube4[3].x > 550)
+	{
+		bcube4 = true;
+	}
+  }
+
+  if(bcube5)
+  {
+    cube5RigidBody->activate(true);
+    cube5RigidBody->setLinearVelocity(btVector3(-10, 0, 0));
+	if(cube5[3].x < 480)
+	{
+		bcube5 = false;
+
+	}
+  }
+  if(!bcube5)
+  {
+    cube5RigidBody->activate(true);
+    cube5RigidBody->setLinearVelocity(btVector3(10, 0, 0));
+	if(cube5[3].x > 520)
+	{
+		bcube5 = true;
+	}
+  }
+
+  if(bcube6)
+  {
+    cube6RigidBody->activate(true);
+    cube6RigidBody->setLinearVelocity(btVector3(-10, 0, 0));
+	if(cube6[3].x < 480)
+	{
+		bcube6 = false;
+
+	}
+  }
+  if(!bcube6)
+  {
+    cube6RigidBody->activate(true);
+    cube6RigidBody->setLinearVelocity(btVector3(10, 0, 0));
+	if(cube6[3].x > 520)
+	{
+		bcube6 = true;
+	}
+  }
+
+
 
 //LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
 }
@@ -1173,6 +1253,7 @@ void Graphics::Render()
 
 void Graphics::moveBox(int direction)
     {
+
 	 btVector3 move = ballRigidBody->getLinearVelocity();
      switch(direction)
         {
@@ -1285,8 +1366,9 @@ void Graphics::moveBox(int direction)
 
 void Graphics::reset()
     {
+	 std::cout<<"Game Reset"<<std::endl;
      ballRigidBody->activate(true);
-     ballRigidBody->translate(btVector3(0, -1, -25)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->translate(btVector3(0, 0, -25)- ballRigidBody->getCenterOfMassPosition());
      score = 0;
      numBalls = 3;
      gameOver = false;
