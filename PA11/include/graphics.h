@@ -77,30 +77,35 @@ class Graphics
     btDefaultMotionState *cubeMotionState = NULL;
     btRigidBody *cubeRigidBody;
 
-    Object *m_collectible;
-    btCollisionShape *collectible;
-    btDefaultMotionState *collectibleMotionState = NULL;
-    btRigidBody *collectibleRigidBody;
+    Object *m_endGoal;
+    btCollisionShape *endGoal;
+    btDefaultMotionState *endGoalMotionState = NULL;
+    btRigidBody *endGoalRigidBody;
 
-    Object *m_collectible1;
-    btCollisionShape *collectible1;
-    btDefaultMotionState *collectible1MotionState = NULL;
-    btRigidBody *collectible1RigidBody;
+    Object *m_endGoal1;
+    btCollisionShape *endGoal1;
+    btDefaultMotionState *endGoal1MotionState = NULL;
+    btRigidBody *endGoal1RigidBody;
 
-    Object *m_collectible2;
-    btCollisionShape *collectible2;
-    btDefaultMotionState *collectible2MotionState = NULL;
-    btRigidBody *collectible2RigidBody;
+    Object *m_endGoal2;
+    btCollisionShape *endGoal2;
+    btDefaultMotionState *endGoal2MotionState = NULL;
+    btRigidBody *endGoal2RigidBody;
 
-    Object *m_collectible3;
-    btCollisionShape *collectible3;
-    btDefaultMotionState *collectible3MotionState = NULL;
-    btRigidBody *collectible3RigidBody;
+    Object *m_endGoal3;
+    btCollisionShape *endGoal3;
+    btDefaultMotionState *endGoal3MotionState = NULL;
+    btRigidBody *endGoal3RigidBody;
 
-    Object *m_collectible4;
-    btCollisionShape *collectible4;
-    btDefaultMotionState *collectible4MotionState = NULL;
-    btRigidBody *collectible4RigidBody;
+    Object *m_endGoal4;
+    btCollisionShape *endGoal4;
+    btDefaultMotionState *endGoal4MotionState = NULL;
+    btRigidBody *endGoal4RigidBody;
+
+    Object *m_endGoal5;
+    btCollisionShape *endGoal5;
+    btDefaultMotionState *endGoal5MotionState = NULL;
+    btRigidBody *endGoal5RigidBody;
 
     btCollisionShape *loss;
     btDefaultMotionState *lossMotionState = NULL;

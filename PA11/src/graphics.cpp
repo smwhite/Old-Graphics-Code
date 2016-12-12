@@ -6,11 +6,12 @@ int score = 0;
 int numBalls = 3;
 bool gameOver = false;
 bool lostBall = false;
-void *collectiblePtr;
-void *collectible1Ptr;
-void *collectible2Ptr;
-void *collectible3Ptr;
-void *collectible4Ptr;
+void *endGoalPtr;
+void *endGoal1Ptr;
+void *endGoal2Ptr;
+void *endGoal3Ptr;
+void *endGoal4Ptr;
+void *endGoal5Ptr;
 btRigidBody *tempBallRigidBody;
 
 bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
@@ -37,7 +38,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         }
     }
 
-    else if(temp1Ptr == collectiblePtr || temp2Ptr == collectiblePtr)
+    else if(temp1Ptr == endGoalPtr || temp2Ptr == endGoalPtr)
     {
         cout << "C0" << endl;
         score ++;
@@ -47,7 +48,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
-    else if(temp1Ptr == collectible1Ptr || temp2Ptr == collectible1Ptr)
+    else if(temp1Ptr == endGoal1Ptr || temp2Ptr == endGoal1Ptr)
     {
         cout << "C1" << endl;
         score ++;
@@ -57,7 +58,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
-    else if(temp1Ptr == collectible2Ptr || temp2Ptr == collectible2Ptr)
+    else if(temp1Ptr == endGoal2Ptr || temp2Ptr == endGoal2Ptr)
     {
         cout << "C2" << endl;
         score ++;
@@ -66,7 +67,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
-    else if(temp1Ptr == collectible3Ptr || temp2Ptr == collectible3Ptr)
+    else if(temp1Ptr == endGoal3Ptr || temp2Ptr == endGoal3Ptr)
     {
         cout << "C3" << endl;
         score ++;
@@ -76,7 +77,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
-    else if(temp1Ptr == collectible4Ptr || temp2Ptr == collectible4Ptr)
+    else if(temp1Ptr == endGoal4Ptr || temp2Ptr == endGoal4Ptr)
     {
         cout << "C4" << endl;
         score ++;
@@ -84,6 +85,16 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         tempBallRigidBody->activate(true);
         tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
         tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
+    }
+
+    else if(temp1Ptr == endGoal5Ptr || temp2Ptr == endGoal5Ptr)
+    {
+        cout << "C5" << endl;
+        score ++;
+        std::cout << "Score: " << score << endl;
+        //tempBallRigidBody->activate(true);
+        //tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
+        //tempBallRigidBody->translate(btVector3(0, 0, -20)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     return false;
@@ -179,61 +190,72 @@ bool Graphics::Initialize(int width, int height)
   ballRigidBody->setGravity(btVector3(0, -9.8, 0));
   tempBallRigidBody = ballRigidBody;
 
-  m_collectible = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
-  collectible = new btBoxShape (btVector3(1, 1, 1));
-  collectibleMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, 5)));
-  btRigidBody::btRigidBodyConstructionInfo collectibleRigidBodyCI(0, collectibleMotionState, collectible, btVector3(0, 0, 0));
-  collectibleRigidBody = new btRigidBody(collectibleRigidBodyCI);  
-  collectibleRigidBody->setUserPointer(collectibleRigidBody);
-  collectiblePtr = collectibleRigidBody->getUserPointer();
-  cout << collectiblePtr << endl;
-  dynamicsWorld->addRigidBody(collectibleRigidBody);
-  collectibleRigidBody->setCollisionFlags(collectibleRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+  m_endGoal = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  endGoal = new btBoxShape (btVector3(1, 1, 1));
+  endGoalMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, 5)));
+  btRigidBody::btRigidBodyConstructionInfo endGoalRigidBodyCI(0, endGoalMotionState, endGoal, btVector3(0, 0, 0));
+  endGoalRigidBody = new btRigidBody(endGoalRigidBodyCI);  
+  endGoalRigidBody->setUserPointer(endGoalRigidBody);
+  endGoalPtr = endGoalRigidBody->getUserPointer();
+  cout << endGoalPtr << endl;
+  dynamicsWorld->addRigidBody(endGoalRigidBody);
+  endGoalRigidBody->setCollisionFlags(endGoalRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 
-  m_collectible1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
-  collectible1 = new btBoxShape (btVector3(1, 1, 1));
-  collectible1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, 5)));
-  btRigidBody::btRigidBodyConstructionInfo collectible1RigidBodyCI(0, collectible1MotionState, collectible1, btVector3(0, 0, 0));
-  collectible1RigidBody = new btRigidBody(collectible1RigidBodyCI);
-  collectible1RigidBody->setUserPointer(collectible1RigidBody);
-  collectible1Ptr = collectible1RigidBody->getUserPointer();
-  cout << collectible1Ptr << endl;
-  dynamicsWorld->addRigidBody(collectible1RigidBody);
-  collectible1RigidBody->setCollisionFlags(collectible1RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+  m_endGoal1 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  endGoal1 = new btBoxShape (btVector3(1, 1, 1));
+  endGoal1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, 5)));
+  btRigidBody::btRigidBodyConstructionInfo endGoal1RigidBodyCI(0, endGoal1MotionState, endGoal1, btVector3(0, 0, 0));
+  endGoal1RigidBody = new btRigidBody(endGoal1RigidBodyCI);
+  endGoal1RigidBody->setUserPointer(endGoal1RigidBody);
+  endGoal1Ptr = endGoal1RigidBody->getUserPointer();
+  cout << endGoal1Ptr << endl;
+  dynamicsWorld->addRigidBody(endGoal1RigidBody);
+  endGoal1RigidBody->setCollisionFlags(endGoal1RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-  m_collectible2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
-  collectible2 = new btBoxShape (btVector3(1, 1, 1));
-  collectible2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 5)));
-  btRigidBody::btRigidBodyConstructionInfo collectible2RigidBodyCI(0, collectible2MotionState, collectible2, btVector3(0, 0, 0));
-  collectible2RigidBody = new btRigidBody(collectible2RigidBodyCI);
-  collectible2RigidBody->setUserPointer(collectible2RigidBody);
-  collectible2Ptr = collectible2RigidBody->getUserPointer();
-  cout << collectible2Ptr << endl;
-  dynamicsWorld->addRigidBody(collectible2RigidBody);
-  collectible2RigidBody->setCollisionFlags(collectible2RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+  m_endGoal2 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  endGoal2 = new btBoxShape (btVector3(1, 1, 1));
+  endGoal2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 5)));
+  btRigidBody::btRigidBodyConstructionInfo endGoal2RigidBodyCI(0, endGoal2MotionState, endGoal2, btVector3(0, 0, 0));
+  endGoal2RigidBody = new btRigidBody(endGoal2RigidBodyCI);
+  endGoal2RigidBody->setUserPointer(endGoal2RigidBody);
+  endGoal2Ptr = endGoal2RigidBody->getUserPointer();
+  cout << endGoal2Ptr << endl;
+  dynamicsWorld->addRigidBody(endGoal2RigidBody);
+  endGoal2RigidBody->setCollisionFlags(endGoal2RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-  m_collectible3 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
-  collectible3 = new btBoxShape (btVector3(1, 1, 1));
-  collectible3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, -5)));
-  btRigidBody::btRigidBodyConstructionInfo collectible3RigidBodyCI(0, collectible3MotionState, collectible3, btVector3(0, 0, 0));
-  collectible3RigidBody = new btRigidBody(collectible3RigidBodyCI);
-  collectible3RigidBody->setUserPointer(collectible3RigidBody);
-  collectible3Ptr = collectible3RigidBody->getUserPointer();
-  cout << collectible3Ptr << endl;
-  dynamicsWorld->addRigidBody(collectible3RigidBody);
-  collectible3RigidBody->setCollisionFlags(collectible3RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+  m_endGoal3 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  endGoal3 = new btBoxShape (btVector3(1, 1, 1));
+  endGoal3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, -5)));
+  btRigidBody::btRigidBodyConstructionInfo endGoal3RigidBodyCI(0, endGoal3MotionState, endGoal3, btVector3(0, 0, 0));
+  endGoal3RigidBody = new btRigidBody(endGoal3RigidBodyCI);
+  endGoal3RigidBody->setUserPointer(endGoal3RigidBody);
+  endGoal3Ptr = endGoal3RigidBody->getUserPointer();
+  cout << endGoal3Ptr << endl;
+  dynamicsWorld->addRigidBody(endGoal3RigidBody);
+  endGoal3RigidBody->setCollisionFlags(endGoal3RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-  m_collectible4 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
-  collectible4 = new btBoxShape (btVector3(1, 1, 1));
-  collectible4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, -5)));
-  btRigidBody::btRigidBodyConstructionInfo collectible4RigidBodyCI(0, collectible4MotionState, collectible4, btVector3(0, 0, 0));
-  collectible4RigidBody = new btRigidBody(collectible4RigidBodyCI);
-  collectible4RigidBody->setUserPointer(collectible4RigidBody);
-  collectible4Ptr = collectible4RigidBody->getUserPointer();
-  cout << collectible4Ptr << endl;
-  dynamicsWorld->addRigidBody(collectible4RigidBody);  
-  collectible4RigidBody->setCollisionFlags(collectible4RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+  m_endGoal4 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  endGoal4 = new btBoxShape (btVector3(1, 1, 1));
+  endGoal4MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, -5)));
+  btRigidBody::btRigidBodyConstructionInfo endGoal4RigidBodyCI(0, endGoal4MotionState, endGoal4, btVector3(0, 0, 0));
+  endGoal4RigidBody = new btRigidBody(endGoal4RigidBodyCI);
+  endGoal4RigidBody->setUserPointer(endGoal4RigidBody);
+  endGoal4Ptr = endGoal4RigidBody->getUserPointer();
+  cout << endGoal4Ptr << endl;
+  dynamicsWorld->addRigidBody(endGoal4RigidBody);  
+  endGoal4RigidBody->setCollisionFlags(endGoal4RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
+  m_endGoal5 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
+  endGoal5 = new btBoxShape (btVector3(1, 1, 1));
+  endGoal5MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-5, 0, 8)));
+  btRigidBody::btRigidBodyConstructionInfo endGoal5RigidBodyCI(0, endGoal5MotionState, endGoal5, btVector3(0, 0, 0));
+  endGoal5RigidBody = new btRigidBody(endGoal5RigidBodyCI);
+  endGoal5RigidBody->setUserPointer(endGoal5RigidBody);
+  endGoal5Ptr = endGoal5RigidBody->getUserPointer();
+  cout << endGoal5Ptr << endl;
+  dynamicsWorld->addRigidBody(endGoal5RigidBody);  
+  endGoal5RigidBody->setCollisionFlags(endGoal5RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
   m_cylinder = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/cylindar.obj", false, NULL);
   cylinder = new btCylinderShape(btVector3(1, 1, 1));
@@ -405,6 +427,7 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
     {
      ballRigidBody->activate(true);
      ballRigidBody->translate(btVector3(0, 0, -20)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->setLinearVelocity(btVector3(0,0,0));
      lostBall = false;
     }
 
@@ -413,6 +436,7 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
      gameOver = false;
      ballRigidBody->activate(true);
      ballRigidBody->translate(btVector3(0, 0, -20)- ballRigidBody->getCenterOfMassPosition());
+     ballRigidBody->setLinearVelocity(btVector3(0,0,0));
     }
   // Update the object
   btTransform trans;
@@ -430,21 +454,29 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   trans.getOpenGLMatrix(m);
   m_walls->Update(dt, glm::make_mat4(m));
 
-  collectibleRigidBody->getMotionState()->getWorldTransform(trans);
+  endGoalRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  m_collectible->Update(dt, glm::make_mat4(m));
-  collectible1RigidBody->getMotionState()->getWorldTransform(trans);
+  m_endGoal->Update(dt, glm::make_mat4(m));
+
+  endGoal1RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  m_collectible1->Update(dt, glm::make_mat4(m));
-  collectible2RigidBody->getMotionState()->getWorldTransform(trans);
+  m_endGoal1->Update(dt, glm::make_mat4(m));
+
+  endGoal2RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  m_collectible2->Update(dt, glm::make_mat4(m));
-  collectible3RigidBody->getMotionState()->getWorldTransform(trans);
+  m_endGoal2->Update(dt, glm::make_mat4(m));
+
+  endGoal3RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  m_collectible3->Update(dt, glm::make_mat4(m));
-  collectible4RigidBody->getMotionState()->getWorldTransform(trans);
+  m_endGoal3->Update(dt, glm::make_mat4(m));
+
+  endGoal4RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
-  m_collectible4->Update(dt, glm::make_mat4(m));
+  m_endGoal4->Update(dt, glm::make_mat4(m));
+
+  endGoal5RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_endGoal5->Update(dt, glm::make_mat4(m));
 
   cylinderRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -494,19 +526,18 @@ void Graphics::Render()
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder2->GetModel()));
   m_cylinder2->Render();
 
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible->GetModel()));
-  m_collectible->Render();
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible1->GetModel()));
-  m_collectible1->Render();
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible2->GetModel()));
-  m_collectible2->Render();
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible3->GetModel()));
-  m_collectible3->Render();
-  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_collectible4->GetModel()));
-  m_collectible4->Render();
-
-  //glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-  //m_cube->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_endGoal->GetModel()));
+  m_endGoal->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_endGoal1->GetModel()));
+  m_endGoal1->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_endGoal2->GetModel()));
+  m_endGoal2->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_endGoal3->GetModel()));
+  m_endGoal3->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_endGoal4->GetModel()));
+  m_endGoal4->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_endGoal5->GetModel()));
+  m_endGoal5->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();
@@ -524,7 +555,6 @@ void Graphics::moveBox(int direction)
         {
          case 1:
             ballRigidBody->activate(true);
-            //ballRigidBody->applyCentralForce(btVector3(0, 0, 300));
 			move = move + btVector3(0, 0, 5);
 			if(move.z() > 10)
 			{
