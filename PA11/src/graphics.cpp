@@ -319,14 +319,13 @@ bool Graphics::Initialize(int width, int height)
   rPaddle1RigidBody->setActivationState(true);
 
 
-  cover = new btStaticPlaneShape (btVector3(0, -1, 0), 1);
-  coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-  btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(0, coverMotionState, cover, btVector3(0, 0, 0));
-  coverRigidBody = new btRigidBody(coverRigidBodyCI);
-  dynamicsWorld->addRigidBody(coverRigidBody);
+  //cover = new btStaticPlaneShape (btVector3(0, -1, 0), 1);
+  //coverMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  //btRigidBody::btRigidBodyConstructionInfo coverRigidBodyCI(0, coverMotionState, cover, btVector3(0, 0, 0));
+  //coverRigidBody = new btRigidBody(coverRigidBodyCI);
+  //dynamicsWorld->addRigidBody(coverRigidBody);
 
   loss = new btStaticPlaneShape (btVector3(0, 0, 1), 1);
-
   lossMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -30)));
   btRigidBody::btRigidBodyConstructionInfo lossRigidBodyCI(0, lossMotionState, loss, btVector3(0, 0, 0));
   lossRigidBody = new btRigidBody(lossRigidBodyCI);
