@@ -166,6 +166,9 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
   dynamicsWorld->setGravity(btVector3(0, 0, 0));
   gContactAddedCallback=bumperCallback;
   canJump = true;
+  bcube0=true;
+  bcube1=true;
+  bcube2=true;
 }
 
 Graphics::~Graphics()
@@ -432,21 +435,21 @@ bool Graphics::Initialize(int width, int height)
   m_cube = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
   cube = new btBoxShape (btVector3(3.5, 3.5, 3.5));
   cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-838, 3, 8)));
-  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(0, cubeMotionState, cube, btVector3(0, 0, 0));
+  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(1, cubeMotionState, cube, btVector3(0, 0, 0));
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   dynamicsWorld->addRigidBody(cubeRigidBody);
 
   m_cube1 = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
   cube1 = new btBoxShape (btVector3(3.5, 3.5, 3.5));
   cube1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-862, 3, -2)));
-  btRigidBody::btRigidBodyConstructionInfo cube1RigidBodyCI(0, cube1MotionState, cube1, btVector3(0, 0, 0));
+  btRigidBody::btRigidBodyConstructionInfo cube1RigidBodyCI(1, cube1MotionState, cube1, btVector3(0, 0, 0));
   cube1RigidBody = new btRigidBody(cube1RigidBodyCI);
   dynamicsWorld->addRigidBody(cube1RigidBody);
 
   m_cube2 = new Object(vertexFile, fragmentFile, "../models/metalbox.obj", false, NULL);
   cube2 = new btBoxShape (btVector3(3.5, 3.5, 3.5));
   cube2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-838, 3, -12)));
-  btRigidBody::btRigidBodyConstructionInfo cube2RigidBodyCI(0, cube2MotionState, cube2, btVector3(0, 0, 0));
+  btRigidBody::btRigidBodyConstructionInfo cube2RigidBodyCI(1, cube2MotionState, cube2, btVector3(0, 0, 0));
   cube2RigidBody = new btRigidBody(cube2RigidBodyCI);
   dynamicsWorld->addRigidBody(cube2RigidBody);
 //LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
@@ -681,13 +684,81 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   trans.getOpenGLMatrix(m);
   m_cube->Update(dt, glm::make_mat4(m));
 
+  glm::mat4 cube0 = glm::make_mat4(m);
+  //m_camera->Update(test[3].x,test[3].z,0.0,0.0,0.0);
+
   cube1RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_cube1->Update(dt, glm::make_mat4(m));
 
+  glm::mat4 cube1 = glm::make_mat4(m);
+
   cube2RigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_cube2->Update(dt, glm::make_mat4(m));
+
+  glm::mat4 cube2 = glm::make_mat4(m);
+
+
+
+  if(bcube0)
+  {
+    cubeRigidBody->activate(true);
+    cubeRigidBody->setLinearVelocity(btVector3(-10, 0, 0));
+	if(cube0[3].x < -870)
+	{
+		bcube0 = false;
+
+	}
+  }
+  if(!bcube0)
+  {
+    cubeRigidBody->activate(true);
+    cubeRigidBody->setLinearVelocity(btVector3(10, 0, 0));
+	if(cube0[3].x > -830)
+	{
+		bcube0 = true;
+	}
+  }
+  if(!bcube1)
+  {
+    cube1RigidBody->activate(true);
+    cube1RigidBody->setLinearVelocity(btVector3(-10, 0, 0));
+	if(cube1[3].x < -870)
+	{
+		bcube1 = true;
+
+	}
+  }
+  if(bcube1)
+  {
+    cube1RigidBody->activate(true);
+    cube1RigidBody->setLinearVelocity(btVector3(10, 0, 0));
+	if(cube1[3].x > -830)
+	{
+		bcube1 = false;
+	}
+  }
+  if(bcube2)
+  {
+    cube2RigidBody->activate(true);
+    cube2RigidBody->setLinearVelocity(btVector3(-10, 0, 0));
+	if(cube2[3].x < -870)
+	{
+		bcube2 = false;
+
+	}
+  }
+  if(!bcube2)
+  {
+    cube2RigidBody->activate(true);
+    cube2RigidBody->setLinearVelocity(btVector3(10, 0, 0));
+	if(cube2[3].x > -830)
+	{
+		bcube2 = true;
+	}
+  }
+
 //LEVEL 5 MOVING METAL CUBES///////////////////////////////////////////////////////////////////////////////////
 }
 

@@ -24,6 +24,9 @@ class Graphics
     void rightPaddle();
     void reset();
 	//bool canJump;
+	bool bcube0;
+	bool bcube1;
+	bool bcube2;
 
   private:
     std::string ErrorString(GLenum error);
