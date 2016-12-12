@@ -27,8 +27,6 @@ class Graphics
     void deleteObj(btCollisionObject* obj);
 	bool canJump;
 
-    //int score = 0;
-
   private:
     std::string ErrorString(GLenum error);
 
@@ -85,26 +83,31 @@ class Graphics
     btCollisionShape *collectible;
     btDefaultMotionState *collectibleMotionState = NULL;
     btRigidBody *collectibleRigidBody;
+    //void *collectiblePtr;
 
     Object *m_collectible1;
     btCollisionShape *collectible1;
     btDefaultMotionState *collectible1MotionState = NULL;
     btRigidBody *collectible1RigidBody;
+    void *collectible1Ptr;
 
     Object *m_collectible2;
     btCollisionShape *collectible2;
     btDefaultMotionState *collectible2MotionState = NULL;
     btRigidBody *collectible2RigidBody;
+    void *collectible2Ptr;
 
     Object *m_collectible3;
     btCollisionShape *collectible3;
     btDefaultMotionState *collectible3MotionState = NULL;
     btRigidBody *collectible3RigidBody;
+    void *collectible3Ptr;
 
     Object *m_collectible4;
     btCollisionShape *collectible4;
     btDefaultMotionState *collectible4MotionState = NULL;
     btRigidBody *collectible4RigidBody;
+    void *collectible4Ptr;
 
     Object *m_backboard;
 
