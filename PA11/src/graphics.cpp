@@ -11,34 +11,13 @@ void *collectible1Ptr;
 void *collectible2Ptr;
 void *collectible3Ptr;
 void *collectible4Ptr;
+btRigidBody *tempBallRigidBody;
 
 bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
   {
     void *temp1Ptr = obj1->getCollisionObject()->getUserPointer();
-    cout << temp1Ptr << endl;
+
     void *temp2Ptr = obj2->getCollisionObject()->getUserPointer();
-    cout << temp2Ptr << endl;
-    /*
-    if(int(obj1->getCollisionShape()->getUserIndex()) == 2 || int(obj2->getCollisionShape()->getUserIndex()) == 2)
-    {
-        cout << ":D1" << endl;
-    }
-
-    if(int(obj1->getCollisionShape()->getUserIndex()) == 3 || int(obj2->getCollisionShape()->getUserIndex()) == 3)
-    {
-        cout << ":D2" << endl;
-    }
-
-    if(int(obj1->getCollisionShape()->getUserIndex()) == 4 || int(obj2->getCollisionShape()->getUserIndex()) == 4)
-    {
-        cout << ":D3" << endl;
-    }
-    
-    if(int(obj1->getCollisionShape()->getUserIndex()) == 5 || int(obj2->getCollisionShape()->getUserIndex()) == 5)
-    {
-        cout << ":D4" << endl;
-    }
-    */
 
     if(std::string(obj1->getCollisionShape()->getName()) == "CylinderY")
     {
@@ -75,26 +54,51 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
     else if(temp1Ptr == collectiblePtr || temp2Ptr == collectiblePtr)
     {
         cout << "C0" << endl;
+        score ++;
+        std::cout << "Score: " << score << endl;
+        tempBallRigidBody->activate(true);
+        tempBallRigidBody->translate(btVector3(-28, -1, -8)- tempBallRigidBody->getCenterOfMassPosition());
+        //Graphics::ballRigidBody->activate(true);
+        //Graphics::ballRigidBody->translate(btVector3(-28, -1, -8)- Graphics::ballRigidBody->getCenterOfMassPosition());
+        //Graphics::levelTwo(graphics);
     }
 
     else if(temp1Ptr == collectible1Ptr || temp2Ptr == collectible1Ptr)
     {
         cout << "C1" << endl;
+        score ++;
+        std::cout << "Score: " << score << endl;
+        tempBallRigidBody->activate(true);
+        tempBallRigidBody->translate(btVector3(-28, -1, -8)- tempBallRigidBody->getCenterOfMassPosition());
+        //Graphics::levelThree(graphics);
     }
 
     else if(temp1Ptr == collectible2Ptr || temp2Ptr == collectible2Ptr)
     {
         cout << "C2" << endl;
+        score ++;
+        std::cout << "Score: " << score << endl;
+        tempBallRigidBody->activate(true);
+        tempBallRigidBody->translate(btVector3(-28, -1, -8)- tempBallRigidBody->getCenterOfMassPosition());
+        //Graphics::levelOne(graphics);
     }
 
     else if(temp1Ptr == collectible3Ptr || temp2Ptr == collectible3Ptr)
     {
         cout << "C3" << endl;
+        score ++;
+        std::cout << "Score: " << score << endl;
+        tempBallRigidBody->activate(true);
+        tempBallRigidBody->translate(btVector3(-28, -1, -8)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     else if(temp1Ptr == collectible4Ptr || temp2Ptr == collectible4Ptr)
     {
         cout << "C4" << endl;
+        score ++;
+        std::cout << "Score: " << score << endl;
+        tempBallRigidBody->activate(true);
+        tempBallRigidBody->translate(btVector3(-28, -1, -8)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     return false;
@@ -111,6 +115,7 @@ Graphics::Graphics(string vFile, string fFile, string mFile)
   vertexFile = vFile;
   fragmentFile = fFile;
   modelFile = mFile;
+  //graphics = this;
 
   broadphase = new btDbvtBroadphase();
   collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -193,6 +198,7 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(ballRigidBody);
   ballRigidBody->setRestitution(1.0);
   ballRigidBody->setGravity(btVector3(0, -9.8, 0));
+  tempBallRigidBody = ballRigidBody;
 
   m_collectible = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/box.obj", false, NULL);
   collectible = new btBoxShape (btVector3(1, 1, 1));
@@ -768,9 +774,22 @@ std::string Graphics::ErrorString(GLenum error)
     return "None";
   }
 }
-
-void Graphics::deleteObj(btCollisionObject* obj)
+/*
+void Graphics::levelOne(Graphics *temp)
 {
-    cout << "Blah" << endl;
+    temp->ballRigidBody->activate(true);
+    temp->ballRigidBody->translate(btVector3(-28, -1, -8)- temp->ballRigidBody->getCenterOfMassPosition());
 }
 
+void Graphics::levelTwo(Graphics *temp)
+{
+    temp->ballRigidBody->activate(true);
+    temp->ballRigidBody->translate(btVector3(-28, -1, -8)- temp->ballRigidBody->getCenterOfMassPosition());
+}
+
+void Graphics::levelThree(Graphics *temp)
+{
+    temp->ballRigidBody->activate(true);
+    temp->ballRigidBody->translate(btVector3(-28, -1, -8)- temp->ballRigidBody->getCenterOfMassPosition());
+}
+*/
