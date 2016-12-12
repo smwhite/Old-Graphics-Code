@@ -35,6 +35,19 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
 
     void *temp2Ptr = obj2->getCollisionObject()->getUserPointer();
 
+    if(std::string(obj1->getCollisionShape()->getName()) == "CylinderY")
+    {
+        btVector3 temp = tempBallRigidBody->getLinearVelocity();
+        tempBallRigidBody->setLinearVelocity(btVector3(temp.x() * -1.5, 0, temp.z() * -1.5));
+         
+    }
+
+    if(std::string(obj2->getCollisionShape()->getName()) == "CylinderY")
+    {
+        btVector3 temp = tempBallRigidBody->getLinearVelocity();
+        tempBallRigidBody->setLinearVelocity(btVector3(temp.x() * -1.5, 0, temp.z() * -1.5));       
+    }
+
     if(std::string(obj2->getCollisionShape()->getName()) == "STATICPLANE")
     {
 
