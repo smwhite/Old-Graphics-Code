@@ -160,11 +160,6 @@ class Graphics
     btDefaultMotionState *cylinder14MotionState = NULL;
     btRigidBody *cylinder14RigidBody;
 
-    Object *m_cylinder14;
-    btCollisionShape *cylinder14;
-    btDefaultMotionState *cylinder14MotionState = NULL;
-    btRigidBody *cylinder14RigidBody;
-
     Object *m_cylinder15;
     btCollisionShape *cylinder15;
     btDefaultMotionState *cylinder15MotionState = NULL;

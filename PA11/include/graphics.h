@@ -80,10 +80,25 @@ class Graphics
     btDefaultMotionState *level5MotionState = NULL;
     btRigidBody *level5RigidBody;
 
-    Object *m_level6;
-    btCollisionShape *level6;
-    btDefaultMotionState *level6MotionState = NULL;
-    btRigidBody *level6RigidBody;
+    Object *m_level6j;
+    btCollisionShape *level6j;
+    btDefaultMotionState *level6jMotionState = NULL;
+    btRigidBody *level6jRigidBody;
+
+    Object *m_level6a;
+    btCollisionShape *level6a;
+    btDefaultMotionState *level6aMotionState = NULL;
+    btRigidBody *level6aRigidBody;
+
+    Object *m_level6d;
+    btCollisionShape *level6d;
+    btDefaultMotionState *level6dMotionState = NULL;
+    btRigidBody *level6dRigidBody;
+
+    Object *m_level6r;
+    btCollisionShape *level6r;
+    btDefaultMotionState *level6rMotionState = NULL;
+    btRigidBody *level6rRigidBody;
 
     Object *m_cylinder;
     btCollisionShape *cylinder;

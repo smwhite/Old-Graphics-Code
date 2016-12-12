@@ -18,7 +18,10 @@ void *level2Ptr;
 void *level3Ptr;
 void *level4Ptr;
 void *level5Ptr;
-void *level6Ptr;
+void *level6jPtr;
+void *level6aPtr;
+void *level6rPtr;
+void *level6dPtr;
 
 bool canJump;
 bool jumping = false;
@@ -105,7 +108,7 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         std::cout << "Score: " << score << endl;
         tempBallRigidBody->activate(true);
         tempBallRigidBody->setLinearVelocity(btVector3(0,0,0));
-        tempBallRigidBody->translate(btVector3(-850, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
+        tempBallRigidBody->translate(btVector3(500, 0, -25)- tempBallRigidBody->getCenterOfMassPosition());
     }
 
     if(temp1Ptr == level1Ptr || temp2Ptr == level1Ptr)
@@ -137,11 +140,30 @@ bool bumperCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, i
         //cout << "can jump again!" << endl;
     }
 
-    else if(temp1Ptr == level6Ptr || temp2Ptr == level6Ptr)
+    else if(temp1Ptr == level6jPtr || temp2Ptr == level6jPtr)
     {
         canJump = true;
         //cout << "can jump again!" << endl;
     }
+
+    else if(temp1Ptr == level6rPtr || temp2Ptr == level6rPtr)
+    {
+        canJump = true;
+        //cout << "can jump again!" << endl;
+    }
+
+    else if(temp1Ptr == level6dPtr || temp2Ptr == level6dPtr)
+    {
+        canJump = true;
+        //cout << "can jump again!" << endl;
+    }
+
+    else if(temp1Ptr == level6aPtr || temp2Ptr == level6aPtr)
+    {
+        canJump = true;
+        //cout << "can jump again!" << endl;
+    }
+
 
     //if(jumping == true)
     //{
@@ -286,19 +308,52 @@ bool Graphics::Initialize(int width, int height)
   cout << level5Ptr << endl;
   dynamicsWorld->addRigidBody(level5RigidBody);
   level5RigidBody->setCollisionFlags(level5RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-/*
+//////////////////////////////////////LEVEL 5///////////////////////////////////////////////////////////////////////////////////
   btTriangleMesh *objTriMesh6 = new btTriangleMesh();
-  m_level6 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh6);
-  level6 = new btBvhTriangleMeshShape(objTriMesh6, true);
-  level6MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(1, -1, 0)));
-  btRigidBody::btRigidBodyConstructionInfo level6RigidBodyCI(0, level6MotionState, level6, btVector3(0, 0, 0));
-  level6RigidBody = new btRigidBody(level6RigidBodyCI);
-  level6RigidBody->setUserPointer(level6RigidBody);
-  level6Ptr = level6RigidBody->getUserPointer();
-  cout << level6Ptr << endl;
-  dynamicsWorld->addRigidBody(level6RigidBody);
-  level6RigidBody->setCollisionFlags(level6RigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-*/
+  m_level6j = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/jumpfloor.obj", true, objTriMesh6);
+  level6j = new btBvhTriangleMeshShape(objTriMesh6, true);
+  level6jMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, -25)));
+  btRigidBody::btRigidBodyConstructionInfo level6jRigidBodyCI(0, level6jMotionState, level6j, btVector3(0, 0, 0));
+  level6jRigidBody = new btRigidBody(level6jRigidBodyCI);
+  level6jRigidBody->setUserPointer(level6jRigidBody);
+  level6jPtr = level6jRigidBody->getUserPointer();
+  cout << level6jPtr << endl;
+  dynamicsWorld->addRigidBody(level6jRigidBody);
+  level6jRigidBody->setCollisionFlags(level6jRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
+  m_level6a = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/anglefloor.obj", true, objTriMesh6);
+  level6a = new btBvhTriangleMeshShape(objTriMesh6, true);
+  level6aMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 170)));
+  btRigidBody::btRigidBodyConstructionInfo level6aRigidBodyCI(0, level6aMotionState, level6a, btVector3(0, 0, 0));
+  level6aRigidBody = new btRigidBody(level6aRigidBodyCI);
+  level6aRigidBody->setUserPointer(level6aRigidBody);
+  level6aPtr = level6aRigidBody->getUserPointer();
+  cout << level6aPtr << endl;
+  dynamicsWorld->addRigidBody(level6aRigidBody);
+  level6aRigidBody->setCollisionFlags(level6aRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
+  m_level6d = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/diamondfloor.obj", true, objTriMesh6);
+  level6d = new btBvhTriangleMeshShape(objTriMesh6, true);
+  level6dMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 260)));
+  btRigidBody::btRigidBodyConstructionInfo level6dRigidBodyCI(0, level6dMotionState, level6d, btVector3(0, 0, 0));
+  level6dRigidBody = new btRigidBody(level6dRigidBodyCI);
+  level6dRigidBody->setUserPointer(level6dRigidBody);
+  level6dPtr = level6dRigidBody->getUserPointer();
+  cout << level6dPtr << endl;
+  dynamicsWorld->addRigidBody(level6dRigidBody);
+  level6dRigidBody->setCollisionFlags(level6dRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
+  m_level6r = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/rectanglefloor.obj", true, objTriMesh6);
+  level6r = new btBvhTriangleMeshShape(objTriMesh6, true);
+  level6rMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, -1, 210)));
+  btRigidBody::btRigidBodyConstructionInfo level6rRigidBodyCI(0, level6rMotionState, level6r, btVector3(0, 0, 0));
+  level6rRigidBody = new btRigidBody(level6rRigidBodyCI);
+  level6rRigidBody->setUserPointer(level6rRigidBody);
+  level6rPtr = level6rRigidBody->getUserPointer();
+  cout << level6rPtr << endl;
+  dynamicsWorld->addRigidBody(level6rRigidBody);
+  level6rRigidBody->setCollisionFlags(level6rRigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   m_ball = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/ball.obj", false, NULL);
   ball = new btSphereShape (1);
@@ -313,7 +368,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh *egTriMesh = new btTriangleMesh();
   m_endGoal = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/goal.obj", true, egTriMesh);
   endGoal = new btBvhTriangleMeshShape(egTriMesh, true);
-  endGoalMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, 5)));
+  endGoalMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 25)));
   btRigidBody::btRigidBodyConstructionInfo endGoalRigidBodyCI(0, endGoalMotionState, endGoal, btVector3(0, 0, 0));
   endGoalRigidBody = new btRigidBody(endGoalRigidBodyCI);  
   endGoalRigidBody->setUserPointer(endGoalRigidBody);
@@ -346,7 +401,7 @@ bool Graphics::Initialize(int width, int height)
 
   m_endGoal3 = new Object("../shaders/fragmentfl.frag", "../shaders/vertexfl.vert", "../models/goal.obj", true, egTriMesh);
   endGoal3 = new btBvhTriangleMeshShape(egTriMesh, true);
-  endGoal3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-850, 0, 30)));
+  endGoal3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-850, 0, 25)));
   btRigidBody::btRigidBodyConstructionInfo endGoal3RigidBodyCI(0, endGoal3MotionState, endGoal3, btVector3(0, 0, 0));
   endGoal3RigidBody = new btRigidBody(endGoal3RigidBodyCI);
   endGoal3RigidBody->setUserPointer(endGoal3RigidBody);
@@ -761,6 +816,22 @@ void Graphics::Update(unsigned int dt,float LR,float UD)
   trans.getOpenGLMatrix(m);
   m_level5->Update(dt, glm::make_mat4(m));
 
+  level6jRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_level6j->Update(dt, glm::make_mat4(m));
+
+  level6aRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_level6a->Update(dt, glm::make_mat4(m));
+
+  level6dRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_level6d->Update(dt, glm::make_mat4(m));
+
+  level6rRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_level6r->Update(dt, glm::make_mat4(m));
+
   endGoalRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_endGoal->Update(dt, glm::make_mat4(m));
@@ -984,6 +1055,14 @@ void Graphics::Render()
   m_level4->Render();
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level5->GetModel()));
   m_level5->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level6r->GetModel()));
+  m_level6r->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level6d->GetModel()));
+  m_level6d->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level6a->GetModel()));
+  m_level6a->Render();
+  glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_level6j->GetModel()));
+  m_level6j->Render();
 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
   m_cylinder->Render();
